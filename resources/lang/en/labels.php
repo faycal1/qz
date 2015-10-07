@@ -33,4 +33,6 @@ return [
     'toggle_navigation' => 'Toggle Navigation',
     'update_information_box_title' => 'Update Information',
 
+    'cours_list' => 'Cours List',
+
 ];
