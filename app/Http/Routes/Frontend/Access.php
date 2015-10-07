@@ -13,6 +13,7 @@ $router->group(['namespace' => 'Auth'], function () use ($router)
 		get('auth/logout', 'AuthController@getLogout');
 		get('auth/password/change', 'PasswordController@getChangePassword');
 		post('auth/password/change', 'PasswordController@postChangePassword')->name('password.change');
+		
 	});
 
 	/**

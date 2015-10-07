@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Backend\Quiz;
 
-use App\Cour;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class CourController extends Controller
+class PageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +15,7 @@ class CourController extends Controller
      */
     public function index()
     {
-        $cours = Cour::all();
-
-        return view('frontend.cours.list' , ['cours'=> $cours]);
+        //
     }
 
     /**
