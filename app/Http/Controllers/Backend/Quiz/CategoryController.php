@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Backend\Quiz;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Backend\Quiz\CreateCategoryRequest;
+use App\Category ;
+
 
 
 class CategoryController extends Controller
@@ -35,9 +38,12 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateCategoryRequest $request)
     {
-        //
+
+        Category::create(['title'=>$request->input('title') , 'slug'=>str_slug($request->input('title')) ,'body'=>$request->input('body') ]);
+       
+        return redirect()->route('admin.quiz.category.index');
     }
 
     /**
