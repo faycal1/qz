@@ -40,8 +40,8 @@ $router->group(['namespace' => 'Backend'], function () use ($router)
 $router->group(['middleware' =>'access.routeNeedsPermission:view-backend'] , function($router)
 {
 	  Route::resource('admin/quiz/category', 'Backend\Quiz\CategoryController');
-	  Route::resource('cour', 'Backend\Quiz\CourController');
-	  Route::resource('page', 'Backend\Quiz\PageController');
-	  Route::resource('question', 'Backend\Quiz\QuestionController');
-	  Route::resource('answer', 'Backend\Quiz\AnswerController');
+	  Route::resource('admin/quiz/category/cour', 'Backend\Quiz\CourController');
+	  Route::resource('admin/quiz/category/cour/page', 'Backend\Quiz\PageController');
+	  Route::resource('admin/quiz/category/cour/question', 'Backend\Quiz\QuestionController');
+	  Route::resource('admin/quiz/category/cour/question/answer', 'Backend\Quiz\AnswerController');
 });

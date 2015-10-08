@@ -13,7 +13,7 @@
 @endsection
 
 @section('content')
-    @include('backend.access.includes.partials.header-buttons')
+    @include('backend.categories.includes.partials.header-buttons')
 
     <div class="box box-success">
         <div class="box-header with-border">
