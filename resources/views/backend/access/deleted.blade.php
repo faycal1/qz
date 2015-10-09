@@ -90,18 +90,67 @@
 
 @section('after-scripts-end')
 	<script>
-		$(function() {
+		// $(function() {
+  //           @permission('permanently-delete-users')
+  //               $("a[name='delete_user_perm']").click(function() {
+  //                   return confirm("Are you sure you want to delete this user permanently? Anywhere in the application that references this user's id will most likely error. Proceed at your own risk. This can not be un-done.");
+  //               });
+  //           @endauth
+
+  //           @permission('undelete-users')
+  //               $("a[name='restore_user']").click(function() {
+  //                   return confirm("Restore this user to its original state?");
+  //               });
+  //           @endauth
+		// });
+	
+
+    $(function() {
             @permission('permanently-delete-users')
                 $("a[name='delete_user_perm']").click(function() {
-                    return confirm("Are you sure you want to delete this user permanently? Anywhere in the application that references this user's id will most likely error. Proceed at your own risk. This can not be un-done.");
+
+                    e.preventDefault();
+                    var linkURL = $(this).attr("href");
+
+                    swal({
+                      title: "Are you sure?",
+                      text: "you want to delete this user permanently? Anywhere in the application that references this user's id will most likely error. Proceed at your own risk. This can not be un-done",
+                      type: "warning",
+                      showCancelButton: true,
+                      confirmButtonColor: "#DD6B55",
+                      confirmButtonText: "Yes, delete it!",
+                      closeOnConfirm: false
+                    },
+                    function(){
+                      window.location.href = linkURL;
+                      swal("Deleted!", "...", "success");
+                    });
+
+                   // return confirm("Are you sure you want to delete this user permanently? Anywhere in the application that references this user's id will most likely error. Proceed at your own risk. This can not be un-done.");
                 });
             @endauth
 
             @permission('undelete-users')
-                $("a[name='restore_user']").click(function() {
-                    return confirm("Restore this user to its original state?");
+                $("a[name='restore_user']").click(function(e) {
+                    e.preventDefault();
+                    var linkURL = $(this).attr("href");
+                  swal({
+                      title: "Are you sure?",
+                      text: "Restore this user to its original state?",
+                      type: "warning",
+                      showCancelButton: true,
+                      confirmButtonColor: "#DD6B55",
+                      confirmButtonText: "Yes, delete it!",
+                      closeOnConfirm: false
+                    },
+                    function(){
+                        window.location.href = linkURL;
+                        swal("Restored!", "...", "success");
+
+                    });
+                    
                 });
             @endauth
-		});
-	</script>
+        });
+    </script>
 @stop

@@ -49,9 +49,49 @@ $(function(){
     /*
      Generic are you sure dialog
      */
-    $('form[name=delete_item]').submit(function(){
+    $('form[name=delete_item]').submit(function(e){
+
+        //  e.preventDefault();
+        //  var linkURL = $(this).find("form").attr("action");
+        // swal({
+        //   title: "Are you sure?",
+        //   text: "You will not be able to recover this imaginary file!",
+        //   type: "warning",
+        //   showCancelButton: true,
+        //   confirmButtonColor: "#DD6B55",
+        //   confirmButtonText: "Yes, delete it!",
+        //   closeOnConfirm: false
+        // },
+        // function(){
+        //     window.location.href = linkURL;
+        //     swal("Deleted!", "...", "success");
+          
+        // });
+
         return confirm("Are you sure you want to delete this item?");
     });
+
+    // $('form[name=delete_item_user]').submit(function(e){
+
+    //      e.preventDefault();
+    //      var linkURL = 'admin/access/users';
+    //     swal({
+    //       title: "Are you sure?",
+    //       text: "You will not be able to recover this imaginary file!",
+    //       type: "warning",
+    //       showCancelButton: true,
+    //       confirmButtonColor: "#DD6B55",
+    //       confirmButtonText: "Yes, delete it!",
+    //       closeOnConfirm: false
+    //     },
+    //     function(){
+    //         window.location.href = linkURL;
+    //         swal("Deleted!", "...", "success");
+          
+    //     });
+
+    //    // return confirm("Are you sure you want to delete this item?");
+    // });
 
     /*
      Bind all bootstrap tooltips

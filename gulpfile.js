@@ -19,15 +19,17 @@ elixir(function(mix) {
             ], 'public/js/frontend.js')
 
         .sass([ // Process back-end stylesheets
-            'backend/main.scss',
+            'backend/main.scss',            
             'backend/skin.scss',
             'backend/plugin/toastr/toastr.scss'
         ], 'resources/assets/css/backend/main.css')
         .styles([ // Combine pre-processed CSS files
-                'backend/main.css'
+                'backend/main.css',
+                'sweetalert.css',
             ], 'public/css/backend.css')
         .scripts([ // Combine back-end scripts
-                'plugins.js',
+                'sweetalert.min.js',
+                'plugins.js',                
                 'backend/main.js',
                 'backend/plugin/toastr/toastr.min.js',
                 'backend/custom.js'
