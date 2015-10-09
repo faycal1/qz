@@ -19,7 +19,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('backend.quiz.categories.index') ;
+        
+        return view('backend.quiz.categories.index' )->with('categories', Category::all()) ;
     }
 
     /**

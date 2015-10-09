@@ -6,7 +6,7 @@
           <ul class="dropdown-menu" role="menu">
             <li><a href="{{route('admin.quiz.category.index')}}">Toutes les Categories</a></li>
 
-            @permission('create-categories')
+            @permission('create-category')
                 <li><a href="{{route('admin.quiz.category.create')}}">Créer une catégorie</a></li>
             @endauth
 

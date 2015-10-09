@@ -24,8 +24,18 @@ class CreateCategoryRequest extends Request
     public function rules()
     {
         return [
-            'title'                  =>  'required',
+            'title'                  =>  'required|unique:categories',
             'body'                 =>  'required',
             ];
     }
+
+    public function messages()
+    {
+        return [
+            'title.unique' => 'Ce titre existe deja',
+            'title.required' => 'Le titre est obligatoire',
+            'body.required' => 'La déscription est obligatoire',
+        ];
+    }
 }
+

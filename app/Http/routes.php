@@ -39,7 +39,13 @@ $router->group(['namespace' => 'Backend'], function () use ($router)
 
 $router->group(['middleware' =>'access.routeNeedsPermission:view-backend'] , function($router)
 {
-	  Route::resource('admin/quiz/category', 'Backend\Quiz\CategoryController');
+	  Route::get('admin/quiz/category/create' ,['middleware' => 'access.routeNeedsPermission:create-category' , 'uses' =>  'Backend\Quiz\CategoryController@create' , 'as' => 'admin.quiz.category.create' ]) ;
+
+	  Route::post('admin/quiz/category/store' ,['middleware' => 'access.routeNeedsPermission:create-category' , 'uses' =>  'Backend\Quiz\CategoryController@store' , 'as' => 'admin.quiz.category.store' ]) ;
+	  Route::resource('admin/quiz/category', 'Backend\Quiz\CategoryController' ,['except' => ['create', 'store', 'update', 'edit' , 'destroy']]);
+
+	  
+
 	  Route::resource('admin/quiz/category/cour', 'Backend\Quiz\CourController');
 	  Route::resource('admin/quiz/category/cour/page', 'Backend\Quiz\PageController');
 	  Route::resource('admin/quiz/category/cour/question', 'Backend\Quiz\QuestionController');
