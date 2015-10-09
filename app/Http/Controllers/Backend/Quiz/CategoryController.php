@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Quiz\CreateCategoryRequest;
-use App\Category ;
+use App\Models\Quiz\Category\Category ;
 
 
 

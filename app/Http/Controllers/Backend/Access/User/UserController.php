@@ -52,6 +52,14 @@ class UserController extends Controller {
 	 * @return mixed
 	 */
 	public function index() {
+
+		
+		// echo 'hi';
+		// foreach ($this->users->getAllUsers() as $user){
+		// 	dd($user->action_buttons) ;
+		// }
+
+		// exit();
 		return view('backend.access.index')
 			->withUsers($this->users->getUsersPaginated(config('access.users.default_per_page'), 1));
 	}
