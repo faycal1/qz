@@ -29,6 +29,8 @@ class RouteServiceProvider extends ServiceProvider {
 		//
 
 		parent::boot($router);
+
+		$router->model('category' , 'App\Models\Quiz\Category\Category');
 	}
 
 	/**

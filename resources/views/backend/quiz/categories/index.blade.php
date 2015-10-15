@@ -29,7 +29,7 @@
 
         @foreach ($categories as $category)
                 <tr>
-                    <td>{!! $category->title !!}</td>
+                    <td><a href="{{route('admin.quiz.category.show' , $category->id)}}">{!! $category->title !!}</a></td>
                     <td>{!! str_limit($category->body , 30) !!}</td>
                     <td>{!! $category->created_at->diffForHumans() !!}</td>
                     <td>{!! $category->updated_at->diffForHumans() !!}</td>

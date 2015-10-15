@@ -41,9 +41,9 @@ $router->group(['middleware' =>'access.routeNeedsPermission:view-backend'] , fun
 {
 	  Route::get('admin/quiz/category/create' ,['middleware' => 'access.routeNeedsPermission:create-category' , 'uses' =>  'Backend\Quiz\CategoryController@create' , 'as' => 'admin.quiz.category.create' ]) ;
 	  Route::post('admin/quiz/category/store' ,['middleware' => 'access.routeNeedsPermission:create-category' , 'uses' =>  'Backend\Quiz\CategoryController@store' ,  'as' => 'admin.quiz.category.store' ]) ;
-	  Route::get('admin/quiz/category/{id}/edit'  ,['middleware' => 'access.routeNeedsPermission:edit-category'   , 'uses' =>  'Backend\Quiz\CategoryController@edit' ,   'as' => 'admin.quiz.category.edit' ]) ;
-	  Route::PATCH('admin/quiz/category/{id}/update'  ,['middleware' => 'access.routeNeedsPermission:update-category'   , 'uses' =>  'Backend\Quiz\CategoryController@update' ,   'as' => 'admin.quiz.category.update' ]) ;
-	  Route::delete('admin/quiz/category/{id}/destroy'  ,['middleware' => 'access.routeNeedsPermission:destroy-category'   , 'uses' =>  'Backend\Quiz\CategoryController@destroy' ,   'as' => 'admin.quiz.category.destroy' ]) ;
+	  Route::get('admin/quiz/category/{category}/edit'  ,['middleware' => 'access.routeNeedsPermission:edit-category'   , 'uses' =>  'Backend\Quiz\CategoryController@edit' ,   'as' => 'admin.quiz.category.edit' ]) ;
+	  Route::PATCH('admin/quiz/category/{category}/update'  ,['middleware' => 'access.routeNeedsPermission:update-category'   , 'uses' =>  'Backend\Quiz\CategoryController@update' ,   'as' => 'admin.quiz.category.update' ]) ;
+	  Route::delete('admin/quiz/category/{category}/destroy'  ,['middleware' => 'access.routeNeedsPermission:destroy-category'   , 'uses' =>  'Backend\Quiz\CategoryController@destroy' ,   'as' => 'admin.quiz.category.destroy' ]) ;
 
 	  Route::resource('admin/quiz/category', 'Backend\Quiz\CategoryController' ,['except' => ['create', 'store', 'update', 'edit' , 'destroy']]);
 

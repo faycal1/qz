@@ -146,6 +146,7 @@ return [
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Html\HtmlServiceProvider',
 		Laracasts\Generators\GeneratorsServiceProvider::class,
+		Cviebrock\EloquentSluggable\SluggableServiceProvider::class,
 
 		/*
 		 * Application Service Providers...

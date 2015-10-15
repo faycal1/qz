@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Backend\Quiz;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Backend\Quiz\CreateCategoryRequest;
+use App\Http\Requests\Backend\Quiz\Category\CreateCategoryRequest;
+use App\Http\Requests\Backend\Quiz\Category\UpdateCategoryRequest;
 use App\Models\Quiz\Category\Category ;
+use Carbon\Carbon as Carbon;
 
 
 
@@ -42,8 +44,8 @@ class CategoryController extends Controller
     public function store(CreateCategoryRequest $request)
     {
 
-        Category::create(['title'=>$request->input('title') , 'slug'=>str_slug($request->input('title')) ,'body'=>$request->input('body') ]);
-       
+       // Category::create(['title'=>$request->input('title') , 'slug'=>str_slug($request->input('title')) ,'body'=>$request->input('body') ]);
+       Category::create($request->all());
         return redirect()->route('admin.quiz.category.index');
     }
 
@@ -53,9 +55,12 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Category $category)
     {
-        //
+        setlocale(LC_TIME, 'fr');
+        // $category = Category::findOrFail($id);
+       
+        return view('backend.quiz.categories.show' , compact('category') );
     }
 
     /**
@@ -64,9 +69,10 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
+    public function edit(Category $category)
+    {      
+         
+        return view('backend.quiz.categories.edit' , compact('category') ) ;
     }
 
     /**
@@ -76,9 +82,11 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update( Category $category , UpdateCategoryRequest $request )     {
+        
+
+        $category->update($request->all()) ;
+        return redirect()->route('admin.quiz.category.index');
     }
 
     /**
@@ -87,8 +95,8 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        //
+        $category->destroy(1);
     }
 }
