@@ -41,7 +41,7 @@
     </table>
 
     <div class="pull-left">
-        
+        {!! $categories->render() !!}
     </div>
 
     <div class="pull-right">
