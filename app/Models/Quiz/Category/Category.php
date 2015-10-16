@@ -21,7 +21,7 @@ class Category extends Model implements SluggableInterface
     protected $dates = ['deleted_at'];
 
 	protected $sluggable = [
-        'build_from' => 'categories.title',
+        'build_from' => 'title',
         'save_to'    => 'slug',
     ];
 
