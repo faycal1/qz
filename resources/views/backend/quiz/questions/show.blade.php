@@ -17,12 +17,12 @@
 
 
 
-    <h2>{{ $cour->title }}</h2>
-    <p>{{ $cour->body }}</p>
-    <h4 class="badge" > Catégorie : {{ $cour->category->title }}</h4><br>
+    <h2>{{ $question->title }}</h2>
+    <p>{{ $question->body }}</p>
+    <h4 class="badge" > Cour : {{ $question->cour->title }}</h4><br>
 
-    <p class="badge badge-success">Crée le {!! $cour->created_at->format('d M Y à H:m:i') !!}</p><br>
-    <p class="badge badge-warning">Actualisé le {!! $cour->updated_at->format('d M Y à H:m:i')  !!}</p>
+    <p class="badge badge-success">Crée le {!! $question->created_at->format('d M Y à H:m:i') !!}</p><br>
+    <p class="badge badge-warning">Actualisé le {!! $question->updated_at->format('d M Y à H:m:i')  !!}</p>
 
 
 @endsection
