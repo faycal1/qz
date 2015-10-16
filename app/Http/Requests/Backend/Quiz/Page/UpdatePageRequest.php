@@ -24,7 +24,7 @@ class UpdatePageRequest extends Request
     public function rules()
     {
         return [
-            'title'                =>  "required|unique:pages,title,".$this->page->id,
+            'title'                =>  "required",
             'body'                 =>  'required',
             ];
     }
@@ -32,7 +32,7 @@ class UpdatePageRequest extends Request
     public function messages()
     {
         return [
-            'title.unique' => 'Ce titre existe deja',
+            
             'title.required' => 'Le titre est obligatoire',
             'body.required' => 'La déscription est obligatoire',
         ];

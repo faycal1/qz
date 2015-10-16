@@ -14,7 +14,7 @@ class Answer extends Model
     use SoftDeletes;
 
 	protected $guarded = ['id'];
-    protected $fillable = ['title' , 'body' ,'question_id', 'score' , 'type' ] ;
+    protected $fillable = ['title' , 'body' ,'question_id',  'type' ] ;
 
     protected $dates = ['deleted_at'];
 

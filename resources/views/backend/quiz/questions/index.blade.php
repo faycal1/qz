@@ -21,7 +21,8 @@
             <th>Title</th>
             <th>Description</th>
             <th>Cour</th> 
-            <th>Type</th>            
+            <th>Type</th>
+            <th>Score</th>            
             <th class="visible-lg">Créer</th>
             <th class="visible-lg">Editer</th>
             <th>{{ trans('crud.actions') }}</th>
@@ -35,6 +36,7 @@
                     <td>{!! str_limit($question->body , 30) !!}</td>
                     <td>{!! $question->cour->title  !!}</td>
                     <td>{!! $question->type  !!}</td>
+                    <td>{!! $question->score  !!}</td>
                     <td>{!! $question->created_at->diffForHumans() !!}</td>
                     <td>{!! $question->updated_at->diffForHumans() !!}</td>
                     <td>{!! $question->action_buttons !!}</td>

@@ -21,7 +21,7 @@
             <th>Question</th>          
             <th>Reponse</th>
             <th>Type</th>
-            <th>Score</th>                        
+                                  
             <th class="visible-lg">Créer</th>
             <th class="visible-lg">Editer</th>
             <th>{{ trans('crud.actions') }}</th>
@@ -35,7 +35,7 @@
                     <td><a href="{{route('admin.quiz.answer.show' , $answer->id)}}">{!! str_limit($answer->body , 30) !!}</a></td>
                     
                     <td>{!! $answer->type  !!}</td>
-                    <td>{!! $answer->score  !!}</td>
+                    
                     <td>{!! $answer->created_at->diffForHumans() !!}</td>
                     <td>{!! $answer->updated_at->diffForHumans() !!}</td>
                     <td>{!! $answer->action_buttons !!}</td>

@@ -32,12 +32,7 @@
             </div>
         </div><!--form control--> 
 
-         <div class="form-group">
-            {!! Form::label('score', 'Score', ['class' => 'col-lg-2 control-label']) !!}
-            <div class="col-lg-10">
-                {!! Form::text('score', null, ['class' => 'form-control', 'placeholder' => 'Score']) !!}
-            </div>
-        </div><!--form control-->
+         
 
         <div class="form-group">
             {!! Form::label('type', 'Type', ['class' => 'col-lg-2 control-label']) !!}

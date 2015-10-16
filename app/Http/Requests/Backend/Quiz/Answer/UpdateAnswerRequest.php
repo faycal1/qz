@@ -20,7 +20,7 @@ class UpdateAnswerRequest extends Request
     {
         return [
             'body'  =>  'required',
-            'score'   =>  'required',
+            
             'question_id' => 'required',            
             'type'=>'required'
             ];
@@ -30,7 +30,7 @@ class UpdateAnswerRequest extends Request
     {
         return [            
             'title.required' => 'Le titre est obligatoire',
-            'score.required'   =>  'Le Score est obligatoire',
+            
             'question_id.required' => 'La Question est obligatoire',
             'type.required'=>'Le type de la reponse obligatoire'
         ];

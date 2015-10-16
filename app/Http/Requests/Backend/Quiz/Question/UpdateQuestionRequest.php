@@ -20,17 +20,21 @@ class UpdateQuestionRequest extends Request
     {
         return [
             'title'  =>  'required',
-            //'body'   =>  'required',
+            'type' => 'required',
             'cour_id' => 'required',
+            'score'   =>  'required|integer|between:0,100',
             ];
     }
 
     public function messages()
     {
         return [            
-            'title.required' => 'Le titre est obligatoire',
-            //'body.required' => 'La déscription est obligatoire',
-            'cour_id.required' => 'Le Cour est obligatoire'
+            'title.required' => 'Le titre est obligatoire',            
+            'cour_id.required' => 'Le cour est obligatoire',
+            'type.required' => 'Le Type est obligatoire',
+            'score.required'=> 'Le Score est obligatoire',
+            'score.integer'=> 'Le Score doit contenir un chiffre entre 0 et 100',
+            'score.between'=> 'Le Score doit contenir un chiffre entre 0 et 100'
         ];
     }
 }

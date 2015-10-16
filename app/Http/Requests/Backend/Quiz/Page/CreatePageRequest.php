@@ -19,7 +19,7 @@ class CreatePageRequest extends Request
     public function rules()
     {
         return [
-            'title'  =>  'required|unique:pages',
+            'title'  =>  'required',
             'body'   =>  'required',
             'cour_id' => 'required',
             ];
@@ -28,7 +28,7 @@ class CreatePageRequest extends Request
     public function messages()
     {
         return [
-            'title.unique' => 'Ce titre existe deja',
+            
             'title.required' => 'Le titre est obligatoire',
             'body.required' => 'La déscription est obligatoire',
             'cour_id.required' => 'Le cour est obligatoire'

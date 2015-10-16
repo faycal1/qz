@@ -7,6 +7,7 @@
     </h1>
 @endsection
 
+
 @section('breadcrumbs')
     <li><a href="{!!route('backend.dashboard')!!}"><i class="fa fa-dashboard"></i> {{ trans('menus.dashboard') }}</a></li>
     <li class="">Gestion des Questions</li> <li class="active">Creation Question</li>
@@ -25,6 +26,13 @@
         </div><!--form control-->
 
         <div class="form-group">
+            {!! Form::label('type', 'Type', ['class' => 'col-lg-2 control-label']) !!}
+            <div class="col-lg-10">
+                {!! Form::select('type' , [''=>'Type','one'=>'Unique','multiple'=>'Multiple'] , null, ['class'=>'form-control']) !!}
+            </div>
+        </div><!--form control-->
+
+        <div class="form-group">
             {!! Form::label('title', 'Titre', ['class' => 'col-lg-2 control-label']) !!}
             <div class="col-lg-10">
                 {!! Form::text('title', null, ['class' => 'form-control', 'placeholder' => 'Titre']) !!}
@@ -37,6 +45,13 @@
                 {!! Form::textarea('body', null, ['class' => 'form-control', 'placeholder' => 'Déscription']) !!}
             </div>
         </div><!--form control--> 
+
+         <div class="form-group">
+            {!! Form::label('score', 'Score', ['class' => 'col-lg-2 control-label']) !!}
+            <div class="col-lg-10">
+                {!! Form::text('score', null, ['class' => 'form-control', 'placeholder' => 'Score']) !!}
+            </div>
+        </div><!--form control-->
 
         <div class="well">            
 

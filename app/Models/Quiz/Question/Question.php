@@ -16,7 +16,7 @@ class Question extends Model implements SluggableInterface
     use SoftDeletes;
 
     protected $guarded = ['id'];
-    protected $fillable = ['title' , 'body' ,'cour_id' , 'type' ] ;
+    protected $fillable = ['title' , 'body' ,'cour_id' , 'type' , 'score' ] ;
 
     protected $dates = ['deleted_at'];
 
