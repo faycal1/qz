@@ -10,9 +10,9 @@
                 <li><a href="{{route('admin.quiz.category.create')}}">Créer une catégorie</a></li>
             @endauth
 
-            {{--<li class="divider"></li>
-             <li><a href="{{route('admin.access.users.deactivated')}}">{{ trans('menus.deactivated_users') }}</a></li>
-            <li><a href="{{route('admin.access.users.banned')}}">{{ trans('menus.banned_users') }}</a></li>
+            <li class="divider"></li>
+             <li><a href="{{route('admin.quiz.category.deleted')}}">Catégorie Supprimées</a></li>
+           {{-- <li><a href="{{route('admin.access.users.banned')}}">{{ trans('menus.banned_users') }}</a></li>
             <li><a href="{{route('admin.access.users.deleted')}}">{{ trans('menus.deleted_users') }}</a></li> --}}
           </ul>
         </div>
@@ -22,10 +22,10 @@
               Cours <span class="caret"></span>
           </button>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="{{route('admin.quiz.category.cour.index')}}">Tous les cours</a></li>
+            <li><a href="{{route('admin.quiz.cour.index')}}">Tous les cours</a></li>
 
             @permission('create-cours')
-                <li><a href="{{route('admin.quiz.category.cour.create')}}">Créer un cours</a></li>
+                <li><a href="{{route('admin.quiz.cour.create')}}">Créer un cours</a></li>
             @endauth
           </ul>
         </div>
@@ -35,9 +35,9 @@
               Pages <span class="caret"></span>
           </button>
           <ul class="dropdown-menu pull-right" role="menu">
-            <li><a href="{{route('admin.quiz.category.cour.page.index')}}">Toutes les pages</a></li>
+            <li><a href="{{route('admin.quiz.page.index')}}">Toutes les pages</a></li>
             @permission('create-page')
-                <li><a href="{{route('admin.quiz.category.cour.page.create')}}">Créer une page</a></li>
+                <li><a href="{{route('admin.quiz.page.create')}}">Créer une page</a></li>
             @endauth 
             
           </ul>

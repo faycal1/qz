@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Backend\Quiz\Category;
+namespace App\Http\Requests\Backend\Quiz\Page;
 
 use App\Http\Requests\Request;
 
-class CreateCategoryRequest extends Request
+class CreatePageRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,19 +13,15 @@ class CreateCategoryRequest extends Request
      */
     public function authorize()
     {
-       return access()->can('create-category');
+        return access()->can('create-page');
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
     public function rules()
     {
         return [
-            'title'  =>  'required|unique:categories',
-            'body'   =>  'required'
+            'title'  =>  'required|unique:pages',
+            'body'   =>  'required',
+            'cour_id' => 'required',
             ];
     }
 
@@ -34,8 +30,8 @@ class CreateCategoryRequest extends Request
         return [
             'title.unique' => 'Ce titre existe deja',
             'title.required' => 'Le titre est obligatoire',
-            'body.required' => 'La déscription est obligatoire'
+            'body.required' => 'La déscription est obligatoire',
+            'cour_id.required' => 'Le cour est obligatoire'
         ];
     }
 }
-

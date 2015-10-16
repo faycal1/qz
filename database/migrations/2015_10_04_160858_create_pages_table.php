@@ -19,6 +19,7 @@ class CreatePagesTable extends Migration
 
             $table->integer('cour_id')->unsigned();
             $table->foreign('cour_id')->references('id')->on('cours')->onDelete('cascade');
+             $table->softDeletes() ;
             $table->timestamps();
         });
     }

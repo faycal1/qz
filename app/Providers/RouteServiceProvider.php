@@ -30,7 +30,20 @@ class RouteServiceProvider extends ServiceProvider {
 
 		parent::boot($router);
 
-		$router->model('category' , 'App\Models\Quiz\Category\Category');
+		$router->bind('category', function($value)
+		{
+		    return \App\Models\Quiz\Category\Category::withTrashed()->where('id', $value)->first();
+		}); 
+		
+		$router->bind('cour', function($value)
+		{
+		    return \App\Models\Quiz\Cour\Cour::withTrashed()->where('id', $value)->first();
+		});
+
+		$router->bind('page', function($value)
+		{
+		    return \App\Models\Quiz\Page\Page::withTrashed()->where('id', $value)->first();
+		});
 	}
 
 	/**

@@ -2,20 +2,24 @@
 
 namespace App\Http\Controllers\Backend\Quiz;
 
-use Illuminate\Http\Request;
 use App\Http\Requests;
+use Illuminate\Http\Request;
+use App\Models\Quiz\Page\Page ;
+use App\Models\Quiz\Cour\Cour ;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Backend\Quiz\Page\CreatePageRequest;
+use App\Http\Requests\Backend\Quiz\Page\UpdatePageRequest;
 
 class PageController extends Controller
 {
-    /**
+   /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        return view('backend.quiz.pages.index' )->with('pages', Page::all()) ;
     }
 
     /**
@@ -24,8 +28,9 @@ class PageController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
+    {            
+        $cours = [''=>'Choisissez un cour'] + Cour::lists('title','id')->all();
+        return view('backend.quiz.pages.create' , compact('cours') ) ;
     }
 
     /**
@@ -34,9 +39,11 @@ class PageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreatePageRequest $request)
     {
-        //
+        
+        Page::create($request->all());
+        return redirect()->route('admin.quiz.page.index')->withFlashSuccess('Page crée avec sucçés');
     }
 
     /**
@@ -45,9 +52,10 @@ class PageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Page $page)
     {
-        //
+        setlocale(LC_TIME, 'fr');       
+        return view('backend.quiz.pages.show' , compact('page') );
     }
 
     /**
@@ -56,9 +64,10 @@ class PageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Page $page)
     {
-        //
+        $cours = Cour::lists('title','id');
+        return view('backend.quiz.pages.edit' , compact('page' , 'cours') ) ;
     }
 
     /**
@@ -68,9 +77,10 @@ class PageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Page $page ,UpdatePageRequest $request)
     {
-        //
+        $page->update($request->all());
+        return redirect()->route('admin.quiz.page.index')->withFlashSuccess('Page edité avec sucçés');
     }
 
     /**
@@ -79,8 +89,10 @@ class PageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Page $page)
     {
-        //
+        $page->delete();
+         //$page->pages()->delete();
+         return redirect()->route('admin.quiz.page.index')->withFlashSuccess('Page supprimée avec sucçés');;
     }
 }

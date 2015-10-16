@@ -19,11 +19,8 @@ class CreateCoursTable extends Migration
             $table->timestamp('published_at');
 
             $table->integer('category_id')->unsigned();
-            $table->foreign('category_id')->references('id')->on('categories');
-
-           /* $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');*/
-
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+             $table->softDeletes() ;
             $table->timestamps();
         });
     }

@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Backend\Quiz;
 
-use Illuminate\Http\Request;
 use App\Http\Requests;
+use Illuminate\Http\Request;
+use App\Models\Quiz\Cour\Cour ;
 use App\Http\Controllers\Controller;
+use App\Models\Quiz\Category\Category as Category;
+use App\Http\Requests\Backend\Quiz\Cour\CreateCourRequest;
+use App\Http\Requests\Backend\Quiz\Cour\UpdateCourRequest;
 
 class CourController extends Controller
 {
@@ -15,7 +19,7 @@ class CourController extends Controller
      */
     public function index()
     {
-        //
+        return view('backend.quiz.cours.index' )->with('cours', Cour::all()) ;
     }
 
     /**
@@ -24,8 +28,9 @@ class CourController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
+    {            
+        $categories = [''=>'Choisissez une catégorie'] + Category::lists('title','id')->all();
+        return view('backend.quiz.cours.create' , compact('categories') ) ;
     }
 
     /**
@@ -34,9 +39,11 @@ class CourController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateCourRequest $request)
     {
-        //
+        //dd($request->all());
+        Cour::create($request->all());
+        return redirect()->route('admin.quiz.cour.index')->withFlashSuccess('Cour crée avec sucçés');
     }
 
     /**
@@ -45,9 +52,10 @@ class CourController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Cour $cour)
     {
-        //
+        setlocale(LC_TIME, 'fr');       
+        return view('backend.quiz.cours.show' , compact('cour') );
     }
 
     /**
@@ -56,9 +64,10 @@ class CourController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Cour $cour)
     {
-        //
+        $categories = Category::lists('title','id');
+        return view('backend.quiz.cours.edit' , compact('cour' , 'categories') ) ;
     }
 
     /**
@@ -68,9 +77,10 @@ class CourController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Cour $cour ,UpdateCourRequest $request)
     {
-        //
+        $cour->update($request->all());
+        return redirect()->route('admin.quiz.cour.index')->withFlashSuccess('Cour edité avec sucçés');
     }
 
     /**
@@ -79,8 +89,10 @@ class CourController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Cour $cour)
     {
-        //
+        $cour->delete();
+         $cour->pages()->delete();
+         return redirect()->route('admin.quiz.cour.index')->withFlashSuccess('Cour supprimée avec sucçés');;
     }
 }

@@ -2,18 +2,23 @@
 
 namespace App\Http\Controllers\Backend\Quiz;
 
-use Illuminate\Http\Request;
+use Carbon\Carbon ;
 use App\Http\Requests;
+use Illuminate\Http\Request;
+use App\Models\Quiz\Page\Page ;
 use App\Http\Controllers\Controller;
+use App\Models\Quiz\Category\Category ;
 use App\Http\Requests\Backend\Quiz\Category\CreateCategoryRequest;
 use App\Http\Requests\Backend\Quiz\Category\UpdateCategoryRequest;
-use App\Models\Quiz\Category\Category ;
-use Carbon\Carbon as Carbon;
+
+
 
 
 
 class CategoryController extends Controller
 {
+    
+    
     /**
      * Display a listing of the resource.
      *
@@ -46,7 +51,7 @@ class CategoryController extends Controller
 
        // Category::create(['title'=>$request->input('title') , 'slug'=>str_slug($request->input('title')) ,'body'=>$request->input('body') ]);
        Category::create($request->all());
-        return redirect()->route('admin.quiz.category.index');
+        return redirect()->route('admin.quiz.category.index')->withFlashSuccess('Categorie crée avec sucçés');;
     }
 
     /**
@@ -70,8 +75,7 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Category $category)
-    {      
-         
+    {               
         return view('backend.quiz.categories.edit' , compact('category') ) ;
     }
 
@@ -86,7 +90,7 @@ class CategoryController extends Controller
         
 
         $category->update($request->all()) ;
-        return redirect()->route('admin.quiz.category.index');
+        return redirect()->route('admin.quiz.category.index')->withFlashSuccess('Categorie éditée avec sucçés');
     }
 
     /**
@@ -97,6 +101,33 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        $category->destroy(1);
+         $category->delete();
+         $category->cours()->delete();
+         return redirect()->route('admin.quiz.category.index')->withFlashSuccess('Categorie supprimée avec sucçés');;
+    }
+
+    
+    /**
+     * @return mixed
+     */
+    public function deleted() {
+
+        $categories = Category::onlyTrashed()->get();
+        return view('backend.quiz.categories.deleted' , compact('categories') ) ;
+    }
+
+    public function restore(Category $category)
+    {      
+       
+        $category->restore(); 
+        $category->cours()->restore();        
+       
+        return redirect()->route('admin.quiz.category.deleted')->withFlashSuccess('Element restoré avec sucçés');;
+    }
+
+    public  function forcedelete (Category $category)
+    {
+        $category->forceDelete();
+        return redirect()->route('admin.quiz.category.deleted')->withFlashSuccess('Element Supprrimé difinitivement avec sucçés');;
     }
 }
