@@ -71,8 +71,20 @@ $router->group(['middleware' =>'access.routeNeedsPermission:view-backend'] , fun
 	  Route::get('admin/quiz/page/deleted'  ,['middleware' => 'access.routeNeedsPermission:view-deleted-page'   , 'uses' =>  'Backend\Quiz\PageController@deleted' ,   'as' => 'admin.quiz.page.deleted' ]) ; 
 	   
 	  Route::resource('admin/quiz/page', 'Backend\Quiz\PageController'     ,['only' => ['index', 'show']]);
+
+
+	  Route::patch('admin/quiz/question/{question}/restore'  ,['middleware' => 'access.routeNeedsPermission:restore-question'   , 'uses' =>  'Backend\Quiz\QuestionController@restore' ,   'as' => 'admin.quiz.question.restore' ]) ;
+	  Route::delete('admin/quiz/question/{question}/forcedelete'  ,['middleware' => 'access.routeNeedsPermission:force-delete-question'   , 'uses' =>  'Backend\Quiz\QuestionController@forcedelete' ,   'as' => 'admin.quiz.question.forcedelete' ]) ;
+	  Route::get('admin/quiz/question/create' ,['middleware' => 'access.routeNeedsPermission:create-question' , 'uses' =>  'Backend\Quiz\QuestionController@create' , 'as' => 'admin.quiz.question.create' ]) ;
+	  Route::post('admin/quiz/question/store' ,['middleware' => 'access.routeNeedsPermission:create-question' , 'uses' =>  'Backend\Quiz\QuestionController@store' ,  'as' => 'admin.quiz.question.store' ]) ;
+	  Route::get('admin/quiz/question/{question}/edit'  ,['middleware' => 'access.routeNeedsPermission:edit-question'   , 'uses' =>  'Backend\Quiz\QuestionController@edit' ,   'as' => 'admin.quiz.question.edit' ]) ;
+	  Route::patch('admin/quiz/question/{question}/update'  ,['middleware' => 'access.routeNeedsPermission:update-question'   , 'uses' =>  'Backend\Quiz\QuestionController@update' ,   'as' => 'admin.quiz.question.update' ]) ;
+	  Route::delete('admin/quiz/question/{question}/destroy'  ,['middleware' => 'access.routeNeedsPermission:destroy-question'   , 'uses' =>  'Backend\Quiz\QuestionController@destroy' ,   'as' => 'admin.quiz.question.destroy' ]) ;
+	  Route::get('admin/quiz/question/deleted'  ,['middleware' => 'access.routeNeedsPermission:view-deleted-question'   , 'uses' =>  'Backend\Quiz\QuestionController@deleted' ,   'as' => 'admin.quiz.question.deleted' ]) ; 
+	   
+	  Route::resource('admin/quiz/question', 'Backend\Quiz\QuestionController'     ,['only' => ['index', 'show']]);
 	  
 	  //Route::resource('admin/quiz/category/cour/page', 'Backend\Quiz\PageController');
-	  Route::resource('admin/quiz/category/cour/question', 'Backend\Quiz\QuestionController');
-	  Route::resource('admin/quiz/category/cour/question/answer', 'Backend\Quiz\AnswerController');
+	  //Route::resource('admin/quiz/category/cour/question', 'Backend\Quiz\QuestionController');
+	  Route::resource('admin/quiz/answer', 'Backend\Quiz\AnswerController');
 });

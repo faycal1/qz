@@ -44,6 +44,16 @@ class RouteServiceProvider extends ServiceProvider {
 		{
 		    return \App\Models\Quiz\Page\Page::withTrashed()->where('id', $value)->first();
 		});
+
+		$router->bind('question', function($value)
+		{
+		    return \App\Models\Quiz\Question\Question::withTrashed()->where('id', $value)->first();
+		});
+
+		$router->bind('answer', function($value)
+		{
+		    return \App\Models\Quiz\Answer\Answer::withTrashed()->where('id', $value)->first();
+		});
 	}
 
 	/**

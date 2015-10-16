@@ -48,9 +48,9 @@
               Questions <span class="caret"></span>
           </button>
           <ul class="dropdown-menu pull-right" role="menu">
-            <li><a href="{{route('admin.quiz.category.cour.question.index')}}">Toutes les Questions</a></li>
-            @permission('create-page')
-                <li><a href="{{route('admin.quiz.category.cour.question.create')}}">Créer une Question</a></li>
+            <li><a href="{{route('admin.quiz.question.index')}}">Toutes les Questions</a></li>
+            @permission('create-question')
+                <li><a href="{{route('admin.quiz.question.create')}}">Créer une Question</a></li>
             @endauth 
             
           </ul>
@@ -61,9 +61,9 @@
               Reponses <span class="caret"></span>
           </button>
           <ul class="dropdown-menu pull-right" role="menu">
-            <li><a href="{{route('admin.quiz.category.cour.question.answer.index')}}">Toutes les Reponses</a></li>
-            @permission('create-page')
-                <li><a href="{{route('admin.quiz.category.cour.question.answer.create')}}">Créer une reponse</a></li>
+            <li><a href="{{route('admin.quiz.answer.index')}}">Toutes les Reponses</a></li>
+            @permission('create-answer')
+                <li><a href="{{route('admin.quiz.answer.create')}}">Créer une reponse</a></li>
             @endauth 
             
           </ul>
