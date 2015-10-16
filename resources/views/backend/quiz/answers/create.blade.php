@@ -9,27 +9,21 @@
 
 @section('breadcrumbs')
     <li><a href="{!!route('backend.dashboard')!!}"><i class="fa fa-dashboard"></i> {{ trans('menus.dashboard') }}</a></li>
-    <li class="">Gestion des Pages</li> <li class="active">Creation Page</li>
+    <li class="">Gestion des Reponses</li> <li class="active">Creation Reponse</li>
 @endsection
 
 @section('content')
     @include('backend.quiz.includes.partials.header-buttons')
 
-    {!! Form::open(['route' => 'admin.quiz.page.store', 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'post']) !!}
+    {!! Form::open(['route' => 'admin.quiz.answer.store', 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'post']) !!}
        
         <div class="form-group">
-            {!! Form::label('cour_id', 'Cours', ['class' => 'col-lg-2 control-label']) !!}
+            {!! Form::label('question_id', 'Cours', ['class' => 'col-lg-2 control-label']) !!}
             <div class="col-lg-10">
-                {!! Form::select('cour_id' , $cours , null, ['class'=>'form-control']) !!}
+                {!! Form::select('question_id' , $questions , null, ['class'=>'form-control']) !!}
             </div>
         </div><!--form control-->
-
-        <div class="form-group">
-            {!! Form::label('title', 'Titre', ['class' => 'col-lg-2 control-label']) !!}
-            <div class="col-lg-10">
-                {!! Form::text('title', null, ['class' => 'form-control', 'placeholder' => 'Titre']) !!}
-            </div>
-        </div><!--form control-->
+      
 
         <div class="form-group">
             {!! Form::label('body', 'Déscription', ['class' => 'col-lg-2 control-label']) !!}
@@ -37,6 +31,21 @@
                 {!! Form::textarea('body', null, ['class' => 'form-control', 'placeholder' => 'Déscription']) !!}
             </div>
         </div><!--form control--> 
+
+         <div class="form-group">
+            {!! Form::label('score', 'Score', ['class' => 'col-lg-2 control-label']) !!}
+            <div class="col-lg-10">
+                {!! Form::text('score', null, ['class' => 'form-control', 'placeholder' => 'Score']) !!}
+            </div>
+        </div><!--form control-->
+
+        <div class="form-group">
+            {!! Form::label('type', 'Type', ['class' => 'col-lg-2 control-label']) !!}
+            <div class="col-lg-10">
+                 {!! Form::radio('type', true , true) !!} Vrai<br>
+                 {!! Form::radio('type', false ) !!} Faux
+            </div>
+        </div><!--form control-->
 
         <div class="well">            
 

@@ -6,17 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Quiz\Answer\Traits\Attribute\AnswerAttribute;
 
-use Cviebrock\EloquentSluggable\SluggableInterface;
-use Cviebrock\EloquentSluggable\SluggableTrait;
 
-class Answer extends Model implements SluggableInterface
+class Answer extends Model 
 {
     use AnswerAttribute ;
-    use SluggableTrait;
+   
     use SoftDeletes;
 
 	protected $guarded = ['id'];
-    protected $fillable = ['title' , 'body' ,'question_id', 'score' ] ;
+    protected $fillable = ['title' , 'body' ,'question_id', 'score' , 'type' ] ;
 
     protected $dates = ['deleted_at'];
 

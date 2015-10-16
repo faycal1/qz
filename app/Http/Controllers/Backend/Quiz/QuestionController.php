@@ -98,3 +98,4 @@ class QuestionController extends Controller
         return redirect()->route('admin.quiz.question.index')->withFlashSuccess('Question supprimée avec sucçés');;
     }
 }
+

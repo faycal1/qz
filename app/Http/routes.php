@@ -83,8 +83,20 @@ $router->group(['middleware' =>'access.routeNeedsPermission:view-backend'] , fun
 	  Route::get('admin/quiz/question/deleted'  ,['middleware' => 'access.routeNeedsPermission:view-deleted-question'   , 'uses' =>  'Backend\Quiz\QuestionController@deleted' ,   'as' => 'admin.quiz.question.deleted' ]) ; 
 	   
 	  Route::resource('admin/quiz/question', 'Backend\Quiz\QuestionController'     ,['only' => ['index', 'show']]);
+
+
+	  Route::patch('admin/quiz/answer/{answer}/restore'  ,['middleware' => 'access.routeNeedsPermission:restore-answer'   , 'uses' =>  'Backend\Quiz\AnswerController@restore' ,   'as' => 'admin.quiz.answer.restore' ]) ;
+	  Route::delete('admin/quiz/answer/{answer}/forcedelete'  ,['middleware' => 'access.routeNeedsPermission:force-delete-answer'   , 'uses' =>  'Backend\Quiz\AnswerController@forcedelete' ,   'as' => 'admin.quiz.answer.forcedelete' ]) ;
+	  Route::get('admin/quiz/answer/create' ,['middleware' => 'access.routeNeedsPermission:create-answer' , 'uses' =>  'Backend\Quiz\AnswerController@create' , 'as' => 'admin.quiz.answer.create' ]) ;
+	  Route::post('admin/quiz/answer/store' ,['middleware' => 'access.routeNeedsPermission:create-answer' , 'uses' =>  'Backend\Quiz\AnswerController@store' ,  'as' => 'admin.quiz.answer.store' ]) ;
+	  Route::get('admin/quiz/answer/{answer}/edit'  ,['middleware' => 'access.routeNeedsPermission:edit-answer'   , 'uses' =>  'Backend\Quiz\AnswerController@edit' ,   'as' => 'admin.quiz.answer.edit' ]) ;
+	  Route::patch('admin/quiz/answer/{answer}/update'  ,['middleware' => 'access.routeNeedsPermission:update-answer'   , 'uses' =>  'Backend\Quiz\AnswerController@update' ,   'as' => 'admin.quiz.answer.update' ]) ;
+	  Route::delete('admin/quiz/answer/{answer}/destroy'  ,['middleware' => 'access.routeNeedsPermission:destroy-answer'   , 'uses' =>  'Backend\Quiz\AnswerController@destroy' ,   'as' => 'admin.quiz.answer.destroy' ]) ;
+	  Route::get('admin/quiz/answer/deleted'  ,['middleware' => 'access.routeNeedsPermission:view-deleted-answer'   , 'uses' =>  'Backend\Quiz\AnswerController@deleted' ,   'as' => 'admin.quiz.answer.deleted' ]) ; 
+	   
+	  Route::resource('admin/quiz/answer', 'Backend\Quiz\AnswerController'     ,['only' => ['index', 'show']]);
 	  
 	  //Route::resource('admin/quiz/category/cour/page', 'Backend\Quiz\PageController');
 	  //Route::resource('admin/quiz/category/cour/question', 'Backend\Quiz\QuestionController');
-	  Route::resource('admin/quiz/answer', 'Backend\Quiz\AnswerController');
+	  //Route::resource('admin/quiz/answer', 'Backend\Quiz\AnswerController');
 });

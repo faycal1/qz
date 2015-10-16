@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\\Backend\Quiz\Answer;
+namespace App\Http\Requests\Backend\Quiz\Answer;
 
 use App\Http\Requests\Request;
 

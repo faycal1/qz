@@ -9,7 +9,7 @@
 
 @section('breadcrumbs')
     <li><a href="{!!route('backend.dashboard')!!}"><i class="fa fa-dashboard"></i> {{ trans('menus.dashboard') }}</a></li>
-    <li class="active">Gestion des Pages</li>
+    <li class="active">Gestion des Reponses</li>
 @endsection
 
 @section('content')
@@ -17,10 +17,11 @@
 
     <table class="table table-striped table-bordered table-hover">
         <thead>
-        <tr>            
-            <th>Title</th>
-            <th>Description</th>
-            <th>Cour</th>            
+        <tr>   
+            <th>Question</th>          
+            <th>Reponse</th>
+            <th>Type</th>
+            <th>Score</th>                        
             <th class="visible-lg">Créer</th>
             <th class="visible-lg">Editer</th>
             <th>{{ trans('crud.actions') }}</th>
@@ -28,14 +29,16 @@
         </thead>
         <tbody>
 
-        @foreach ($pages as $page)
+        @foreach ($answers as $answer)
                 <tr>
-                    <td><a href="{{route('admin.quiz.page.show' , $page->id)}}">{!! $page->title !!}</a></td>
-                    <td>{!! str_limit($page->body , 30) !!}</td>
-                    <td>{!! $page->cour->title  !!}</td>
-                    <td>{!! $page->created_at->diffForHumans() !!}</td>
-                    <td>{!! $page->updated_at->diffForHumans() !!}</td>
-                    <td>{!! $page->action_buttons !!}</td>
+                    <td>{!! $answer->question->title  !!}</td>
+                    <td><a href="{{route('admin.quiz.answer.show' , $answer->id)}}">{!! str_limit($answer->body , 30) !!}</a></td>
+                    
+                    <td>{!! $answer->type  !!}</td>
+                    <td>{!! $answer->score  !!}</td>
+                    <td>{!! $answer->created_at->diffForHumans() !!}</td>
+                    <td>{!! $answer->updated_at->diffForHumans() !!}</td>
+                    <td>{!! $answer->action_buttons !!}</td>
                 </tr>
         @endforeach
             

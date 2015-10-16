@@ -9,20 +9,20 @@
 
 @section('breadcrumbs')
     <li><a href="{!!route('backend.dashboard')!!}"><i class="fa fa-dashboard"></i> {{ trans('menus.dashboard') }}</a></li>
-    <li class="">Gestion des Categories</li> <li class="active">Creation catégorie</li>
+    <li class="">Gestion des Reponses</li> <li class="active">{{ $answer->question->title }}</li>
 @endsection
 
 @section('content')
+
+    
+
     @include('backend.quiz.includes.partials.header-buttons')
-
-
-
-    <h2>{{ $cour->title }}</h2>
-    <p>{{ $cour->body }}</p>
-    <h4 class="badge" > Catégorie : {{ $cour->category->title }}</h4><br>
-
-    <p class="badge badge-success">Crée le {!! $cour->created_at->format('d M Y à H:m:i') !!}</p><br>
-    <p class="badge badge-warning">Actualisé le {!! $cour->updated_at->format('d M Y à H:m:i')  !!}</p>
+    <p><span class="badge badge-success" >Question :</span> {{ $answer->question->title }}</p>
+    <p><span class="badge badge-success" >Reponse  :</span> {{  $answer->body }}</p>
+    <p><span class="badge badge-success" >Type  :</span> {{  $answer->type }}</p>
+    <p><span class="badge badge-success" >Score  :</span> {{  $answer->score }}</p>
+     <p class="badge badge-success">Crée le {!! $answer->created_at->format('d M Y à H:m:i') !!}</p><br>
+    <p class="badge badge-warning">Actualisé le {!! $answer->updated_at->format('d M Y à H:m:i')  !!}</p>
 
 
 @endsection

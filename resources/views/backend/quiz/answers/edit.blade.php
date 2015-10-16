@@ -16,21 +16,14 @@
     @include('backend.quiz.includes.partials.header-buttons')
    
 
-    {!! Form::model( $page ,['route' => ['admin.quiz.page.update' , $page->id ], 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'patch']) !!}
+    {!! Form::model( $answer ,['route' => ['admin.quiz.answer.update' , $answer->id ], 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'patch']) !!}
 
         <div class="form-group">
-            {!! Form::label('cour_id', 'Cours', ['class' => 'col-lg-2 control-label']) !!}
+            {!! Form::label('question_id', 'Cours', ['class' => 'col-lg-2 control-label']) !!}
             <div class="col-lg-10">
-                {!! Form::select('cour_id' , $cours , null, ['class'=>'form-control']) !!}
+                {!! Form::select('question_id' , $questions , null, ['class'=>'form-control']) !!}
             </div>
-        </div><!--form control-->
-
-        <div class="form-group">
-            {!! Form::label('title', 'Titre', ['class' => 'col-lg-2 control-label']) !!}
-            <div class="col-lg-10">
-                {!! Form::text('title', null, ['class' => 'form-control', 'placeholder' => 'Titre']) !!}
-            </div>
-        </div><!--form control-->
+        </div><!--form control-->      
 
         <div class="form-group">
             {!! Form::label('body', 'Déscription', ['class' => 'col-lg-2 control-label']) !!}
@@ -38,6 +31,21 @@
                 {!! Form::textarea('body', null, ['class' => 'form-control', 'placeholder' => 'Déscription']) !!}
             </div>
         </div><!--form control--> 
+
+         <div class="form-group">
+            {!! Form::label('score', 'Score', ['class' => 'col-lg-2 control-label']) !!}
+            <div class="col-lg-10">
+                {!! Form::text('score', null, ['class' => 'form-control', 'placeholder' => 'Score']) !!}
+            </div>
+        </div><!--form control-->
+
+        <div class="form-group">
+            {!! Form::label('type', 'Type', ['class' => 'col-lg-2 control-label']) !!}
+            <div class="col-lg-10">
+                 {!! Form::radio('type', 1 ) !!} Vrai<br>
+                 {!! Form::radio('type', 0 ) !!} Faux
+            </div>
+        </div><!--form control-->
 
         <div class="well">            
 

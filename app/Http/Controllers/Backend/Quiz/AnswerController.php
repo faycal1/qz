@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Backend\Quiz;
 
-use Illuminate\Http\Request;
 use App\Http\Requests;
+use Illuminate\Http\Request;
+use App\Models\Quiz\Question\Question ;
 use App\Http\Controllers\Controller;
+use App\Models\Quiz\Answer\Answer ;
+use App\Http\Requests\Backend\Quiz\Answer\CreateAnswerRequest;
+use App\Http\Requests\Backend\Quiz\Answer\UpdateAnswerRequest;
 
 class AnswerController extends Controller
 {
@@ -15,7 +19,7 @@ class AnswerController extends Controller
      */
     public function index()
     {
-        //
+        return view('backend.quiz.answers.index' )->with('answers', Answer::all()) ;
     }
 
     /**
@@ -24,8 +28,9 @@ class AnswerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
+    {            
+        $questions = [''=>'Choisissez une Question'] + Question::lists('title','id')->all();
+        return view('backend.quiz.answers.create' , compact('questions') ) ;
     }
 
     /**
@@ -34,9 +39,11 @@ class AnswerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateAnswerRequest $request)
     {
-        //
+        
+        Answer::create($request->all());
+        return redirect()->route('admin.quiz.answer.index')->withFlashSuccess('Answer crée avec sucçés');
     }
 
     /**
@@ -45,9 +52,10 @@ class AnswerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Answer $answer)
     {
-        //
+        setlocale(LC_TIME, 'fr');       
+        return view('backend.quiz.answers.show' , compact('answer') );
     }
 
     /**
@@ -56,10 +64,12 @@ class AnswerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Answer $answer)
     {
-        //
+        $questions = Question::lists('title','id');
+        return view('backend.quiz.answers.edit' , compact('answer' , 'questions') ) ;
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -68,9 +78,10 @@ class AnswerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Answer $answer ,UpdateAnswerRequest $request)
     {
-        //
+        $answer->update($request->all());
+        return redirect()->route('admin.quiz.answer.index')->withFlashSuccess('Answer edité avec sucçés');
     }
 
     /**
@@ -79,8 +90,10 @@ class AnswerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Answer $answer)
     {
-        //
+        $answer->delete();         
+        return redirect()->route('admin.quiz.answer.index')->withFlashSuccess('Answer supprimée avec sucçés');;
     }
 }
+
