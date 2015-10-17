@@ -11,7 +11,8 @@ elixir(function(mix) {
                 'frontend/main.scss'
             ], 'resources/assets/css/frontend/main.css')
         .styles([  // Combine pre-processed CSS files
-                'frontend/main.css'
+                'frontend/main.css',
+                'frontend/style.css'
             ], 'public/css/frontend.css')
         .scripts([ // Combine front-end scripts
                 'plugins.js',

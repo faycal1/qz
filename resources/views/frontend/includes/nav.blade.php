@@ -12,8 +12,13 @@
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li>{!! link_to('/', trans('navs.home')) !!}</li>
-					<li>{!! link_to('macros', trans('navs.macros')) !!}</li>
+					<li>{!! link_to('/', "Accueil" ) !!}</li>
+					@permission('view-cours')
+				        <li>{!! link_to_route('cours', 'Cours') !!}</li>
+				    @endauth
+					
+
+					{{-- <li>{!! link_to('macros', trans('navs.macros')) !!}</li> --}}
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">

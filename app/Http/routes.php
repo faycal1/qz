@@ -38,7 +38,6 @@ $router->group(['namespace' => 'Backend'], function () use ($router)
 
 $router->group(['middleware' =>'access.routeNeedsPermission:view-backend'] , function($router)
 {
-
 	  Route::patch('admin/quiz/category/{category}/restore'  ,['middleware' => 'access.routeNeedsPermission:restore-category'   , 'uses' =>  'Backend\Quiz\CategoryController@restore' ,   'as' => 'admin.quiz.category.restore' ]) ;
 	  Route::delete('admin/quiz/category/{category}/forcedelete'  ,['middleware' => 'access.routeNeedsPermission:force-delete-category'   , 'uses' =>  'Backend\Quiz\CategoryController@forcedelete' ,   'as' => 'admin.quiz.category.forcedelete' ]) ;
 	  Route::get('admin/quiz/category/create' ,['middleware' => 'access.routeNeedsPermission:create-category' , 'uses' =>  'Backend\Quiz\CategoryController@create' , 'as' => 'admin.quiz.category.create' ]) ;
@@ -95,8 +94,18 @@ $router->group(['middleware' =>'access.routeNeedsPermission:view-backend'] , fun
 	  Route::get('admin/quiz/answer/deleted'  ,['middleware' => 'access.routeNeedsPermission:view-deleted-answer'   , 'uses' =>  'Backend\Quiz\AnswerController@deleted' ,   'as' => 'admin.quiz.answer.deleted' ]) ; 
 	   
 	  Route::resource('admin/quiz/answer', 'Backend\Quiz\AnswerController'     ,['only' => ['index', 'show']]);
-	  
-	  //Route::resource('admin/quiz/category/cour/page', 'Backend\Quiz\PageController');
-	  //Route::resource('admin/quiz/category/cour/question', 'Backend\Quiz\QuestionController');
-	  //Route::resource('admin/quiz/answer', 'Backend\Quiz\AnswerController');
 });
+
+
+$router->group(['middleware' =>'access.routeNeedsPermission:view-frontend'] , function($router)
+{
+	Route::get('cours',['middleware' => 'access.routeNeedsPermission:view-cours'   , 'uses' =>  'Frontend\Quiz\CourController@index' ,   'as' => 'cours' ]) ;
+	
+	Route::get('cour/{slug}',['middleware' => 'access.routeNeedsPermission:view-cours'   , 'uses' =>  'Frontend\Quiz\CourController@show' ,   'as' => 'cour.show' ])->where('slug', '[A-Za-z-]+');
+	
+	Route::get('cour/{slug}/{slugq}',['middleware' => 'access.routeNeedsPermission:view-cours'   , 'uses' =>  'Frontend\Quiz\CourController@showCourQuiz' ,   'as' => 'cour.page' ]);
+
+	Route::get('cour/{slug}/{slugp}',['middleware' => 'access.routeNeedsPermission:view-cours'   , 'uses' =>  'Frontend\Quiz\CourController@showCourPage' ,   'as' => 'cour.quiz' ]);
+
+});
+
