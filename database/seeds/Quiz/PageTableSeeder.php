@@ -1,6 +1,6 @@
 <?php
 
-namespace  database\seeds ;
+namespace  database\seeds\Quiz ;
 
 
 use Illuminate\Database\Seeder;

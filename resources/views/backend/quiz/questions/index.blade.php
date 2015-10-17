@@ -51,7 +51,7 @@
     </div>
 
     <div class="pull-right">
-        
+        {!! $questions->render() !!}
     </div>
 
     <div class="clearfix"></div>

@@ -19,7 +19,7 @@ class CourController extends Controller
      */
     public function index()
     {
-        return view('backend.quiz.cours.index' )->with('cours', Cour::all()) ;
+        return view('backend.quiz.cours.index' )->with('cours', Cour::paginate(15)) ;
     }
 
     /**

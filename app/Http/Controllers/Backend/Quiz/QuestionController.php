@@ -22,7 +22,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        return view('backend.quiz.questions.index' )->with('questions', Question::all()) ;
+        return view('backend.quiz.questions.index' )->with('questions', Question::paginate(15)) ;
     }
 
     /**

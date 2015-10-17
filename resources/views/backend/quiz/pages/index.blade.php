@@ -47,7 +47,7 @@
     </div>
 
     <div class="pull-right">
-        
+        {!! $pages->render() !!}
     </div>
 
     <div class="clearfix"></div>

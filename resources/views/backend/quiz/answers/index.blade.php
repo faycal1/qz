@@ -33,9 +33,7 @@
                 <tr>
                     <td>{!! $answer->question->title  !!}</td>
                     <td><a href="{{route('admin.quiz.answer.show' , $answer->id)}}">{!! str_limit($answer->body , 30) !!}</a></td>
-                    
-                    <td>{!! $answer->type  !!}</td>
-                    
+                    <td>{!! $answer->type  !!}</td>                    
                     <td>{!! $answer->created_at->diffForHumans() !!}</td>
                     <td>{!! $answer->updated_at->diffForHumans() !!}</td>
                     <td>{!! $answer->action_buttons !!}</td>
@@ -50,7 +48,7 @@
     </div>
 
     <div class="pull-right">
-        
+        {!! $answers->render() !!}
     </div>
 
     <div class="clearfix"></div>

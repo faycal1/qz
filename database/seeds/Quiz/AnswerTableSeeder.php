@@ -1,18 +1,16 @@
 <?php
 
-namespace  database\seeds ;
-
+namespace  database\seeds\Quiz ;
 
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker ;
-use App\Models\Quiz\Category\Category;
-use App\Models\Quiz\Cour\Cour;
+use App\Models\Quiz\Answer\Answer;
+use App\Models\Quiz\Question\Question;
 use DB ;
 
-class CourTableSeeder extends Seeder
+class AnswerTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
+     /* Run the database seeds.
      *
      * @return void
      */
@@ -22,17 +20,18 @@ class CourTableSeeder extends Seeder
 		if(env('DB_DRIVER')=='mysql')
 			DB::statement('SET FOREIGN_KEY_CHECKS=0;');	
 
-			DB::table('cours')->truncate();
+			DB::table('answers')->truncate();
 
         $faker = Faker::create();
-    	$categories = Db::table('categories')->lists('id') ;
+    	$questions = Db::table('questions')->lists('id') ;
 
     	foreach (range(1,30) as $key => $value ) {
 
-    		Cour::create([
-        		'title'=>$faker->sentence(5),
+    		Answer::create([        		
         		'body'=>$faker->paragraph(4),
-        		'category_id'=>$faker->randomElement($categories) 
+        		'question_id'=>$faker->randomElement($questions) ,
+        		'type'=>$faker->boolean(10) ,
+        		
 	        ]);
     	}
 

@@ -19,7 +19,7 @@ class AnswerController extends Controller
      */
     public function index()
     {
-        return view('backend.quiz.answers.index' )->with('answers', Answer::all()) ;
+        return view('backend.quiz.answers.index' )->with('answers', Answer::paginate(15)) ;
     }
 
     /**

@@ -19,7 +19,7 @@ class PageController extends Controller
      */
     public function index()
     {
-        return view('backend.quiz.pages.index' )->with('pages', Page::all()) ;
+        return view('backend.quiz.pages.index' )->with('pages', Page::paginate(15)) ;
     }
 
     /**

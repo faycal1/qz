@@ -12,9 +12,6 @@ use App\Http\Requests\Backend\Quiz\Category\CreateCategoryRequest;
 use App\Http\Requests\Backend\Quiz\Category\UpdateCategoryRequest;
 
 
-
-
-
 class CategoryController extends Controller
 {
     
@@ -27,7 +24,7 @@ class CategoryController extends Controller
     public function index()
     {
         
-        return view('backend.quiz.categories.index' )->with('categories', Category::paginate(10)); 
+        return view('backend.quiz.categories.index' )->with('categories', Category::paginate(15)); 
     }
 
     /**
