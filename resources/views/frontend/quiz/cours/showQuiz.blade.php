@@ -42,21 +42,19 @@
 		</div><!-- col-md-10 -->
 
         <div class="col-md-2">
-         
+            <div class="panel panel-default">
+                <div class="panel-heading"><i class="fa fa-home"></i> Liste des Pages </div>
+                <div class="panel-body">
+                   @include('frontend.includes.pages_list')     
+                </div>
+            </div><!-- panel -->
 
             <div class="panel panel-default">
                 <div class="panel-heading"><i class="fa fa-home"></i> Quiz </div>
                 <div class="panel-body">
-                    <ul class="list-group" >
-                        @foreach ($cour->questions as $question)
-                            <li class="list-group-item <?php echo Request::segment(4) == $question->slug ? 'active' : '' ?> " >
-                                {!! link_to( 'cour/'.$cour->slug.'/'.$question->slug , $question->title) !!}
-                            </li> 
-                        @endforeach 
-                    </ul>                 
+                   @include('frontend.includes.quiz_list')            
                 </div>
             </div><!-- panel -->
-
         </div><!-- col-md-10 -->
 
         

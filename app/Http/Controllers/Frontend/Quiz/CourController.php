@@ -19,42 +19,25 @@ class CourController extends Controller
     	return view('frontend.quiz.cours.list' , compact('cour') ) ;
     }
 
-    public function show($slug , $slugp=null)
+    public function show($slug)
     {
-    	$cour = Cour::where('slug', $slug)->get()->first();
-    	$page = null ;    	
-
-    	if(!is_null($slugp))
-    	{
-    		$page = Page::where('slug', $slugp)->get()->first();
-    	}
-    	    	
-    	return view('frontend.quiz.cours.show' , compact('cour' , 'page' ) ) ;
+    	$cour = Cour::where('slug', $slug)->get()->first();    	    	
+    	return view('frontend.quiz.cours.show' , compact('cour' ) ) ;
     }
 
-    public function showCourPage($slug , $slugp=null)
-    {
-    	$cour = Cour::where('slug', $slug)->get()->first();
-    	$page = null ;    	
+    public function showCourPage($slug , $slugp)
+    {        
 
-    	if(!is_null($slugp))
-    	{
-    		$page = Page::where('slug', $slugp)->get()->first();
-    	}
+    	$cour = Cour::where('slug', $slug)->get()->first();
+    	$page = Page::where('slug', $slugp)->get()->first();
     	    	
     	return view('frontend.quiz.cours.showPage' , compact('cour' , 'page' ) ) ;
     }
 
-    public function showCourQuiz($slug ,  $slugq=null)
-    {
+    public function showCourQuiz($slug ,  $slugq)
+    {        
     	$cour = Cour::where('slug', $slug)->get()->first();
-    	
-    	$question = null ;
-
-    	if(!is_null($slugq))
-    	{
-    		$question = Question::where('slug', $slugq)->get()->first();
-    	}    	
+    	$question = Question::where('slug', $slugq)->get()->first();
     	    	
     	return view('frontend.quiz.cours.showQuiz' , compact('cour' ,  'question') ) ;
     }
