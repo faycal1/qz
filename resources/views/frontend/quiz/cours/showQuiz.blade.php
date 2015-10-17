@@ -19,25 +19,23 @@
                     <p> {{ $cour->body }} </p>                    
                 </div>
             </div><!-- panel -->
-          
+           
+            <div class="panel panel-default">
+                <div class="panel-heading"><i class="fa fa-home"></i> {{ $question->title }} </div>
+                <div class="panel-body">
+                    <h2> {{ $question->title }} </h2>
+                    <p> {{ $question->body }} </p> 
 
-            @if(!is_null($question))
-                <div class="panel panel-default">
-                    <div class="panel-heading"><i class="fa fa-home"></i> {{ $question->title }} </div>
-                    <div class="panel-body">
-                        <h2> {{ $question->title }} </h2>
-                        <p> {{ $question->body }} </p> 
-
-                        <ul class="list-group" >
-                            @foreach ($question->answers as $answer)
-                                <li class="list-group-item " >
-                                    <p> {{ $answer->body }} </p>
-                                </li> 
-                            @endforeach 
-                        </ul> 
-                    </div>
-                </div><!-- panel -->
-            @endif
+                    <ul class="list-group" >
+                        @foreach ($question->answers as $answer)
+                            <li class="list-group-item " >
+                                <p> {{ $answer->body }} </p>
+                            </li> 
+                        @endforeach 
+                    </ul> 
+                </div>
+            </div><!-- panel -->
+            
 
 		</div><!-- col-md-10 -->
 
