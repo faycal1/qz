@@ -11,30 +11,25 @@
             </div><!-- panel -->
         </div>           
 
-		<div class="col-md-8">
-			<div class="panel panel-default">
-                <div class="panel-heading"><i class="fa fa-home"></i> {{ $cour->title }} </div>
-                <div class="panel-body">
-                    <h2> {{ $cour->title }} </h2>
-                    <p> {{ $cour->body }} </p>                    
-                </div>
-            </div><!-- panel -->
-           
-            <div class="panel panel-default">
-                <div class="panel-heading"><i class="fa fa-home"></i> {{ $question->title }} </div>
-                <div class="panel-body">
-                    <h2> {{ $question->title }} </h2>
-                    <p> {{ $question->body }} </p> 
+       <div class="col-md-8">
 
-                    <ul class="list-group" >
-                        @foreach ($question->answers as $answer)
-                            <li class="list-group-item " >
-                                <p> {{ $answer->body }} </p>
-                            </li> 
-                        @endforeach 
-                    </ul> 
+              <div id="quiz"  class="panel panel-default">
+                <div class="panel-heading"><i class="fa fa-home"></i> Quiz  : {{ $cour->title }} </div>
+                <div class="panel-body" >
+                    <div id="container" style="width:95%;height:100%;"></div>                    
+                    
                 </div>
             </div><!-- panel -->
+
+	<div class="panel panel-default">
+                    <div class="panel-heading"><i class="fa fa-home"></i> {{ $cour->title }} </div>
+                    <div class="panel-body">
+                        <h2> {{ $cour->title }} </h2>
+                        <p> {{ $cour->body }} </p>                    
+                    </div>
+                </div><!-- panel -->
+           
+      
             
 
 		</div><!-- col-md-10 -->
@@ -58,4 +53,22 @@
         
 
 	</div><!-- row -->
+@endsection
+
+@section('quizJs')
+               <script type="text/javascript">
+                            var quiz;
+                            function init(){                                
+                                //create the screen object which loads the xml and creates all screen elements
+                                quiz = new Screen({id:"myQuiz", xmlPath:"http://localhost:8000/xml/quiz2_responsive.xml"});                                
+                                //choose a target div
+                                var targetDiv = get("container");                                
+                                //load it
+                                quiz.load(targetDiv,false);
+                            }                            
+                            //kick off
+                            jQuery(document).ready(function() {
+                                init();
+                            });                            
+                </script>
 @endsection

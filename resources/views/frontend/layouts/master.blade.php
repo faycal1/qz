@@ -35,6 +35,9 @@
             @yield('content')
         </div><!-- container -->
 
+        <script type="text/javascript">
+            var APP_URL = {!! json_encode(url('/')) !!};
+        </script>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="{{asset('js/vendor/jquery-1.11.2.min.js')}}"><\/script>')</script>
         {!! HTML::script('js/vendor/bootstrap.min.js') !!}
@@ -43,6 +46,6 @@
         {!! HTML::script(elixir('js/frontend.js')) !!}
         @yield('after-scripts-end')
 
-        @include('includes.partials.ga')
+         @yield('quizJs')
     </body>
 </html>
