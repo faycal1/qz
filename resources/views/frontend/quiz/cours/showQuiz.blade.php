@@ -60,7 +60,7 @@
                             var quiz;
                             function init(){                                
                                 //create the screen object which loads the xml and creates all screen elements
-                                quiz = new Screen({id:"myQuiz", xmlPath:"http://localhost:8000/xml/quiz2_responsive.xml"});                                
+                                quiz = new Screen({id:"myQuiz", xmlPath:"http://localhost:8000/pxml"});                                
                                 //choose a target div
                                 var targetDiv = get("container");                                
                                 //load it

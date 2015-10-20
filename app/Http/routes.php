@@ -109,3 +109,5 @@ $router->group(['middleware' =>'access.routeNeedsPermission:view-frontend'] , fu
 
 });
 
+
+Route::get('pxml' , 'Frontend\Quiz\CourController@paresXml');

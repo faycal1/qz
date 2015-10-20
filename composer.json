@@ -17,7 +17,8 @@
 		"arcanedev/log-viewer": "~3.4.0",
 		"creativeorange/gravatar": "~1.0",
 		"nesbot/carbon": "^1.20",
-		"cviebrock/eloquent-sluggable": "^3.1"
+		"cviebrock/eloquent-sluggable": "^3.1",
+		"teepluss/restable": "dev-master"
 	},
 	"require-dev": {
 		"fzaninotto/faker": "~1.4",

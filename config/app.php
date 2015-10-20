@@ -147,6 +147,7 @@ return [
 		'Illuminate\Html\HtmlServiceProvider',
 		Laracasts\Generators\GeneratorsServiceProvider::class,
 		Cviebrock\EloquentSluggable\SluggableServiceProvider::class,
+		Teepluss\Restable\RestableServiceProvider::class,
 
 		/*
 		 * Application Service Providers...
@@ -223,6 +224,7 @@ return [
 		'Gravatar'  => 'Creativeorange\Gravatar\Facades\Gravatar',
 		'HTML'		=> 'Illuminate\Html\HtmlFacade',
 		'Socialize' => 'Laravel\Socialite\Facades\Socialite',
+		 'Restable' => 'Teepluss\Restable\Facades\Restable'
 
 	],
 ];
