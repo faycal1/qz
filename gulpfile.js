@@ -12,11 +12,17 @@ elixir(function(mix) {
             ], 'resources/assets/css/frontend/main.css')
         .styles([  // Combine pre-processed CSS files
                 'frontend/main.css',
-                'frontend/style.css'
+                'frontend/style.css',
+                'frontend/quiz/styles.css'
             ], 'public/css/frontend.css')
         .scripts([ // Combine front-end scripts
                 'plugins.js',
-                'frontend/main.js'
+                'frontend/main.js',
+                'frontend/quiz/essemble_core.min.js',
+                'frontend/quiz/jquery.easing.1.3.js',
+                'frontend/quiz/jquery.transit.min.js',
+                'frontend/quiz/mcq.js',
+                'frontend/quiz/quiz.js'
             ], 'public/js/frontend.js')
 
         .sass([ // Process back-end stylesheets
