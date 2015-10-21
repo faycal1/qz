@@ -99,8 +99,10 @@ class CourController extends Controller
 
     function quiz (Request $request)
     {
-        $question = Redis::set('question:profile:'.$request->id);
+
+        $cour_id = Question::findOrFail($request->id);        
+        $question = Redis::set('question' , $request->id);
          
-       return  response()->json(['name' => Redis::get('question')]) ;
+       return  response()->json(['question' => Redis::get('question') , 'cour' => $cour_id->cour_id ]) ;
     }
 }
