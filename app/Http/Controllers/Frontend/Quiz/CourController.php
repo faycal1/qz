@@ -2,21 +2,18 @@
 
 namespace App\Http\Controllers\Frontend\Quiz;
 
-use Illuminate\Http\Request;
+use Auth ;
+use Redis;
+use Response;
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Request as Req ;
-
+use Illuminate\Http\Request;
 use App\Models\Quiz\Cour\Cour ;
 use App\Models\Quiz\Page\Page ;
+use App\Services\Quiz\QuizService ;
+use App\Http\Controllers\Controller;
 use App\Models\Quiz\Question\Question ;
 
-use Response;
-
-use App\Services\Quiz\QuizService ;
-use Redis;
-
-
+use Illuminate\Support\Facades\Request as Req ;
 
 class CourController extends Controller
 {
@@ -42,11 +39,11 @@ class CourController extends Controller
     	return view('frontend.quiz.cours.showPage' , compact('cour' , 'page' ) ) ;
     }
 
-    public function showCourQuiz($slug ,  $slugq)
+    public function showCourQuiz($slug )
     {        
     	$cour = Cour::where('slug', $slug)->get()->first();
-    	$question = Question::where('slug', $slugq)->get()->first();
-    	    	
+    	//$question = Question::where('slug', $slugq)->get()->first();
+        $question = '';
     	return view('frontend.quiz.cours.showQuiz' , compact('cour' ,  'question') ) ;
     }
 
@@ -100,9 +97,35 @@ class CourController extends Controller
     function quiz (Request $request)
     {
 
-        $cour_id = Question::findOrFail($request->id);        
-        $question = Redis::set('question' , $request->id);
+        $id = $request->id ;
+        $passed = $request->passed ;
+        $cour_id =  Question::findOrFail($id)->cour_id;
+        $user = Auth::user() ;
+
+        if (Redis::get('quiz'))
+        {
+            
+            $quiz = unserialize(Redis::get('quiz')) ;
+            $question = [ 'id'=>$id , 'passed'=>$passed ] ; 
+
+            foreach ($quiz['question'] as $key => $value) {
+                if ($value['id'] == $id) {
+                    unset($quiz['question'][$key]);
+                }
+            }
+
+            array_push($quiz['question'], $question);
+            $redis = Redis::set('quiz' , serialize($quiz));
+
+        }else{
+            $quiz=['question'=>[]];
+            $question = ['id'=>$id , 'passed'=>$passed ] ;                        
+            array_push($quiz['question'], $question);
+            $redis =  Redis::set('quiz' , serialize($quiz));
+        }       
+
+        $user->cours()->sync([$cour_id=>['result'=> Redis::get('quiz') , 'score'=>$request->score]]);
          
-       return  response()->json(['question' => Redis::get('question') , 'cour' => $cour_id->cour_id ]) ;
+       return  response()->json(['data' => Redis::get('quiz') , 'unserialize'=>unserialize(Redis::get('quiz'))]) ;
     }
 }

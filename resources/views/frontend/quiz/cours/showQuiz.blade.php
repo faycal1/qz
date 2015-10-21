@@ -17,13 +17,7 @@
                 <div class="panel-heading"><i class="fa fa-home"></i> Quiz  : {{ $cour->title }} </div>
                 <div class="panel-body" >
 
-               {{--  @foreach ($cour->questions as $question)
-                     @foreach ($question->answers as $answer)
-                            {{ $answer->body }}<br><br>
-                    @endforeach
-                @endforeach --}}
-
-                    <div id="container" style="width:95%;height:100%;"></div>                    
+                                  <div id="container" style="width:95%;height:100%;"></div>                    
                     
                 </div>
             </div><!-- panel -->
@@ -42,6 +36,13 @@
 		</div><!-- col-md-10 -->
 
         <div class="col-md-2">
+
+        <div class="panel panel-default">
+                <div class="panel-heading"><i class="fa fa-home"></i> Quiz </div>
+                <div class="panel-body">
+                   @include('frontend.includes.quiz_list')            
+                </div>
+            </div><!-- panel -->
             <div class="panel panel-default">
                 <div class="panel-heading"><i class="fa fa-home"></i> Liste des Pages </div>
                 <div class="panel-body">
@@ -49,12 +50,7 @@
                 </div>
             </div><!-- panel -->
 
-            <div class="panel panel-default">
-                <div class="panel-heading"><i class="fa fa-home"></i> Quiz </div>
-                <div class="panel-body">
-                   @include('frontend.includes.quiz_list')            
-                </div>
-            </div><!-- panel -->
+            
         </div><!-- col-md-10 -->
 
         

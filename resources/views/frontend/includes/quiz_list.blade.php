@@ -1,9 +1,12 @@
 @inject('quiz', 'App\Services\Quiz\CourService')
-<ul class="list-group" >
-    @foreach ($quiz->questionsLists($cour->id) as $question)
-        <li class="list-group-item <?php echo Request::segment(4) == $question->slug ? 'active' : '' ?> " >
-            {!! link_to( 'cour/'.$cour->slug.'/quiz/'.$question->slug , $question->title) !!}
-        </li> 
-    @endforeach 
-</ul>      
+<?php $cour_user = $cour->hasUser(\Auth::user()->id , $cour->id) ?>
+@if (count($cour_user) === 1)
+    	{!! link_to( 'cour/'.$cour->slug.'/quiz/' , 'Jouer Au Quiz ?' , array('style' => 'color:#b52a2f !important; text-decoration: line-through;')) !!} <br>
+    	Score <span style="color:#b52a2f; text-style:bold;" > {{$cour_user->score }} %</span>
+@else
+	{!! link_to( 'cour/'.$cour->slug.'/quiz/' , 'Jouer Au Quiz ?' ) !!}
+@endif
+
+
+    
 

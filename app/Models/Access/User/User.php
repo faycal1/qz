@@ -57,4 +57,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	public function canChangeEmail() {
 		return config('access.users.change_email');
 	}
+
+	public function cours ()
+	{
+		return $this->belongsToMany('App\Models\Quiz\Cour\Cour')->withTimestamps(); ;
+	}
 }

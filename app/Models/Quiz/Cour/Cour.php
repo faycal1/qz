@@ -2,6 +2,7 @@
 
 namespace App\Models\Quiz\Cour;
 
+use DB ;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Quiz\Cour\Traits\Attribute\CourAttribute;
@@ -39,5 +40,16 @@ class Cour extends Model implements SluggableInterface
     public function category()
     {
     	return $this->belongsTo('App\Models\Quiz\Category\Category') ;
+    }
+
+
+    public function users ()
+    {
+        return $this->belongsToMany('App\Models\Access\User')->withTimestamps(); ;
+    }
+
+    public function hasUser($user_id , $cour_id)
+    {
+        return DB::table('cour_user')->where('user_id', $user_id)->where('cour_id', $cour_id)->first();
     }
 }
