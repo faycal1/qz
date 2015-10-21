@@ -16,7 +16,7 @@ class Cour extends Model implements SluggableInterface
     use SoftDeletes;
 
     protected $guarded = ['id'];
-    protected $fillable = ['title' , 'body' ,'category_id' ] ;
+    protected $fillable = ['title' , 'body' ,'category_id' , 'timer' ] ;
 
     protected $dates = ['deleted_at'];
 

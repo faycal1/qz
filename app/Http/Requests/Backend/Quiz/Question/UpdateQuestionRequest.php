@@ -22,7 +22,10 @@ class UpdateQuestionRequest extends Request
             'title'  =>  'required',
             'type' => 'required',
             'cour_id' => 'required',
-            'score'   =>  'required|integer|between:0,100',
+            'pass'=>'required',
+            'fail'=>'required',
+            'partial'=>'required',
+            
             ];
     }
 
@@ -32,9 +35,10 @@ class UpdateQuestionRequest extends Request
             'title.required' => 'Le titre est obligatoire',            
             'cour_id.required' => 'Le cour est obligatoire',
             'type.required' => 'Le Type est obligatoire',
-            'score.required'=> 'Le Score est obligatoire',
-            'score.integer'=> 'Le Score doit contenir un chiffre entre 0 et 100',
-            'score.between'=> 'Le Score doit contenir un chiffre entre 0 et 100'
+            'pass'=>'Le champs Passe est obligatoire',
+            'fail'=>'Le champs Ne passe pas est obligatoire',
+            'partial'=>'Le champs Partiel est obligatoire',
+            
         ];
     }
 }

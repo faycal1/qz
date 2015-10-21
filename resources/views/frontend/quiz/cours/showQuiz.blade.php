@@ -13,21 +13,28 @@
 
        <div class="col-md-8">
 
-              <div id="quiz"  class="panel panel-default">
+              <div id="quizContainer"  class="panel panel-default">
                 <div class="panel-heading"><i class="fa fa-home"></i> Quiz  : {{ $cour->title }} </div>
                 <div class="panel-body" >
+
+               {{--  @foreach ($cour->questions as $question)
+                     @foreach ($question->answers as $answer)
+                            {{ $answer->body }}<br><br>
+                    @endforeach
+                @endforeach --}}
+
                     <div id="container" style="width:95%;height:100%;"></div>                    
                     
                 </div>
             </div><!-- panel -->
 
-	<div class="panel panel-default">
-                    <div class="panel-heading"><i class="fa fa-home"></i> {{ $cour->title }} </div>
-                    <div class="panel-body">
-                        <h2> {{ $cour->title }} </h2>
-                        <p> {{ $cour->body }} </p>                    
-                    </div>
-                </div><!-- panel -->
+           <div class="panel panel-default">
+                <div class="panel-heading"><i class="fa fa-home"></i> {{ $cour->title }} </div>
+                <div class="panel-body">
+                    <h2> {{ $cour->title }} </h2>
+                    <p> {{ $cour->body }} </p>                    
+                </div>
+            </div><!-- panel -->
            
       
             
@@ -60,7 +67,7 @@
                             var quiz;
                             function init(){                                
                                 //create the screen object which loads the xml and creates all screen elements
-                                quiz = new Screen({id:"myQuiz", xmlPath:"http://localhost:8000/pxml"});                                
+                                quiz = new Screen({id:"myQuiz", xmlPath:"http://localhost:8000/pxml/{{ $cour->slug }}"});                                
                                 //choose a target div
                                 var targetDiv = get("container");                                
                                 //load it

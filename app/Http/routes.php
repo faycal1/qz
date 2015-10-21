@@ -109,5 +109,6 @@ $router->group(['middleware' =>'access.routeNeedsPermission:view-frontend'] , fu
 
 });
 
+Route::get('pxml/{slug}' , 'Frontend\Quiz\CourController@paresXml');
 
-Route::get('pxml' , 'Frontend\Quiz\CourController@paresXml');
+Route::post('quiz' , 'Frontend\Quiz\CourController@quiz');

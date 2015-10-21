@@ -16,7 +16,7 @@ body{font-family: 'Roboto Condensed', sans-serif;background:transparent;color:#4
 }*/
 
 
-#quiz  {height:100%;background:#ffc746 url("../assets/bg_nasa.jpg") no-repeat center center fixed; 
+#quizContainer  {height:100%;background:#ffc746 url("../assets/bg_nasa.jpg") no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -28,7 +28,7 @@ body{font-family: 'Roboto Condensed', sans-serif;background:transparent;color:#4
 }
 
 h1{font-size:34px;color: #4b4b40;margin-bottom: 30px;}
-h2{font-size:34px;color: #f2b115;margin-bottom: 30px;}
+h2{font-size:34px;color: #337AB7;margin-bottom: 30px;}
 div, p, a, li, td { -webkit-text-size-adjust:none; }
 p{font-size:14px;line-height:21px;margin-bottom:12px;color:#4b4b40;}
 p:last-child{margin-bottom:0px;}
@@ -105,7 +105,7 @@ img{display:block;} /* remove bottom padding */
 
 /* timer */
 #timerContainer{text-align: center;}
-#timer{margin-top:150px;background:transparent none no-repeat 0px 0px;display:none;opacity:0.5;filter:alpha(opacity=50);filter:progid:DXImageTransform.Microsoft.Alpha(opacity=50) ;-moz-opacity:0.5;position:relative !important;}
+#timer{margin-top:40px;margin-bottom:40px;background:transparent none no-repeat 0px 0px;display:none;opacity:0.5;filter:alpha(opacity=50);filter:progid:DXImageTransform.Microsoft.Alpha(opacity=50) ;-moz-opacity:0.5;position:relative !important;}
 
 @media (max-width: 992px) {
   #col1{margin-top:110px;} /* pushes the question down allowing space for the timer */

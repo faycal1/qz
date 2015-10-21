@@ -19,7 +19,7 @@ class CreateQuestionsTable extends Migration
             $table->text ('body');
             $table->enum('type', ['multiple', 'one']);
             $table->integer('cour_id')->unsigned();
-            $table->foreign('cour_id')->references('id')->on('cours')->on('questions')->onDelete('cascade');
+            $table->foreign('cour_id')->references('id')->on('cours')->onDelete('cascade');
              $table->softDeletes() ;
             $table->timestamps();
         });

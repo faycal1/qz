@@ -25,14 +25,16 @@ class QuestionTableSeeder extends Seeder
         $faker = Faker::create();
     	$cours = Db::table('cours')->lists('id') ;
 
-    	foreach (range(1,30) as $key => $value ) {
-
+    	foreach (range(1,100) as $key => $value ) {
     		Question::create([
         		'title'=>$faker->sentence(5),
         		'body'=>$faker->paragraph(4),
         		'cour_id'=>$faker->randomElement($cours) ,
         		'type'=>$faker->randomElement(['one'=>'one' , 'multiple'=>'multiple']) ,
         		'score'=>$faker->numberBetween( 0, 100) ,
+                'pass'=>$faker->paragraph(1),
+                'fail'=>$faker->paragraph(1),
+                'partial'=>$faker->paragraph(1),
 	        ]);
     	}
 

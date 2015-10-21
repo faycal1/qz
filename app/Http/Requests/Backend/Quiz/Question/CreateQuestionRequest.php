@@ -16,13 +16,17 @@ class CreateQuestionRequest extends Request
         return access()->can('create-question');
     }
 
-    ublic function rules()
+    public function rules()
     {
         return [
             'title'  =>  'required',
             'type' => 'required',
             'cour_id' => 'required',
-            'score'   =>  'required|integer|between:0,100',
+            'pass'=>'required',
+            'fail'=>'required',
+            'partial'=>'required',
+            'time'=>'integer'
+            
             ];
     }
 
@@ -32,10 +36,12 @@ class CreateQuestionRequest extends Request
             'title.required' => 'Le titre est obligatoire',            
             'cour_id.required' => 'Le cour est obligatoire',
             'type.required' => 'Le Type est obligatoire',
-            'score.required'=> 'Le Score est obligatoire',
-            'score.integer'=> 'Le Score doit contenir un chiffre',
-            'score.between'=> 'Le Score doit contenir un chiffre entre 0 et 100'
+            'pass.required'=>'Le champs Passe est obligatoire',
+            'fail.required'=>'Le champs Ne passe pas est obligatoire',
+            'partial.required'=>'Le champs Partiel est obligatoire',
+            'time.integer'=>'Le champs Temps doit contenir des secondes est obligatoire',
+            
         ];
-    }
+    
     }
 }

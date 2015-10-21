@@ -19,8 +19,7 @@ class CreateAnswerRequest extends Request
     public function rules()
     {
         return [
-            'body'  =>  'required',
-            
+            'body'  =>  'required',            
             'question_id' => 'required',
             'type'=>'required'
             ];
@@ -29,8 +28,7 @@ class CreateAnswerRequest extends Request
     public function messages()
     {
         return [            
-            'title.required' => 'Le titre est obligatoire',
-            
+            'title.required' => 'Le titre est obligatoire',            
             'question_id.required' => 'La Question est obligatoire',
             'type.required'=>'Le type de la reponse obligatoire'
         ];

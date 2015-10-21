@@ -21,7 +21,7 @@ class CreateCourRequest extends Request
         return [
             'title'  =>  'required|unique:cours',
             'body'   =>  'required',
-            'category_id' => 'required',
+            'category_id' => 'required'
             ];
     }
 

@@ -46,10 +46,31 @@
             </div>
         </div><!--form control--> 
 
-         <div class="form-group">
-            {!! Form::label('score', 'Score', ['class' => 'col-lg-2 control-label']) !!}
+          <div class="form-group">
+            {!! Form::label('pass', 'Passe', ['class' => 'col-lg-2 control-label']) !!}
             <div class="col-lg-10">
-                {!! Form::text('score', null, ['class' => 'form-control', 'placeholder' => 'Score']) !!}
+                {!! Form::text('pass', null, ['class' => 'form-control', 'placeholder' => 'Passe']) !!}
+            </div>
+        </div><!--form control-->
+
+        <div class="form-group">
+            {!! Form::label('fail', 'Ne Passe pas', ['class' => 'col-lg-2 control-label']) !!}
+            <div class="col-lg-10">
+                {!! Form::text('fail', null, ['class' => 'form-control', 'placeholder' => 'Ne Passe pas']) !!}
+            </div>
+        </div><!--form control-->
+
+        <div class="form-group">
+            {!! Form::label('partial', 'Partiel', ['class' => 'col-lg-2 control-label']) !!}
+            <div class="col-lg-10">
+                {!! Form::text('partial', null, ['class' => 'form-control', 'placeholder' => 'Partiel']) !!}
+            </div>
+        </div><!--form control-->
+
+         <div class="form-group">
+            {!! Form::label('time', 'Temps (en seconds, par default 15 secondes)', ['class' => 'col-lg-2 control-label']) !!}
+            <div class="col-lg-10">
+                {!! Form::text('time', null, ['class' => 'form-control', 'placeholder' => 'time']) !!}
             </div>
         </div><!--form control-->
 

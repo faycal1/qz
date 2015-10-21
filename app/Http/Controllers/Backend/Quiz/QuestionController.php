@@ -44,6 +44,7 @@ class QuestionController extends Controller
      */
     public function store(CreateQuestionRequest $request)
     {
+        //dd($request->cour_id) ;
         
         Question::create($request->all());
         return redirect()->route('admin.quiz.question.index')->withFlashSuccess('Question crée avec sucçés');

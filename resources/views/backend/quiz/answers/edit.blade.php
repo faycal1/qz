@@ -38,7 +38,7 @@
             {!! Form::label('type', 'Type', ['class' => 'col-lg-2 control-label']) !!}
             <div class="col-lg-10">
                  {!! Form::radio('type', 1 ) !!} Vrai<br>
-                 {!! Form::radio('type', 0 ) !!} Faux
+                 {!! Form::radio('type', 2 ) !!} Faux
             </div>
         </div><!--form control-->
 

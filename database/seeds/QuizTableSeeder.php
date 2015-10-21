@@ -15,8 +15,8 @@ class QuizTableSeeder extends Seeder
 			 $this->call(\database\seeds\Quiz\CategoryTableSeeder::class);
 			 $this->call(\database\seeds\Quiz\CourTableSeeder::class);
 			 $this->call(\database\seeds\Quiz\PageTableSeeder::class);
-			 $this->call(\database\seeds\Quiz\QuestionTableSeeder::class);
-			$this->call(\database\seeds\Quiz\AnswerTableSeeder::class);
+			 //$this->call(\database\seeds\Quiz\QuestionTableSeeder::class);
+			//$this->call(\database\seeds\Quiz\AnswerTableSeeder::class);
 
 		if(env('DB_DRIVER')=='mysql')
 			DB::statement('SET FOREIGN_KEY_CHECKS=1;');
