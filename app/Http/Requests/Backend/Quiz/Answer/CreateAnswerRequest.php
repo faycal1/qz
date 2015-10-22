@@ -21,7 +21,8 @@ class CreateAnswerRequest extends Request
         return [
             'body'  =>  'required',            
             'question_id' => 'required',
-            'type'=>'required'
+            'type'=>'required',
+            'type'=>'onlyonetrue'
             ];
     }
 
@@ -30,7 +31,8 @@ class CreateAnswerRequest extends Request
         return [            
             'title.required' => 'Le titre est obligatoire',            
             'question_id.required' => 'La Question est obligatoire',
-            'type.required'=>'Le type de la reponse obligatoire'
+            'type.required'=>'Le type de la reponse obligatoire',
+            'type.onlyonetrue'=>'la Question est de type unique et ne peut avoir plusieur vrais reponse'
         ];
     }
 }

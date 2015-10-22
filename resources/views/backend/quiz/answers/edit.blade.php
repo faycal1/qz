@@ -19,7 +19,7 @@
     {!! Form::model( $answer ,['route' => ['admin.quiz.answer.update' , $answer->id ], 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'patch']) !!}
 
         <div class="form-group">
-            {!! Form::label('question_id', 'Cours', ['class' => 'col-lg-2 control-label']) !!}
+            {!! Form::label('question_id', 'Question', ['class' => 'col-lg-2 control-label']) !!}
             <div class="col-lg-10">
                 {!! Form::select('question_id' , $questions , null, ['class'=>'form-control']) !!}
             </div>

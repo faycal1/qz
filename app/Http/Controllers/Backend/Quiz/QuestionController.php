@@ -33,6 +33,7 @@ class QuestionController extends Controller
     public function create()
     {            
         $cours = [''=>'Choisissez un cour'] + Cour::lists('title','id')->all();
+        
         return view('backend.quiz.questions.create' , compact('cours') ) ;
     }
 

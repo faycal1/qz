@@ -1,5 +1,6 @@
 <?php namespace App\Providers;
 
+use Validator;
 use Illuminate\Support\ServiceProvider;
 
 /**
@@ -15,7 +16,7 @@ class AppServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		//
+		Validator::extend('onlyonetrue', 'App\Services\Quiz\Validation@OnlyOneTrue');
 	}
 
 	/**

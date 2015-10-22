@@ -2,6 +2,8 @@
 
 namespace App\Models\Quiz\Question;
 
+
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Quiz\Question\Traits\Attribute\QuestionAttribute;
@@ -35,4 +37,6 @@ class Question extends Model implements SluggableInterface
     {
     	return $this->hasMany('App\Models\Quiz\Answer\Answer');
     }
+
+   
 }

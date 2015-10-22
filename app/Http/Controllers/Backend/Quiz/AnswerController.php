@@ -40,8 +40,8 @@ class AnswerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(CreateAnswerRequest $request)
-    {
-        
+    {        
+        //if question is type=unique can not a second true question
         Answer::create($request->all());
         return redirect()->route('admin.quiz.answer.index')->withFlashSuccess('Answer crée avec sucçés');
     }

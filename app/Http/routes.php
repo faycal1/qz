@@ -107,8 +107,10 @@ $router->group(['middleware' =>'access.routeNeedsPermission:view-frontend'] , fu
 
 	Route::get('cour/{slug}/page/{slugp}',['middleware' => 'access.routeNeedsPermission:view-cours'   , 'uses' =>  'Frontend\Quiz\CourController@showCourPage' ,   'as' => 'cour.quiz' ]);
 
+	Route::get('pxml/{slug}' , 'Frontend\Quiz\CourController@paresXml');
+
+	Route::post('quiz' , 'Frontend\Quiz\CourController@quiz');
+
 });
 
-Route::get('pxml/{slug}' , 'Frontend\Quiz\CourController@paresXml');
 
-Route::post('quiz' , 'Frontend\Quiz\CourController@quiz');

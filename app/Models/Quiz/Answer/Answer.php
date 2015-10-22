@@ -26,4 +26,9 @@ class Answer extends Model
     {
     	return $this->belongsTo('App\Models\Quiz\Question\Question') ;
     }
+
+    public function scopeCountTrueAnswer ($query , $question_id)
+    {
+        return $query->where('question_id' , $question_id)->where('type' , 1)->count() ;
+    }
 }

@@ -18,7 +18,7 @@
     {!! Form::open(['route' => 'admin.quiz.answer.store', 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'post']) !!}
        
         <div class="form-group">
-            {!! Form::label('question_id', 'Cours', ['class' => 'col-lg-2 control-label']) !!}
+            {!! Form::label('question_id', 'Question', ['class' => 'col-lg-2 control-label']) !!}
             <div class="col-lg-10">
                 {!! Form::select('question_id' , $questions , null, ['class'=>'form-control']) !!}
             </div>
