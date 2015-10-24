@@ -60,6 +60,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
 	public function cours ()
 	{
-		return $this->belongsToMany('App\Models\Quiz\Cour\Cour')->withTimestamps(); ;
+		return $this->belongsToMany('App\Models\Quiz\Cour\Cour' , 'cour_user')->withTimestamps(); ;
 	}
 }

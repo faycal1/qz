@@ -45,7 +45,7 @@ class Cour extends Model implements SluggableInterface
 
     public function users ()
     {
-        return $this->belongsToMany('App\Models\Access\User')->withTimestamps(); ;
+        return $this->belongsToMany('App\Models\Access\User\User' , 'cour_user')->withTimestamps(); ;
     }
 
     public function hasUser($user_id , $cour_id)

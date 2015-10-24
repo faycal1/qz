@@ -21,4 +21,6 @@ class UserProvider extends Model {
 	 * @var array
 	 */
 	protected $guarded = ['id'];
+
+	
 }

@@ -22,6 +22,8 @@
         </div><!-- /.box-header -->
         <div class="box-body">
             @include('backend.lang.' . app()->getLocale() . '.welcome')
+
+            <?php var_dump($stat) ?>
         </div><!-- /.box-body -->
     </div><!--box box-success-->
 @endsection

@@ -15,7 +15,7 @@
         @yield('after-styles-end')
 
         <!-- Fonts -->
-        <link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
+        <!-- <link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'> -->
 
         <!-- Icons-->
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -38,8 +38,7 @@
         <script type="text/javascript">
             var APP_URL = {!! json_encode(url('/')) !!};
         </script>
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="{{asset('js/vendor/jquery-1.11.2.min.js')}}"><\/script>')</script>
+      {!! HTML::script('js/vendor/jquery-1.11.2.min.js') !!} 
         {!! HTML::script('js/vendor/bootstrap.min.js') !!}
 
         @yield('before-scripts-end')

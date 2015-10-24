@@ -12,8 +12,8 @@ class Validation {
 		
 		Answer::CountTrueAnswer($question_id) ;
 
-		if ($type == 1)
-			if (Answer::CountTrueAnswer($question_id) == 1)
+		if ($type == '1')
+			if (Answer::CountTrueAnswer($question_id) == '1')
 				return false ;
 
 		return true ;
