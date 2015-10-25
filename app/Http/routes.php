@@ -94,6 +94,8 @@ $router->group(['middleware' =>'access.routeNeedsPermission:view-backend'] , fun
 	  Route::get('admin/quiz/answer/deleted'  ,['middleware' => 'access.routeNeedsPermission:view-deleted-answer'   , 'uses' =>  'Backend\Quiz\AnswerController@deleted' ,   'as' => 'admin.quiz.answer.deleted' ]) ; 
 	   
 	  Route::resource('admin/quiz/answer', 'Backend\Quiz\AnswerController'     ,['only' => ['index', 'show']]);
+
+	  Route::resource('admin/media', 'Backend\Media\MediaController'     ,['only' => ['index', 'show']]);
 });
 
 
@@ -112,5 +114,7 @@ $router->group(['middleware' =>'access.routeNeedsPermission:view-frontend'] , fu
 	Route::post('quiz' , 'Frontend\Quiz\CourController@quiz');
 
 });
+
+// /Route::get('jsonChart' , 'Backend\DashboardController@Chart') ;
 
 

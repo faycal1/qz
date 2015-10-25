@@ -20,6 +20,7 @@
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
+        @include('tinymce::tpl')
     </head>
     <body class="skin-blue">
         <div class="wrapper">
@@ -52,5 +53,7 @@
         @yield('before-scripts-end')
         {!! HTML::script(elixir('js/backend.js')) !!}
         @yield('after-scripts-end')
+
+         @yield('fc')
     </body>
 </html>

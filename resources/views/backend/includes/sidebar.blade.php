@@ -38,6 +38,7 @@
                 @endauth
 
                 <li class="{{ Active::pattern('admin/quiz/*') }}"><a href="{!!url('admin/quiz/category')!!}"><span>Quiz</span></a></li>
+                 <li class="{{ Active::pattern('admin/media*') }}"><a href="{!!url('admin/media')!!}"><span>Media</span></a></li>
 
                  <li class="{{ Active::pattern('admin/log-viewer*') }} treeview">
                   <a href="#">

@@ -33,12 +33,21 @@ elixir(function(mix) {
         .styles([ // Combine pre-processed CSS files
                 'backend/main.css',
                 'sweetalert.css',
+                'backend/dropzone.css',
             ], 'public/css/backend.css')
         .scripts([ // Combine back-end scripts
                 'sweetalert.min.js',
-                'plugins.js',                
+                'plugins.js',                                
                 'backend/main.js',
                 'backend/plugin/toastr/toastr.min.js',
+                'backend/plugin/dropzone/dropzone.js',
+                'fc/fusioncharts.js',
+                'fc/fusioncharts.charts.js',
+                'fc/fusioncharts.powercharts.js',
+                'fc/fusioncharts.gantt.js',
+                'fc/fusioncharts.maps.js',
+                'fc/fusioncharts.widgets.js',
+                'fc/themes/fusioncharts.theme.fint.js',
                 'backend/custom.js'
             ], 'public/js/backend.js')
 

@@ -15,7 +15,7 @@ class MacroServiceProvider extends \Illuminate\Html\HtmlServiceProvider {
 	 */
 	public function boot()
 	{
-		//
+		
 	}
 
 	/**

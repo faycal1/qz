@@ -14,10 +14,7 @@ $(function() {
         "showMethod": "fadeIn",
         "hideMethod": "fadeOut"
     }
-
-
 });
-
 // $( document ).ready(function() {
 //     swal({
 //       title: "Are you sure?",

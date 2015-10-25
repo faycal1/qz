@@ -83,7 +83,7 @@ return [
      * If set to "true", then uniqueness is enforced across trashed and existing models.
      */
 
-    'include_trashed' => true,
+    'include_trashed' => false,
 
     /**
      * Whether to update the slug value when a model is being
@@ -91,7 +91,7 @@ return [
      * means slugs are not updated.
      */
 
-    'on_update' => true,
+    'on_update' => false,
 
     /**
      * An array of slug names that can never be used for this model,

@@ -30,6 +30,8 @@ class RouteServiceProvider extends ServiceProvider {
 
 		parent::boot($router);
 
+		
+
 		$router->bind('category', function($value)
 		{
 		    return \App\Models\Quiz\Category\Category::withTrashed()->where('id', $value)->first();

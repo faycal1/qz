@@ -21,9 +21,39 @@
           </div>
         </div><!-- /.box-header -->
         <div class="box-body">
-            @include('backend.lang.' . app()->getLocale() . '.welcome')
+            <div id="chartContainer">FusionCharts XT will load here!</div>
 
-            <?php var_dump($stat) ?>
+            <?php// var_dump($stat) ?>
         </div><!-- /.box-body -->
     </div><!--box box-success-->
+@endsection
+
+@section('fc')
+<script type="text/javascript">
+  
+  FusionCharts.ready(function(){
+      var revenueChart = new FusionCharts({
+        "type": "column2d",
+        "renderAt": "chartContainer",
+        "width": "100%",
+        "height": "500",
+        /*"dataFormat": "json",
+        "dataSource": {
+          "chart": {
+              "caption": "Monthly revenue for last year",
+              "subCaption": "Harry's SuperMart",
+              "xAxisName": "Month",
+              "yAxisName": "Revenues (In USD)",
+              "theme": "fint"
+           },*/
+          "dataSource": 'http://localhost:8000/jsonChart',
+          "dataFormat": "jsonurl"
+
+       
+    });
+
+    revenueChart.render();
+})
+
+</script>
 @endsection

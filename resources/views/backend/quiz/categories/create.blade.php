@@ -25,9 +25,9 @@
         </div><!--form control-->
 
         <div class="form-group">
-            {!! Form::label('body', 'Déscription', ['class' => 'col-lg-2 control-label']) !!}
+            {!! Form::label('body', 'Déscription', ['class' => 'col-lg-2 control-label' ]) !!}
             <div class="col-lg-10">
-                {!! Form::textarea('body', null, ['class' => 'form-control', 'placeholder' => 'Déscription']) !!}
+                {!! Form::textarea('body', null, ['class' => 'form-control','id'=>'tinymce' , 'placeholder' => 'Déscription']) !!}
             </div>
         </div><!--form control--> 
 

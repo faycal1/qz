@@ -148,6 +148,7 @@ return [
 		Laracasts\Generators\GeneratorsServiceProvider::class,
 		Cviebrock\EloquentSluggable\SluggableServiceProvider::class,
 		Teepluss\Restable\RestableServiceProvider::class,
+		Ktquez\Tinymce\TinymceServiceProvider::class, 
 
 		/*
 		 * Application Service Providers...
