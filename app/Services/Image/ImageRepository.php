@@ -94,7 +94,7 @@ class ImageRepository
     public function icon( $photo, $filename )
     {
         $manager = new ImageManager();
-        $image = $manager->make( $photo )->encode('jpg')->resize(400, null, function($constraint){$constraint->aspectRatio();})->save( Config::get('images.icon_size')  . $filename );
+        $image = $manager->make( $photo )->encode('jpg')->resize(550, null, function($constraint){$constraint->aspectRatio();})->save( Config::get('images.icon_size')  . $filename );
 
         return $image;
     }
