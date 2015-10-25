@@ -34,6 +34,7 @@ elixir(function(mix) {
                 'backend/main.css',
                 'sweetalert.css',
                 'backend/dropzone.css',
+                'backend/basic.css',
             ], 'public/css/backend.css')
         .scripts([ // Combine back-end scripts
                 'sweetalert.min.js',

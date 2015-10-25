@@ -95,7 +95,12 @@ $router->group(['middleware' =>'access.routeNeedsPermission:view-backend'] , fun
 	   
 	  Route::resource('admin/quiz/answer', 'Backend\Quiz\AnswerController'     ,['only' => ['index', 'show']]);
 
-	  Route::resource('admin/media', 'Backend\Media\MediaController'     ,['only' => ['index', 'show']]);
+	   Route::get('admin/media/list', ['as' => 'admin.media.list', 'uses' => 'Backend\Media\MediaController@getList']);
+	   Route::get('admin/media', ['as' => 'admin.media', 'uses' => 'Backend\Media\MediaController@getUpload']);
+	   Route::post('admin/media/upload', ['as' => 'admin.media.upload', 'uses' =>'Backend\Media\MediaController@postUpload']);
+	   Route::post('admin/media/delete', ['as' => 'admin.media.remove', 'uses' =>'Backend\Media\MediaController@deleteUpload']);
+
+	   /*Route::post('admin/media/upload' ,['uses' =>  'Backend\Media\MediaController@upload' ,  'as' => 'admin.media.upload' ])*/ ;
 });
 
 
@@ -115,6 +120,6 @@ $router->group(['middleware' =>'access.routeNeedsPermission:view-frontend'] , fu
 
 });
 
-// /Route::get('jsonChart' , 'Backend\DashboardController@Chart') ;
+Route::get('jsonChart' , 'Backend\DashboardController@Chart') ;
 
 

@@ -2,85 +2,64 @@
 
 namespace App\Http\Controllers\Backend\Media;
 
-use Illuminate\Http\Request;
-use App\Http\Requests;
+use Response ;
+use App\Models\Image ;
 use App\Http\Controllers\Controller;
+use App\Services\Image\ImageRepository;
+use Illuminate\Support\Facades\Input;
 
 class MediaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    protected $image;
+
+    public function __construct(ImageRepository $imageRepository)
+    {
+        $this->image = $imageRepository;
+    }
+
+    public function getUpload()
     {
         return view('backend.media.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function postUpload()
     {
-        //
+        $photo = Input::all();
+        $response = $this->image->upload($photo);
+        return $response;
+
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function deleteUpload()
     {
-        //
+
+        $filename = Input::get('id');
+
+        if(!$filename)
+        {
+            return 0;
+        }
+
+        $response = $this->image->delete( $filename );
+
+        return $response;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function getList ()
     {
-        //
+        $image_array = array() ;
+        $images =  Image::all() ;
+
+        foreach ($images as $key => $value) {
+            array_push($image_array, array('title'=>$value->filename , 'value'=>$value->filename.'.jpg')) ;
+        }
+
+       
+
+
+        return Response::json($image_array);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+    
 }

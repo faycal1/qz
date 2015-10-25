@@ -12,11 +12,11 @@
         </div>           
 
        <div class="col-md-8">
-
+                
+             
               <div id="quizContainer"  class="panel panel-default">
                 <div class="panel-heading"><i class="fa fa-home"></i> Quiz  : {{ $cour->title }} </div>
                 <div class="panel-body" >
-
                                   <div id="container" style="width:95%;height:100%;"></div>                    
                     
                 </div>

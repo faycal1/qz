@@ -5,6 +5,10 @@ return [
 	'cdn' => env('TINY_MCE_URL') ,//url('vendor/js/tinymce/tinymce.min.js'),
 
 	'params' => [
+		
+		"image_prepend_url"=>env('APP_URL').":8000/photos/icon_size/",
+		"image_list"=> env('APP_URL').":8000/admin/media/list",
+		
 		"selector" => "#tinymce",
 		"language" => 'fr_FR',
 		"theme" => "modern",

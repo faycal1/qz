@@ -2,6 +2,8 @@
 /node_modules
 Homestead.yaml
 Homestead.json
+/public/photos/full_size/
+/public/photos/icon_size/
 .env
 /.DS_Store
 /Thumbs.db
