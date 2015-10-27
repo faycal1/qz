@@ -33,6 +33,8 @@ $router->group(['namespace' => 'Backend'], function () use ($router)
 			require(__DIR__ . "/Routes/Backend/Dashboard.php");
 			require(__DIR__ . "/Routes/Backend/Access.php");
 		});
+
+		Route::get('jsonChart' , 'Backend\DashboardController@Chart') ;
 	});
 });
 
@@ -110,7 +112,7 @@ $router->group(['middleware' =>'access.routeNeedsPermission:view-frontend'] , fu
 	
 	Route::get('cour/{slug}',['middleware' => 'access.routeNeedsPermission:view-cours'   , 'uses' =>  'Frontend\Quiz\CourController@show' ,   'as' => 'cour.show' ])->where('slug', '[A-Za-z-]+');
 	
-	Route::get('cour/{slug}/quiz/',['middleware' => 'access.routeNeedsPermission:view-cours'   , 'uses' =>  'Frontend\Quiz\CourController@showCourQuiz' ,   'as' => 'cour.page' ]);
+	Route::get('cour/{slug}/quiz',['middleware' => 'access.routeNeedsPermission:view-cours'   , 'uses' =>  'Frontend\Quiz\CourController@showCourQuiz' ,   'as' => 'cour.page' ]);
 
 	Route::get('cour/{slug}/page/{slugp}',['middleware' => 'access.routeNeedsPermission:view-cours'   , 'uses' =>  'Frontend\Quiz\CourController@showCourPage' ,   'as' => 'cour.quiz' ]);
 
@@ -120,6 +122,6 @@ $router->group(['middleware' =>'access.routeNeedsPermission:view-frontend'] , fu
 
 });
 
-Route::get('jsonChart' , 'Backend\DashboardController@Chart') ;
+
 
 
