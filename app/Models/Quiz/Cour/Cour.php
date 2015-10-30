@@ -48,8 +48,25 @@ class Cour extends Model implements SluggableInterface
         return $this->belongsToMany('App\Models\Access\User\User' , 'cour_user')->withTimestamps(); ;
     }
 
+     public function departements ()
+    {
+        return $this->belongsToMany('App\Models\Departement\Departement' , 'cour_departement');
+    }
+
+
     public function hasUser($user_id , $cour_id)
     {
         return DB::table('cour_user')->where('user_id', $user_id)->where('cour_id', $cour_id)->first();
+    }
+
+    public function selectedDepartement (Array $selcted)
+    {
+        $DepartementsToDisplay = []  ;
+        
+        foreach ($selcted as $key => $value) {            
+            array_push($DepartementsToDisplay, $value['id']) ;
+        }
+
+        return $DepartementsToDisplay ;
     }
 }

@@ -16,7 +16,7 @@
                 <div class="panel-heading"><i class="fa fa-home"></i> {{ $cour->title }} </div>
                 <div class="panel-body">
                     <h2> {{ $cour->title }} </h2>
-                    <p> {{ $cour->body }} </p>                    
+                    {!! $cour->body !!}                     
                 </div>
             </div><!-- panel -->            
 		</div><!-- col-md-10 -->

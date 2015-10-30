@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers\Backend\Access\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Departement\Departement ;
 use App\Repositories\Backend\User\UserContract;
 use App\Repositories\Backend\Role\RoleRepositoryContract;
 use App\Repositories\Frontend\Auth\AuthenticationContract;
@@ -69,7 +70,8 @@ class UserController extends Controller {
 	 * @return mixed
      */
 	public function create(CreateUserRequest $request) {
-		return view('backend.access.create')
+		$departements = [''=>'Choisissez un Département'] + Departement::lists('name' , 'id')->all() ;
+		return view('backend.access.create' , compact('departements') )
 			->withRoles($this->roles->getAllRoles('sort', 'asc', true))
 			->withPermissions($this->permissions->getAllPermissions());
 	}
@@ -94,7 +96,9 @@ class UserController extends Controller {
      */
 	public function edit($id, EditUserRequest $request) {
 		$user = $this->users->findOrThrowException($id, true);
-		return view('backend.access.edit')
+		$departements = [''=>'Choisissez un Département'] +  Departement::lists('name' , 'id')->all() ;
+
+		return view('backend.access.edit' , compact('departements') )
 			->withUser($user)
 			->withUserRoles($user->roles->lists('id')->all())
 			->withRoles($this->roles->getAllRoles('sort', 'asc', true))

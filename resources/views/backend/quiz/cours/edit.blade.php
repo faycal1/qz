@@ -26,6 +26,15 @@
             </div>
         </div><!--form control-->
 
+        
+         <div class="form-group">
+            {!! Form::label('departement_id', 'Département' , ['class' => 'col-lg-2 control-label']) !!}
+            <div class="col-lg-10">
+                {!! Form::select('departement_id[]' , $departements , $DepartementsToDisplay, ['class'=>'form-control' ,  'multiple' => 'multiple']) !!}
+                
+            </div>
+        </div><!--form control-->
+
         <div class="form-group">
             {!! Form::label('title', 'Titre', ['class' => 'col-lg-2 control-label']) !!}
             <div class="col-lg-10">

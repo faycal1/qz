@@ -37,17 +37,9 @@
         "renderAt": "chartContainer",
         "width": "100%",
         "height": "500",
-        /*"dataFormat": "json",
-        "dataSource": {
-          "chart": {
-              "caption": "Monthly revenue for last year",
-              "subCaption": "Harry's SuperMart",
-              "xAxisName": "Month",
-              "yAxisName": "Revenues (In USD)",
-              "theme": "fint"
-           },*/
-          "dataSource": 'http://localhost:8000/jsonChart',
-          "dataFormat": "jsonurl"
+        
+        "dataSource": "<?php echo url() ?>/admin/jsonChart",
+        "dataFormat": "jsonurl"   
 
        
     });

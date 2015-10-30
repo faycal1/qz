@@ -34,9 +34,17 @@ $router->group(['namespace' => 'Backend'], function () use ($router)
 			require(__DIR__ . "/Routes/Backend/Access.php");
 		});
 
-		Route::get('jsonChart' , 'Backend\DashboardController@Chart') ;
+		get('jsonChart', 'DashboardController@Chart');
 	});
+
+		
+	
+
+
 });
+
+		//Route::get('jsonChart' , 'Backend\DashboardController@Chart') ;
+
 
 $router->group(['middleware' =>'access.routeNeedsPermission:view-backend'] , function($router)
 {

@@ -6,6 +6,7 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Models\Quiz\Cour\Cour ;
 use App\Http\Controllers\Controller;
+use App\Models\Departement\Departement ;
 use App\Models\Quiz\Category\Category as Category;
 use App\Http\Requests\Backend\Quiz\Cour\CreateCourRequest;
 use App\Http\Requests\Backend\Quiz\Cour\UpdateCourRequest;
@@ -29,8 +30,9 @@ class CourController extends Controller
      */
     public function create()
     {            
+        $departements = [''=>'Choisissez un Département'] + Departement::lists('name' , 'id')->all() ;
         $categories = [''=>'Choisissez une catégorie'] + Category::lists('title','id')->all();
-        return view('backend.quiz.cours.create' , compact('categories') ) ;
+        return view('backend.quiz.cours.create' , compact('categories' , 'departements') ) ;
     }
 
     /**
@@ -42,7 +44,8 @@ class CourController extends Controller
     public function store(CreateCourRequest $request)
     {
         //dd($request->all());
-        Cour::create($request->all());
+        $cour = Cour::create($request->all());
+        $cour->departements()->sync($request->departement_id) ;
         return redirect()->route('admin.quiz.cour.index')->withFlashSuccess('Cour crée avec sucçés');
     }
 
@@ -66,8 +69,12 @@ class CourController extends Controller
      */
     public function edit(Cour $cour)
     {
+        $departements = [''=>'Choisissez un Département'] + Departement::lists('name' , 'id')->all() ;
         $categories = Category::lists('title','id');
-        return view('backend.quiz.cours.edit' , compact('cour' , 'categories') ) ;
+
+        $DepartementsToDisplay = $cour->selectedDepartement($cour->departements->toArray()) ;
+
+        return view('backend.quiz.cours.edit' , compact('cour' , 'categories' , 'departements' , 'DepartementsToDisplay') ) ;
     }
 
     /**
@@ -80,6 +87,7 @@ class CourController extends Controller
     public function update(Cour $cour ,UpdateCourRequest $request)
     {
         $cour->update($request->all());
+        $cour->departements()->sync($request->departement_id) ;
         return redirect()->route('admin.quiz.cour.index')->withFlashSuccess('Cour edité avec sucçés');
     }
 

@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder {
 			DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
 		$this->call(AccessTableSeeder::class);
-		$this->call(\database\seeds\QuizTableSeeder::class);
+		//$this->call(\database\seeds\QuizTableSeeder::class);
 		
 		if(env('DB_DRIVER')=='mysql')
 			DB::statement('SET FOREIGN_KEY_CHECKS=1;');
