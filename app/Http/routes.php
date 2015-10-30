@@ -118,7 +118,7 @@ $router->group(['middleware' =>'access.routeNeedsPermission:view-frontend'] , fu
 {
 	Route::get('cours',['middleware' => 'access.routeNeedsPermission:view-cours'   , 'uses' =>  'Frontend\Quiz\CourController@index' ,   'as' => 'cours' ]) ;
 	
-	Route::get('cour/{slug}',['middleware' => 'access.routeNeedsPermission:view-cours'   , 'uses' =>  'Frontend\Quiz\CourController@show' ,   'as' => 'cour.show' ])->where('slug', '[A-Za-z-]+');
+	Route::get('cour/{slug}',['middleware' => ['access.routeNeedsPermission:view-cours' , 'routeReadCour']  , 'uses' =>  'Frontend\Quiz\CourController@show' ,   'as' => 'cour.show' ]);
 	
 	Route::get('cour/{slug}/quiz',['middleware' => 'access.routeNeedsPermission:view-cours'   , 'uses' =>  'Frontend\Quiz\CourController@showCourQuiz' ,   'as' => 'cour.page' ]);
 

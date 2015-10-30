@@ -71,9 +71,7 @@ class CourController extends Controller
     {
         $departements = [''=>'Choisissez un Département'] + Departement::lists('name' , 'id')->all() ;
         $categories = Category::lists('title','id');
-
         $DepartementsToDisplay = $cour->selectedDepartement($cour->departements->toArray()) ;
-
         return view('backend.quiz.cours.edit' , compact('cour' , 'categories' , 'departements' , 'DepartementsToDisplay') ) ;
     }
 

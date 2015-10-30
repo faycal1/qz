@@ -5,4 +5,4 @@
         @endforeach
 </ul>  
 
-{!! $cours->lists()->render() !!}
+{{-- {!! $cours->lists()->render() !!} --}}

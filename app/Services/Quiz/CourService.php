@@ -2,15 +2,23 @@
 
 namespace App\Services\Quiz;
 
+
+use Auth ;
 use App\Models\Quiz\Cour\Cour ; 
 use App\Models\Quiz\Page\Page ;
+use App\Models\Departement\Departement ;
 use App\Models\Quiz\Question\Question ;
 
 class CourService 
 {    
     public function lists () {
 
-    	return Cour::paginate(15);
+        $departement_id = Auth::user()->departement_id ;
+        $departement = Departement::find($departement_id) ;
+        if(count($departement))
+    	   return $departement->cours;
+        else
+            return [];
     }
 
     public function pagelists ($id) {
