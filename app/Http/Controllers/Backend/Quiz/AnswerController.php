@@ -95,5 +95,31 @@ class AnswerController extends Controller
         $answer->delete();         
         return redirect()->route('admin.quiz.answer.index')->withFlashSuccess('Answer supprimée avec sucçés');;
     }
+
+    /**
+     * @return mixed
+     */
+    public function deleted() 
+    {
+        $answers = Answer::onlyTrashed()->get();
+        return view('backend.quiz.answers.deleted' , compact('answers') ) ;
+    }
+
+    public function restore(Answer $answer)
+    {
+        $answer->restore(); 
+        return redirect()->route('admin.quiz.answer.deleted')->withFlashSuccess('Element restoré avec sucçés');
+    }
+
+    public  function forcedelete (Answer $answer)
+    {
+        try {
+              $answer->forceDelete();
+              return redirect()->route('admin.quiz.answer.deleted')->withFlashSuccess('Element Supprrimé difinitivement avec sucçés');
+
+            } catch ( \Illuminate\Database\QueryException $e) {                
+               return redirect()->route('admin.quiz.answer.deleted')->withFlashDanger('vous pouvez supprimer cette reponse !!!');
+            }
+    }
 }
 

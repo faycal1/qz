@@ -56,7 +56,7 @@ return [
     'user_management' => 'User Management',
     'access_management' => 'Access Management',
     'language-picker' => [
-        'language' => 'Language',
+        'language' => 'Langues',
         'langs' => [
             'fr' => 'Français',
             'en' => 'English',

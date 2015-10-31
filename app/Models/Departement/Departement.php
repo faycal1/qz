@@ -14,7 +14,7 @@ class Departement extends Model
     use SoftDeletes;
 
 	protected $guarded = ['id'];
-    protected $fillable = ['title' ] ;
+    protected $fillable = ['name' ] ;
 
     protected $dates = ['deleted_at'];
 

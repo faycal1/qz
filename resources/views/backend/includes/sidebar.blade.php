@@ -36,9 +36,9 @@
                 @permission('view-access-management')
                   <li class="{{ Active::pattern('admin/access/*') }}"><a href="{!!url('admin/access/users')!!}"><span>{{ trans('menus.access_management') }}</span></a></li>
                 @endauth
-
+                <li class="{{ Active::pattern('admin/departement*') }}"><a href="{!!url('admin/departement')!!}"><span>Départements</span></a></li>
                 <li class="{{ Active::pattern('admin/quiz/*') }}"><a href="{!!url('admin/quiz/category')!!}"><span>Quiz</span></a></li>
-                 <li class="{{ Active::pattern('admin/media*') }}"><a href="{!!url('admin/media')!!}"><span>Media</span></a></li>
+                <li class="{{ Active::pattern('admin/media*') }}"><a href="{!!url('admin/media')!!}"><span>Media</span></a></li>
 
                  <li class="{{ Active::pattern('admin/log-viewer*') }} treeview">
                   <a href="#">

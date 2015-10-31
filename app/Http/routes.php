@@ -105,27 +105,34 @@ $router->group(['middleware' =>'access.routeNeedsPermission:view-backend'] , fun
 	   
 	  Route::resource('admin/quiz/answer', 'Backend\Quiz\AnswerController'     ,['only' => ['index', 'show']]);
 
-	   Route::get('admin/media/list', ['as' => 'admin.media.list', 'uses' => 'Backend\Media\MediaController@getList']);
-	   Route::get('admin/media', ['as' => 'admin.media', 'uses' => 'Backend\Media\MediaController@getUpload']);
-	   Route::post('admin/media/upload', ['as' => 'admin.media.upload', 'uses' =>'Backend\Media\MediaController@postUpload']);
-	   Route::post('admin/media/delete', ['as' => 'admin.media.remove', 'uses' =>'Backend\Media\MediaController@deleteUpload']);
 
-	   /*Route::post('admin/media/upload' ,['uses' =>  'Backend\Media\MediaController@upload' ,  'as' => 'admin.media.upload' ])*/ ;
+	  Route::patch('admin/departement/{departement}/restore'  ,['middleware' => 'access.routeNeedsPermission:restore-departement'   , 'uses' =>  'Backend\Departement\DepartementController@restore' ,   'as' => 'admin.departement.restore' ]) ;
+	  Route::delete('admin/departement/{departement}/forcedelete'  ,['middleware' => 'access.routeNeedsPermission:force-delete-departement'   , 'uses' =>  'Backend\Departement\DepartementController@forcedelete' ,   'as' => 'admin.departement.forcedelete' ]) ;
+	  Route::get('admin/departement/create' ,['middleware' => 'access.routeNeedsPermission:create-departement' , 'uses' =>  'Backend\Departement\DepartementController@create' , 'as' => 'admin.departement.create' ]) ;
+	  Route::post('admin/departement/store' ,['middleware' => 'access.routeNeedsPermission:create-departement' , 'uses' =>  'Backend\Departement\DepartementController@store' ,  'as' => 'admin.departement.store' ]) ;
+	  Route::get('admin/departement/{departement}/edit'  ,['middleware' => 'access.routeNeedsPermission:edit-departement'   , 'uses' =>  'Backend\Departement\DepartementController@edit' ,   'as' => 'admin.departement.edit' ]) ;
+	  Route::patch('admin/departement/{departement}/update'  ,['middleware' => 'access.routeNeedsPermission:update-departement'   , 'uses' =>  'Backend\Departement\DepartementController@update' ,   'as' => 'admin.departement.update' ]) ;
+	  Route::delete('admin/departement/{departement}/destroy'  ,['middleware' => 'access.routeNeedsPermission:destroy-departement'   , 'uses' =>  'Backend\Departement\DepartementController@destroy' ,   'as' => 'admin.departement.destroy' ]) ;
+	  Route::get('admin/departement/deleted'  ,['middleware' => 'access.routeNeedsPermission:view-deleted-departement'   , 'uses' =>  'Backend\Departement\DepartementController@deleted' ,   'as' => 'admin.departement.deleted' ]) ; 
+	   
+	  Route::resource('admin/departement', 'Backend\Departement\DepartementController'     ,['only' => ['index', 'show']]);
+
+	  Route::get('admin/media/list', ['as' => 'admin.media.list', 'uses' => 'Backend\Media\MediaController@getList']);
+	  Route::get('admin/media', ['as' => 'admin.media', 'uses' => 'Backend\Media\MediaController@getUpload']);
+	  Route::post('admin/media/upload', ['as' => 'admin.media.upload', 'uses' =>'Backend\Media\MediaController@postUpload']);
+	  Route::post('admin/media/delete', ['as' => 'admin.media.remove', 'uses' =>'Backend\Media\MediaController@deleteUpload']);
+
+	   
 });
 
 
 $router->group(['middleware' =>'access.routeNeedsPermission:view-frontend'] , function($router)
 {
 	Route::get('cours',['middleware' => 'access.routeNeedsPermission:view-cours'   , 'uses' =>  'Frontend\Quiz\CourController@index' ,   'as' => 'cours' ]) ;
-	
 	Route::get('cour/{slug}',['middleware' => ['access.routeNeedsPermission:view-cours' , 'routeReadCour']  , 'uses' =>  'Frontend\Quiz\CourController@show' ,   'as' => 'cour.show' ]);
-	
-	Route::get('cour/{slug}/quiz',['middleware' => 'access.routeNeedsPermission:view-cours'   , 'uses' =>  'Frontend\Quiz\CourController@showCourQuiz' ,   'as' => 'cour.page' ]);
-
-	Route::get('cour/{slug}/page/{slugp}',['middleware' => 'access.routeNeedsPermission:view-cours'   , 'uses' =>  'Frontend\Quiz\CourController@showCourPage' ,   'as' => 'cour.quiz' ]);
-
-	Route::get('pxml/{slug}' , 'Frontend\Quiz\CourController@paresXml');
-
+	Route::get('cour/{slug}/quiz',['middleware' => ['access.routeNeedsPermission:view-cours' , 'routeReadCour']   , 'uses' =>  'Frontend\Quiz\CourController@showCourQuiz' ,   'as' => 'cour.page' ]);
+	Route::get('cour/{slug}/page/{slugp}',['middleware' => ['access.routeNeedsPermission:view-cours' , 'routeReadCour']   , 'uses' =>  'Frontend\Quiz\CourController@showCourPage' ,   'as' => 'cour.quiz' ]);
+	Route::get('pxml/{slug}' , ['middleware' => ['access.routeNeedsPermission:view-cours' , 'routeReadCour'], 'uses'=>'Frontend\Quiz\CourController@paresXml' ]);
 	Route::post('quiz' , 'Frontend\Quiz\CourController@quiz');
 
 });

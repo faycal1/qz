@@ -95,4 +95,30 @@ class PageController extends Controller
          //$page->pages()->delete();
          return redirect()->route('admin.quiz.page.index')->withFlashSuccess('Page supprimée avec sucçés');;
     }
+
+    /**
+     * @return mixed
+     */
+    public function deleted() 
+    {
+        $pages = Page::onlyTrashed()->get();
+        return view('backend.quiz.pages.deleted' , compact('pages') ) ;
+    }
+
+    public function restore(Page $page)
+    {
+        $page->restore(); 
+        return redirect()->route('admin.quiz.page.deleted')->withFlashSuccess('Element restoré avec sucçés');
+    }
+
+    public  function forcedelete (Page $page)
+    {
+        try {
+              $page->forceDelete();
+              return redirect()->route('admin.quiz.page.deleted')->withFlashSuccess('Element Supprrimé difinitivement avec sucçés');
+
+            } catch ( \Illuminate\Database\QueryException $e) {                
+               return redirect()->route('admin.quiz.page.deleted')->withFlashDanger(' vous pouvez pas le supprimer Cette page !!!');
+            }
+    }
 }

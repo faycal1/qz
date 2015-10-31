@@ -15,8 +15,7 @@ class AppServiceProvider extends ServiceProvider {
 	 * @return void
 	 */
 	public function boot()
-	{
-		
+	{	
 		
 		Validator::extend('onlyonetrue', 'App\Services\Quiz\Validation@OnlyOneTrue');
 	}

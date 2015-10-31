@@ -17,16 +17,17 @@
                   <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ trans('menus.language-picker.language') }} <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
+                      <li>{!! link_to('lang/fr', trans('menus.language-picker.langs.fr')) !!}</li>
                       <li>{!! link_to('lang/en', trans('menus.language-picker.langs.en')) !!}</li>
-                      <li>{!! link_to('lang/it', trans('menus.language-picker.langs.it')) !!}</li>
+                      {{-- <li>{!! link_to('lang/it', trans('menus.language-picker.langs.it')) !!}</li>
                       <li>{!! link_to('lang/pt-BR', trans('menus.language-picker.langs.pt-BR')) !!}</li>
                       <li>{!! link_to('lang/ru', trans('menus.language-picker.langs.ru')) !!}</li>    
-                      <li>{!! link_to('lang/sv', trans('menus.language-picker.langs.sv')) !!}</li>
+                      <li>{!! link_to('lang/sv', trans('menus.language-picker.langs.sv')) !!}</li> --}}
                     </ul>
                   </li>
 
                   <!-- Messages: style can be found in dropdown.less-->
-                  <li class="dropdown messages-menu">
+                  {{-- <li class="dropdown messages-menu">
                     <!-- Menu toggle button -->
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                       <i class="fa fa-envelope-o"></i>
@@ -56,7 +57,7 @@
                       </li>
                       <li class="footer"><a href="#">{{ trans('strings.see_all.messages') }}</a></li>
                     </ul>
-                  </li><!-- /.messages-menu -->
+                  </li> --}}<!-- /.messages-menu -->
 
                   <!-- Notifications Menu -->
                   <li class="dropdown notifications-menu">

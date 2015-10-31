@@ -26,14 +26,15 @@ class CourTableSeeder extends Seeder
 
         $faker = Faker::create();
     	$categories = Db::table('categories')->lists('id') ;
+        $departements = Db::table('departements')->lists('id') ;
 
-    	foreach (range(1,30) as $key => $value ) {
+    	foreach (range(1,10) as $key => $value ) {
 
     		Cour::create([
-        		'title'=>$faker->sentence(5),
+        		'title'=>$faker->sentence(3),
         		'body'=>$faker->paragraph(4),
-        		'category_id'=>$faker->randomElement($categories) 
-	        ]);
+        		'category_id'=>$faker->randomElement($categories) ,
+	        ])->departements()->sync($faker->randomElements($departements) , 2);
     	}
 
     	if(env('DB_DRIVER')=='mysql')

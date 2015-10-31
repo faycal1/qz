@@ -27,6 +27,9 @@
             @permission('create-cours')
                 <li><a href="{{route('admin.quiz.cour.create')}}">Créer un cours</a></li>
             @endauth
+
+            <li class="divider"></li>
+             <li><a href="{{route('admin.quiz.cour.deleted')}}">Cours Supprimées</a></li>
           </ul>
         </div>
 
@@ -39,6 +42,9 @@
             @permission('create-page')
                 <li><a href="{{route('admin.quiz.page.create')}}">Créer une page</a></li>
             @endauth 
+
+            <li class="divider"></li>
+             <li><a href="{{route('admin.quiz.page.deleted')}}">Pages Supprimées</a></li>
             
           </ul>
         </div>
@@ -52,6 +58,9 @@
             @permission('create-question')
                 <li><a href="{{route('admin.quiz.question.create')}}">Créer une Question</a></li>
             @endauth 
+
+            <li class="divider"></li>
+             <li><a href="{{route('admin.quiz.question.deleted')}}">Questions Supprimées</a></li>
             
           </ul>
         </div>
@@ -65,6 +74,9 @@
             @permission('create-answer')
                 <li><a href="{{route('admin.quiz.answer.create')}}">Créer une reponse</a></li>
             @endauth 
+
+            <li class="divider"></li>
+             <li><a href="{{route('admin.quiz.answer.deleted')}}">Reponses Supprimées</a></li>
             
           </ul>
         </div>

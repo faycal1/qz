@@ -2,7 +2,6 @@
 
 namespace App\Services\Quiz;
 
-
 use Auth ;
 use App\Models\Quiz\Cour\Cour ; 
 use App\Models\Quiz\Page\Page ;
@@ -13,10 +12,15 @@ class CourService
 {    
     public function lists () {
 
-        $departement_id = Auth::user()->departement_id ;
-        $departement = Departement::find($departement_id) ;
-        if(count($departement))
-    	   return $departement->cours;
+        if(!is_null(Auth::user()->departement_id))
+        {    
+            $departement_id = Auth::user()->departement_id ;
+            $departement = Departement::find($departement_id) ;
+            if(count($departement))
+               return $departement->cours;
+            else
+                return [];
+        }
         else
             return [];
     }

@@ -25,10 +25,10 @@ class AnswerTableSeeder extends Seeder
         $faker = Faker::create();
     	$questions = Db::table('questions')->lists('id') ;
 
-    	foreach (range(1,400) as $key => $value ) {
+    	foreach (range(1,200) as $key => $value ) {
 
     		Answer::create([        		
-        		'body'=>$faker->paragraph(4),
+        		'body'=>$faker->paragraph(1),
         		'question_id'=>$faker->randomElement($questions) ,
         		'type'=>$faker->boolean(40) ,
         		

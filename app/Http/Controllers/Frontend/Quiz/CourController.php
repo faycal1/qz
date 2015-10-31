@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend\Quiz;
 
+use DB ;
 use Auth ;
 use Redis;
 use Response;
@@ -20,7 +21,11 @@ class CourController extends Controller
 
     public function index()
     {
-    	$cour = Cour::first();
+        if(!is_null(Cour::first()))
+    	   $cour = Cour::first();
+        else
+           $cour = [] ;
+       
     	return view('frontend.quiz.cours.list' , compact('cour') ) ;
     }
 
@@ -100,6 +105,8 @@ class CourController extends Controller
         $id = $request->id ;
         $passed = $request->passed ;
         $cour_id =  Question::findOrFail($id)->cour_id;
+        $cour = Cour::findOrFail($cour_id);
+        
         $user = Auth::user() ;
 
         if (Redis::get('quiz'))
@@ -122,9 +129,20 @@ class CourController extends Controller
             $question = ['id'=>$id , 'passed'=>$passed ] ;                        
             array_push($quiz['question'], $question);
             $redis =  Redis::set('quiz' , serialize($quiz));
-        }       
+        }   
 
-        $user->cours()->sync([$cour_id=>['result'=> Redis::get('quiz') , 'score'=>$request->score]]);
+        if($cour->hasUser($user->id , $cour_id))
+        {
+            DB::table('cour_user')->where('user_id' ,$user->id )
+                                  ->where('cour_id' ,$cour_id )    
+                                  ->update(['result'=> Redis::get('quiz') , 'score'=>$request->score]);
+            //$user->cours()->sync([$cour_id=>['result'=> Redis::get('quiz') , 'score'=>$request->score]]); 
+       }else{
+           $user->cours()->attach([$cour_id=>['result'=> Redis::get('quiz') , 'score'=>$request->score]]);
+       }    
+
+        
+        //$cour->users()->sync([$cour_id=>['result'=> Redis::get('quiz') , 'score'=>$request->score]]);
          
        return  response()->json(['data' => Redis::get('quiz') , 'unserialize'=>unserialize(Redis::get('quiz'))]) ;
     }

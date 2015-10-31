@@ -9,34 +9,31 @@
 
 @section('breadcrumbs')
     <li><a href="{!!route('backend.dashboard')!!}"><i class="fa fa-dashboard"></i> {{ trans('menus.dashboard') }}</a></li>
-    <li class="active">Gestion des Cours</li><li class="active">Cours Suprimées</li>
+    <li class="active">Gestion des Categories</li><li class="active">Categories Suprimées</li>
 @endsection
 
 @section('content')
-    @include('backend.quiz.includes.partials.header-buttons')
+    @include('backend.departement.includes.partials.header-buttons')
 
     <table class="table table-striped table-bordered table-hover">
         <thead>
         <tr>            
             <th>Title</th>
-            <th>Description</th>            
+                   
             <th class="visible-lg">Créer</th>
             <th class="visible-lg">Editer</th>
             <th>{{ trans('crud.actions') }}</th>
         </tr>
         </thead>
         <tbody>
-
-        @foreach ($cours as $cour)
+        @foreach ($departements as $departement)
                 <tr>
-                    <td><a href="{{route('admin.quiz.cour.show' , $cour->id)}}">{!! $cour->title !!}</a></td>
-                    <td>{!! str_limit($cour->body , 30) !!}</td>
-                    <td>{!! $cour->created_at->diffForHumans() !!}</td>
-                    <td>{!! $cour->updated_at->diffForHumans() !!}</td>
-                    <td>{!! $cour->action_deleted_buttons !!}</td>
+                    <td><a href="{{route('admin.departement.show' , $departement->id)}}">{!! $departement->name !!}</a></td>                    
+                    <td>{!! $departement->created_at->diffForHumans() !!}</td>
+                    <td>{!! $departement->updated_at->diffForHumans() !!}</td>
+                    <td>{!! $departement->action_deleted_buttons !!}</td>
                 </tr>
-        @endforeach
-            
+        @endforeach            
         </tbody>
     </table>
 

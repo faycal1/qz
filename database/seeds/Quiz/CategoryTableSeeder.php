@@ -23,10 +23,10 @@ class CategoryTableSeeder extends Seeder
 			DB::table('categories')->truncate();
 
 	        $faker = Faker::create();
-	    		foreach (range(1,30) as $key => $value ) {
+	    		foreach (range(1,5) as $key => $value ) {
 
 	    		Category::create([
-	        		'title'=>$faker->sentence(5),
+	        		'title'=>$faker->sentence(3),
 	        		'body'=>$faker->paragraph(4) 
 		        ]);
 	    	}

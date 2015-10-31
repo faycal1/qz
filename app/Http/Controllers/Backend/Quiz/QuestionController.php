@@ -100,5 +100,32 @@ class QuestionController extends Controller
         $question->delete();         
         return redirect()->route('admin.quiz.question.index')->withFlashSuccess('Question supprimée avec sucçés');;
     }
+
+
+    /**
+     * @return mixed
+     */
+    public function deleted() 
+    {
+        $questions = Question::onlyTrashed()->get();
+        return view('backend.quiz.questions.deleted' , compact('questions') ) ;
+    }
+
+    public function restore(Question $question)
+    {
+        $question->restore(); 
+        return redirect()->route('admin.quiz.question.deleted')->withFlashSuccess('Element restoré avec sucçés');
+    }
+
+    public  function forcedelete (Question $question)
+    {
+        try {
+              $question->forceDelete();
+              return redirect()->route('admin.quiz.question.deleted')->withFlashSuccess('Element Supprrimé difinitivement avec sucçés');
+
+            } catch ( \Illuminate\Database\QueryException $e) {                
+               return redirect()->route('admin.quiz.question.deleted')->withFlashDanger(' vous pouvez pas le supprimer cette question !!!');
+            }
+    }
 }
 

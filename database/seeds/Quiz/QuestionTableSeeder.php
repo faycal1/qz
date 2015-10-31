@@ -27,10 +27,11 @@ class QuestionTableSeeder extends Seeder
 
     	foreach (range(1,100) as $key => $value ) {
     		Question::create([
-        		'title'=>$faker->sentence(5),
-        		'body'=>$faker->paragraph(4),
+        		'title'=>$faker->sentence(3),
+        		'body'=>$faker->paragraph(1),
         		'cour_id'=>$faker->randomElement($cours) ,
-        		'type'=>$faker->randomElement(['one'=>'one' , 'multiple'=>'multiple']) ,
+        		//'type'=>$faker->randomElement(['one'=>'one' , 'multiple'=>'multiple']) ,
+                'type'=>$faker->randomElement(['multiple'=>'multiple']) ,
         		'score'=>$faker->numberBetween( 0, 100) ,
                 'pass'=>$faker->paragraph(1),
                 'fail'=>$faker->paragraph(1),

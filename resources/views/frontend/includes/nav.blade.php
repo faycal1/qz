@@ -12,7 +12,7 @@
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li>{!! link_to('/', "Accueil" ) !!}</li>
+					<li>{!! link_to('/', trans('navs.home') ) !!}</li>
 					@permission('view-cours')
 				        <li>{!! link_to_route('cours', 'Cours') !!}</li>
 				    @endauth
@@ -25,11 +25,12 @@
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ trans('menus.language-picker.language') }} <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
+							<li>{!! link_to('lang/fr', trans('menus.language-picker.langs.fr')) !!}</li>
 							<li>{!! link_to('lang/en', trans('menus.language-picker.langs.en')) !!}</li>
-							<li>{!! link_to('lang/it', trans('menus.language-picker.langs.it')) !!}</li>
+							{{-- <li>{!! link_to('lang/it', trans('menus.language-picker.langs.it')) !!}</li>
 							<li>{!! link_to('lang/pt-BR', trans('menus.language-picker.langs.pt-BR')) !!}</li>
                             <li>{!! link_to('lang/ru', trans('menus.language-picker.langs.ru')) !!}</li>
-							<li>{!! link_to('lang/sv', trans('menus.language-picker.langs.sv')) !!}</li>
+							<li>{!! link_to('lang/sv', trans('menus.language-picker.langs.sv')) !!}</li> --}}
 						</ul>
 					</li>
 

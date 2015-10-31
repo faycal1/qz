@@ -9,8 +9,7 @@ use App\Models\Quiz\Answer\Traits\Attribute\AnswerAttribute;
 
 class Answer extends Model 
 {
-    use AnswerAttribute ;
-   
+    use AnswerAttribute ;   
     use SoftDeletes;
 
 	protected $guarded = ['id'];

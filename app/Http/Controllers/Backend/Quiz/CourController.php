@@ -97,8 +97,38 @@ class CourController extends Controller
      */
     public function destroy(Cour $cour)
     {
-        $cour->delete();
+         $cour->delete();
          $cour->pages()->delete();
+         $cour->questions()->delete();
          return redirect()->route('admin.quiz.cour.index')->withFlashSuccess('Cour supprimée avec sucçés');;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function deleted() 
+    {
+        $cours = Cour::onlyTrashed()->get();
+        return view('backend.quiz.cours.deleted' , compact('cours') ) ;
+    }
+
+    public function restore(Cour $cour)
+    {
+        $cour->restore(); 
+        $cour->pages()->restore(); 
+        $cour->questions()->restore(); 
+        return redirect()->route('admin.quiz.cour.deleted')->withFlashSuccess('Element restoré avec sucçés');
+    }
+
+    public  function forcedelete (Cour $cour)
+    {
+        try {
+              $cour->forceDelete();
+              return redirect()->route('admin.quiz.cour.deleted')->withFlashSuccess('Element Supprrimé difinitivement avec sucçés');
+
+            } catch ( \Illuminate\Database\QueryException $e) {                
+               return redirect()->route('admin.quiz.cour.deleted')->withFlashDanger('Ce Cour contiens des pages , vous pouvez pas le supprimer !!!');
+            }
     }
 }

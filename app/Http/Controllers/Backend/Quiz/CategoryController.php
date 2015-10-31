@@ -44,11 +44,9 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(CreateCategoryRequest $request)
-    {
-
-       // Category::create(['title'=>$request->input('title') , 'slug'=>str_slug($request->input('title')) ,'body'=>$request->input('body') ]);
+    {       
        Category::create($request->all());
-        return redirect()->route('admin.quiz.category.index')->withFlashSuccess('Categorie crée avec sucçés');;
+       return redirect()->route('admin.quiz.category.index')->withFlashSuccess('Categorie crée avec sucçés');
     }
 
     /**
@@ -83,8 +81,7 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update( Category $category , UpdateCategoryRequest $request )     {
-        
+    public function update( Category $category , UpdateCategoryRequest $request ){      
 
         $category->update($request->all()) ;
         return redirect()->route('admin.quiz.category.index')->withFlashSuccess('Categorie éditée avec sucçés');
@@ -100,7 +97,7 @@ class CategoryController extends Controller
     {
          $category->delete();
          $category->cours()->delete();
-         return redirect()->route('admin.quiz.category.index')->withFlashSuccess('Categorie supprimée avec sucçés');;
+         return redirect()->route('admin.quiz.category.index')->withFlashSuccess('Categorie supprimée avec sucçés');
     }
 
     
@@ -114,17 +111,20 @@ class CategoryController extends Controller
     }
 
     public function restore(Category $category)
-    {      
-       
+    {
         $category->restore(); 
-        $category->cours()->restore();        
-       
-        return redirect()->route('admin.quiz.category.deleted')->withFlashSuccess('Element restoré avec sucçés');;
+        $category->cours()->restore(); 
+        return redirect()->route('admin.quiz.category.deleted')->withFlashSuccess('Element restoré avec sucçés');
     }
 
     public  function forcedelete (Category $category)
     {
-        $category->forceDelete();
-        return redirect()->route('admin.quiz.category.deleted')->withFlashSuccess('Element Supprrimé difinitivement avec sucçés');;
+        try {
+              $category->forceDelete();
+              return redirect()->route('admin.quiz.category.deleted')->withFlashSuccess('Element Supprrimé difinitivement avec sucçés');
+
+            } catch ( \Illuminate\Database\QueryException $e) {                
+               return redirect()->route('admin.quiz.category.deleted')->withFlashDanger('Cette Catégorie contiens des Cours , vous pouvez pas le supprimer !!!');
+            }
     }
 }

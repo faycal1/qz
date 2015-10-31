@@ -9,7 +9,7 @@
 
 @section('breadcrumbs')
     <li><a href="{!!route('backend.dashboard')!!}"><i class="fa fa-dashboard"></i> {{ trans('menus.dashboard') }}</a></li>
-    <li class="active">Gestion des Categories</li><li class="active">Categories Suprimées</li>
+    <li class="active">Gestion des Pages</li><li class="active">Pages Suprimées</li>
 @endsection
 
 @section('content')
@@ -27,13 +27,13 @@
         </thead>
         <tbody>
 
-        @foreach ($cours as $cour)
+        @foreach ($pages as $page)
                 <tr>
-                    <td><a href="{{route('admin.quiz.cour.show' , $cour->id)}}">{!! $cour->title !!}</a></td>
-                    <td>{!! str_limit($cour->body , 30) !!}</td>
-                    <td>{!! $cour->created_at->diffForHumans() !!}</td>
-                    <td>{!! $cour->updated_at->diffForHumans() !!}</td>
-                    <td>{!! $cour->action_deleted_buttons !!}</td>
+                    <td><a href="{{route('admin.quiz.page.show' , $page->id)}}">{!! $page->title !!}</a></td>
+                    <td>{!! str_limit($page->body , 30) !!}</td>
+                    <td>{!! $page->created_at->diffForHumans() !!}</td>
+                    <td>{!! $page->updated_at->diffForHumans() !!}</td>
+                    <td>{!! $page->action_deleted_buttons !!}</td>
                 </tr>
         @endforeach
             

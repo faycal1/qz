@@ -27,10 +27,10 @@ class PageTableSeeder extends Seeder
         $faker = Faker::create();
     	$cours = Db::table('cours')->lists('id') ;
 
-    	foreach (range(1,180) as $key => $value ) {
+    	foreach (range(1,25) as $key => $value ) {
 
     		Page::create([
-        		'title'=>$faker->sentence(5),
+        		'title'=>$faker->sentence(3),
         		'body'=>$faker->paragraph(4),
         		'cour_id'=>$faker->randomElement($cours) 
 	        ]);
