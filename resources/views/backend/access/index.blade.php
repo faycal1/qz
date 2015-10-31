@@ -26,6 +26,7 @@
             <th>{{ trans('crud.users.confirmed') }}</th>
             <th>{{ trans('crud.users.roles') }}</th>
             <th>{{ trans('crud.users.other_permissions') }}</th>
+            <th>Département</th>
             <th class="visible-lg">{{ trans('crud.users.created') }}</th>
             <th class="visible-lg">{{ trans('crud.users.last_updated') }}</th>
             <th>{{ trans('crud.actions') }}</th>
@@ -54,6 +55,13 @@
                             @endforeach
                         @else
                             None
+                        @endif
+                    </td>
+                    <td>           
+                        @if( $user->departement()->count() > 0)
+                            {!! $user->departement->name !!}
+                        @else
+                            Pas de département
                         @endif
                     </td>
                     <td class="visible-lg">{!! $user->created_at->diffForHumans() !!}</td>

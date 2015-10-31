@@ -21,9 +21,10 @@
           </div>
         </div><!-- /.box-header -->
         <div class="box-body">
+            
             <div id="chartContainer">FusionCharts XT will load here!</div>
 
-            <?php// var_dump($stat) ?>
+            
         </div><!-- /.box-body -->
     </div><!--box box-success-->
 @endsection

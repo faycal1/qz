@@ -16,27 +16,34 @@ class DashboardController extends Controller {
 	 */
 	public function index()
 	{
-
-			
-		//$stat = Cour::findOrFail(1);
-		//return view('backend.dashboard' , compact('stat'));
-
-		return view('backend.dashboard' , compact('stat'));
-
+		
+		
+		
+		return view('backend.dashboard');
 	}
 
 	function Chart()
 	{
+		$departements = new Stats () ; 
+		$stat = $departements->getDepartementActivityQuiz();
+
 		$json =[
 			    "chart"=> [
-			        "caption"=> "Monthly revenue for last year",
-			        "subCaption"=> "Harrys SuperMart",
-			        "xAxisName"=> "Month",
-			        "yAxisName"=> "Revenues (In USD)",
-			        "numberPrefix"=> "$",
+			        "caption"=> " *** ",
+			        "subCaption"=> " **** ",
+			        "xAxisName"=> "Département",
+			        "yAxisName"=> "Utilisateur",
+			        "numberPrefix"=> "",
 			        "theme"=> "fint"
 			    ],
-			    "data"=> [
+			    "data"=> $stat
+			];
+		return response()->json($json); 
+	}
+}
+
+/*
+[
 			        [
 			            "label"=> "Jan",
 			            "value"=> "420000"
@@ -86,7 +93,4 @@ class DashboardController extends Controller {
 			            "value"=> "730000"
 			        ]
 			    ]
-			];
-		return response()->json($json); 
-	}
-}
+*/

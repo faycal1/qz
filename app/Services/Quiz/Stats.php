@@ -2,7 +2,7 @@
 
 namespace App\Services\Quiz;
 
-use App\Models\Access\User\User ;
+use App\Models\Departement\Departement ;
 /**
 * 		
 */
@@ -14,8 +14,21 @@ class Stats
 		# code...
 	}
 
-	public function getUserActivityQuiz ($userID)
+	public function getDepartementActivityQuiz ()
 	{
-		return User::where('id' , $userID)->get();
+		$result = [] ;
+		$departements = Departement::all();
+
+		foreach ($departements as $value) {
+			array_push($result, ["label"=>$value->name , 'value'=> $this->getUserByDpartement($value->id)]) ;
+		}		
+		return $result ;
+	}
+
+
+
+	public function getUserByDpartement($departement_id)
+	{
+		return Departement::find($departement_id)->users->count() ;
 	}
 }

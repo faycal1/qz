@@ -27,4 +27,6 @@ class Departement extends Model
     {
     	return $this->belongsToMany('App\Models\Quiz\Cour\Cour') ;
     }
+
+    
 }
