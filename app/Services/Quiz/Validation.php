@@ -2,6 +2,7 @@
 
 namespace App\Services\Quiz;
 
+use App\Models\Quiz\Question\Question ;
 use App\Models\Quiz\Answer\Answer ;
 
 class Validation {
@@ -9,10 +10,9 @@ class Validation {
 	function OnlyOneTrue( $attribute, $type, $parameters, $validator )
 	{
 		$question_id = $validator->getData()['question_id'] ;
-		
-		Answer::CountTrueAnswer($question_id) ;
+		$question_type = Question::find($question_id)->type ;
 
-		if ($type == '1')
+		if ($type == '1' && $question_type != 'multiple')
 			if (Answer::CountTrueAnswer($question_id) == '1')
 				return false ;
 
