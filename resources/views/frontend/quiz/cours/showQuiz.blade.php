@@ -26,7 +26,7 @@
                 <div class="panel-heading"><i class="fa fa-home"></i> {{ $cour->title }} </div>
                 <div class="panel-body">
                     <h2> {{ $cour->title }} </h2>
-                    <p> {{ $cour->body }} </p>                    
+                    {!! $cour->body !!} </p>                    
                 </div>
             </div><!-- panel -->
            
@@ -63,7 +63,7 @@
                             var quiz;
                             function init(){                                
                                 //create the screen object which loads the xml and creates all screen elements
-                                quiz = new Screen({id:"myQuiz", xmlPath:"http://localhost:8000/pxml/{{ $cour->slug }}"});                                
+                                quiz = new Screen({id:"myQuiz", xmlPath:APP_URL"pxml/{{ $cour->slug }}"});                                
                                 //choose a target div
                                 var targetDiv = get("container");                                
                                 //load it

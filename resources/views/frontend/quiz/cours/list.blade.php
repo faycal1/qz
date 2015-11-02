@@ -20,7 +20,7 @@
                 <div class="panel-heading"><i class="fa fa-home"></i> {{  isset($cour->title) ? $cour->title : 'Pas de Cours !!!' }} </div>
                 <div class="panel-body">
                     <h2> {{ isset($cour->title)  ? $cour->title : 'Pas de Cours !!!' }} </h2>
-                    {{ isset($cour->body)  ? $cour->body : 'Pas de Cours !!!' }}                    
+                    {!! isset($cour->body)  ? $cour->body : 'Pas de Cours !!!' !!}                    
                 </div>
             </div><!-- panel -->
 		</div><!-- col-md-10 -->
