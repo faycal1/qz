@@ -22,7 +22,9 @@
         </div><!-- /.box-header -->
         <div class="box-body">
             
-            <div id="chartContainer">FusionCharts XT will load here!</div>
+            <div id="chartContainer" class="col-md-6">FusionCharts XT will load here!</div>
+            <div id="stackedShartContainer" class="col-md-6">FusionCharts XT will load here!</div>
+
 
             
         </div><!-- /.box-body -->
@@ -44,8 +46,20 @@
 
        
     });
+var quizStackedChart = new FusionCharts({
+        "type": "column2d",
+        "renderAt": "stackedShartContainer",
+        "width": "100%",
+        "height": "500",
+        
+        "dataSource": "<?php echo url() ?>/admin/statcked",
+        "dataFormat": "jsonurl"   
+
+       
+    });
 
     revenueChart.render();
+    quizStackedChart.render();
 })
 
 </script>

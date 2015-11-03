@@ -135,4 +135,6 @@ class CourController extends Controller
 
         return  response()->json(['data' => Redis::get('quiz'), 'unserialize' => unserialize(Redis::get('quiz'))]);
     }
+
+    
 }

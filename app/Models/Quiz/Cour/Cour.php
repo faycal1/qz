@@ -65,4 +65,40 @@ class Cour extends Model implements SluggableInterface
 
         return $DepartementsToDisplay;
     }
+
+    public static function quizsByDepartement ($departement_id)
+    {
+        return Cour::has('questions')->whereHas('departements' , function($query) use ($departement_id)
+        { 
+             $query->where('id', $departement_id);                                                                              
+        });
+    }
+
+    public static function quizsHasUsersByDepartement ($departement_id)
+    {
+        return Cour::has('questions')->has('users')->whereHas('departements' , function($query) use ($departement_id)
+        { 
+             $query->where('id', $departement_id);                                                                              
+        });
+    }
+
+    public static function quizsHasNotUsersByDepartement ($departement_id)
+    {
+        return Cour::has('questions')->has('users' , '<', 1)->whereHas('departements' , function($query) use ($departement_id)
+        { 
+             $query->where('id', $departement_id);                                                                              
+        });
+    }
+
+    public static function quizsHasUsers ()
+    {
+        return Cour::has('questions')->has('users');
+    }
+
+    public static function quizsHasNotUsers ()
+    {
+        return Cour::has('questions')->has('users' , '<' , 1);
+    }
+
+
 }
