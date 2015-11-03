@@ -21,7 +21,7 @@ class CreateDepartementRequest extends Request
      *
      * @return array
      */
-   /**
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array
@@ -29,7 +29,7 @@ class CreateDepartementRequest extends Request
     public function rules()
     {
         return [
-            'name'  =>  'required|unique:departements',
+            'name' => 'required|unique:departements',
             ];
     }
 
@@ -37,7 +37,7 @@ class CreateDepartementRequest extends Request
     {
         return [
             'name.unique' => 'Ce département existe deja',
-            'name.required' => 'Le nom du département est obligatoire',            
+            'name.required' => 'Le nom du département est obligatoire',
         ];
     }
 }

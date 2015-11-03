@@ -1,19 +1,20 @@
-<?php namespace App\Http\Controllers\Frontend;
+<?php
+
+namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 
 /**
- * Class DashboardController
- * @package App\Http\Controllers\Frontend
+ * Class DashboardController.
  */
-class DashboardController extends Controller {
-
-	/**
-	 * @return mixed
-	 */
-	public function index()
-	{
-		return view('frontend.user.dashboard')
-			->withUser(auth()->user());
-	}
+class DashboardController extends Controller
+{
+    /**
+     * @return mixed
+     */
+    public function index()
+    {
+        return view('frontend.user.dashboard')
+            ->withUser(auth()->user());
+    }
 }

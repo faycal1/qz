@@ -1,13 +1,14 @@
-<?php namespace App\Http\Requests\Backend\Access\User;
+<?php
+
+namespace App\Http\Requests\Backend\Access\User;
 
 use App\Http\Requests\Request;
 
 /**
- * Class PermanentlyDeleteUserRequest
- * @package App\Http\Requests\Backend\Access\User
+ * Class PermanentlyDeleteUserRequest.
  */
-class PermanentlyDeleteUserRequest extends Request {
-
+class PermanentlyDeleteUserRequest extends Request
+{
     /**
      * Determine if the user is authorized to make this request.
      *

@@ -119,7 +119,7 @@
                                                         }
                                                     }
                                                     $dependencies = json_encode($dependencies);
-                                                    $dependency_list = implode(", ", $dependency_list);
+                                                    $dependency_list = implode(', ', $dependency_list);
                                                 ?>
 
                                                 @if ($p['id'] != $permission->id)

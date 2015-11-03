@@ -24,8 +24,8 @@ class UpdateCourRequest extends Request
     public function rules()
     {
         return [
-            'title'                =>  "required|unique:cours,title,".$this->cour->id,
-            'body'                 =>  'required',
+            'title' => 'required|unique:cours,title,'.$this->cour->id,
+            'body' => 'required',
             ];
     }
 

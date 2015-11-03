@@ -24,7 +24,7 @@ class UpdateDepartementRequest extends Request
     public function rules()
     {
         return [
-            'name' =>  "required|unique:departements,name,".$this->departement->id
+            'name' => 'required|unique:departements,name,'.$this->departement->id,
             ];
     }
 
@@ -33,7 +33,7 @@ class UpdateDepartementRequest extends Request
         return [
             'name.unique' => 'Ce département existe deja',
             'name.required' => 'Le nom du département est obligatoire',
-            
+
         ];
     }
 }

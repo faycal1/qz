@@ -19,20 +19,20 @@ class CreateAnswerRequest extends Request
     public function rules()
     {
         return [
-            'body'  =>  'required',            
+            'body' => 'required',
             'question_id' => 'required',
-            'type'=>'required',
-            'type'=>'onlyonetrue'
+            'type' => 'required',
+            'type' => 'onlyonetrue',
             ];
     }
 
     public function messages()
     {
-        return [            
-            'title.required' => 'Le titre est obligatoire',            
+        return [
+            'title.required' => 'Le titre est obligatoire',
             'question_id.required' => 'La Question est obligatoire',
-            'type.required'=>'Le type de la reponse obligatoire',
-            'type.onlyonetrue'=>'la Question est de type unique et ne peut avoir plusieur vrais reponse'
+            'type.required' => 'Le type de la reponse obligatoire',
+            'type.onlyonetrue' => 'la Question est de type unique et ne peut avoir plusieur vrais reponse',
         ];
     }
 }

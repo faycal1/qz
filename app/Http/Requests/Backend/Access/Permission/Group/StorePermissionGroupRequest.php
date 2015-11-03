@@ -1,13 +1,14 @@
-<?php namespace App\Http\Requests\Backend\Access\Permission\Group;
+<?php
+
+namespace App\Http\Requests\Backend\Access\Permission\Group;
 
 use App\Http\Requests\Request;
 
 /**
- * Class StorePermissionGroupRequest
- * @package App\Http\Requests\Backend\Access\Permission\Group
+ * Class StorePermissionGroupRequest.
  */
-class StorePermissionGroupRequest extends Request {
-
+class StorePermissionGroupRequest extends Request
+{
     /**
      * Determine if the user is authorized to make this request.
      *

@@ -19,26 +19,26 @@ class UpdateQuestionRequest extends Request
     public function rules()
     {
         return [
-            'title'  =>  'required',
+            'title' => 'required',
             'type' => 'required',
             'cour_id' => 'required',
-            'pass'=>'required',
-            'fail'=>'required',
-            'partial'=>'required',
-            
+            'pass' => 'required',
+            'fail' => 'required',
+            'partial' => 'required',
+
             ];
     }
 
     public function messages()
     {
-        return [            
-            'title.required' => 'Le titre est obligatoire',            
+        return [
+            'title.required' => 'Le titre est obligatoire',
             'cour_id.required' => 'Le cour est obligatoire',
             'type.required' => 'Le Type est obligatoire',
-            'pass'=>'Le champs Passe est obligatoire',
-            'fail'=>'Le champs Ne passe pas est obligatoire',
-            'partial'=>'Le champs Partiel est obligatoire',
-            
+            'pass' => 'Le champs Passe est obligatoire',
+            'fail' => 'Le champs Ne passe pas est obligatoire',
+            'partial' => 'Le champs Partiel est obligatoire',
+
         ];
     }
 }

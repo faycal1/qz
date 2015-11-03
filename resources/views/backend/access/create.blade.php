@@ -135,7 +135,7 @@
                                             }
                                         }
                                         $dependencies = json_encode($dependencies);
-                                        $dependency_list = implode(", ", $dependency_list);
+                                        $dependency_list = implode(', ', $dependency_list);
                                     ?>
 
                                     <li><input type="checkbox" value="{{$p['id']}}" name="permission_user[]" data-dependencies="{!! $dependencies !!}" id="permission-{{$p['id']}}"> <label for="permission-{{$p['id']}}" />

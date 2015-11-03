@@ -1,24 +1,22 @@
 <?php
 
-namespace App\Services\Quiz ;
+namespace App\Services\Quiz;
 
 /**
- * summary
+ * summary.
  */
-class QuizService 
+class QuizService
 {
     /**
-     * summary
+     * summary.
      */
     public function __construct()
     {
-        
     }
 
-    static function XmlEvents()
+    public static function XmlEvents()
     {
-
-		$events = '<events>
+        $events = '<events>
                 <event id="btnover">
                     <rollover>
                         <css name="btnOverCss">this</css>
@@ -114,29 +112,27 @@ class QuizService
                         <anim type="show" animtime="2" oncomplete="0">failbg</anim>
                     </click>
                 </event>
-            </events> ' ;
+            </events> ';
 
-    	return $events;
+        return $events;
     }
 
-
-    public function XmlQuestions ($collection)
-    {    	
-    	$questions = '';
-
-    	foreach ($collection->questions as $value) {
-    		$questions .=  $this->QuestionContainer($value) ;
-    	}
-
-    	return $questions ;    	
-    }
-
-    private function QuestionContainer ($data) 
+    public function XmlQuestions($collection)
     {
+        $questions = '';
 
-        $time = $data->time ? $data->time : '15' ;
+        foreach ($collection->questions as $value) {
+            $questions .=  $this->QuestionContainer($value);
+        }
 
-    	$QuestionContainer = '
+        return $questions;
+    }
+
+    private function QuestionContainer($data)
+    {
+        $time = $data->time ? $data->time : '15';
+
+        $QuestionContainer = '
     		<question id="'.$data->id.'" time="'.$time.'" event="">
                     <box id="col1" position="relative" class="col-md-8" />
                     <box id="col2" position="relative" class="col-md-4" />
@@ -146,47 +142,44 @@ class QuizService
 	                    		<p class="p_24">'.$data->body.'</p>
 	                    	]]>
 	                    </text>	 
-	                    '.$this->AnswersContainer ( $data->answers , $data->type).' 
-	                    '.$this->FbContainer ( $data->pass , $data->fail , $data->partial , $data->type).' 	                     
+	                    '.$this->AnswersContainer($data->answers, $data->type).' 
+	                    '.$this->FbContainer($data->pass, $data->fail, $data->partial, $data->type).' 	                     
             </question>';
 
-            return $QuestionContainer ;
+        return $QuestionContainer;
     }
 
-    private function AnswersContainer (  $collection , $type)
+    private function AnswersContainer($collection, $type)
     {
-    	$options ='' ;
-    	foreach ($collection as $value) {
-
-    		$answertype = 	$value->type == '1' ? 'true' : 'false' ;	
-    		$typeSubmit  = 	$type == 'multiple' ? 'select'  : 'selectandsubmit'  ;
-    		$options .= '
+        $options = '';
+        foreach ($collection as $value) {
+            $answertype = $value->type == '1' ? 'true' : 'false';
+            $typeSubmit = $type == 'multiple' ? 'select'  : 'selectandsubmit';
+            $options .= '
     			<option correct="'.$answertype.'">
-                    <text id="option'.$value->question_id.'_'.$value->id.'" position="relative" target="col1" x="match" width="100%" margin-bottom="10" anim="show" animtime="0.5" animdelay="0.5" event="optionover,'. $typeSubmit.'" class="optionBox">
+                    <text id="option'.$value->question_id.'_'.$value->id.'" position="relative" target="col1" x="match" width="100%" margin-bottom="10" anim="show" animtime="0.5" animdelay="0.5" event="optionover,'.$typeSubmit.'" class="optionBox">
                     	<![CDATA[<p class="p_16 white cent">'.$value->body.'</p>]]>
                     </text>
-                </option>' ;
-    	}
+                </option>';
+        }
 
-
-    	return $options ;
+        return $options;
     }
 
-    private function FbContainer($pass , $fail , $partial , $type)
+    private function FbContainer($pass, $fail, $partial, $type)
     {
-    	if($type == 'multiple')
-    	{
-    		$buttonPartial = 
-    		'<button id="submitBtn" position="relative" target="col1" x="match" float="left" width="100" anim="disabled" animtime="0.3" animdelay="0.7" event="btnover,submit"><![CDATA[<p class="genericBtn">Confirmez</p>]]></button>
+        if ($type == 'multiple') {
+            $buttonPartial =
+            '<button id="submitBtn" position="relative" target="col1" x="match" float="left" width="100" anim="disabled" animtime="0.3" animdelay="0.7" event="btnover,submit"><![CDATA[<p class="genericBtn">Confirmez</p>]]></button>
             <button id="resetBtn" position="relative" target="col1" x="match" float="left" margin-left="10" margin-bottom="40" width="100" anim="disabled" animtime="0.3" animdelay="0.7" event="btnover,reset"><![CDATA[<p class="genericBtn">Videz</p>]]></button>
             ';
-    	}
-    	else 
-    		$buttonPartial = '' ;
+        } else {
+            $buttonPartial = '';
+        }
 
-    	if($type == 'multiple')
-    		$fbPartial = 
-    		' <fb id="partial" event="">  
+        if ($type == 'multiple') {
+            $fbPartial =
+            ' <fb id="partial" event="">  
                 <box id="fb" position="relative" target="col2" x="0" margin-top="20" clear="both" anim="show" animtime="0.5">                    
                     <text id="txt11" position="relative" anim="none" margin-bottom="30">
                     	<![CDATA[<p class="p_24">'.$partial.'</p>]]>
@@ -197,10 +190,11 @@ class QuizService
                     </text>
                 </box>
             </fb>';
-    	else 
-    		$fbPartial = '' ;  
+        } else {
+            $fbPartial = '';
+        }
 
-    	$fb = $buttonPartial .' 
+        $fb = $buttonPartial.' 
     		<fb id="pass" event="">
                 <box id="fb" position="relative" target="col2" margin-top="20" clear="both" anim="show" animtime="0.5">                                
                     <text id="txt1" position="relative" anim="none" margin-bottom="30">
@@ -227,12 +221,12 @@ class QuizService
                 </box>
             </fb>';
 
-            return $fb ;
+        return $fb;
     }
 
-    static function XmlScore($congrat ="Felicitations")
+    public static function XmlScore($congrat = 'Felicitations')
     {
-    	$score = '
+        $score = '
     		<score masteryscore="80">
                <fb id="pass" event="">
                     <box id="center" position="relative" height="100%">
@@ -254,6 +248,7 @@ class QuizService
                     </box> 
                 </fb>
             </score>';
-    	return $score ;
+
+        return $score;
     }
 }

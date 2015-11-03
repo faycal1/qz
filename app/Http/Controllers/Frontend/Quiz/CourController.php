@@ -2,63 +2,61 @@
 
 namespace App\Http\Controllers\Frontend\Quiz;
 
-use DB ;
-use Auth ;
+use DB;
+use Auth;
 use Redis;
 use Response;
-use App\Http\Requests;
 use Illuminate\Http\Request;
-use App\Models\Quiz\Cour\Cour ;
-use App\Models\Quiz\Page\Page ;
-use App\Services\Quiz\QuizService ;
+use App\Models\Quiz\Cour\Cour;
+use App\Models\Quiz\Page\Page;
+use App\Services\Quiz\QuizService;
 use App\Http\Controllers\Controller;
-use App\Models\Quiz\Question\Question ;
-
-use Illuminate\Support\Facades\Request as Req ;
+use App\Models\Quiz\Question\Question;
 
 class CourController extends Controller
 {
-
     public function index()
     {
-        if(!is_null(Cour::first()))
-    	   $cour = Cour::first();
-        else
-           $cour = [] ;
-       
-    	return view('frontend.quiz.cours.list' , compact('cour') ) ;
+        if (!is_null(Cour::first())) {
+            $cour = Cour::first();
+        } else {
+            $cour = [];
+        }
+
+        return view('frontend.quiz.cours.list', compact('cour'));
     }
 
     public function show($slug)
     {
-    	$cour = Cour::where('slug', $slug)->get()->first();    	    	
-    	return view('frontend.quiz.cours.show' , compact('cour' ) ) ;
+        $cour = Cour::where('slug', $slug)->get()->first();
+
+        return view('frontend.quiz.cours.show', compact('cour'));
     }
 
-    public function showCourPage($slug , $slugp)
-    {        
-
-    	$cour = Cour::where('slug', $slug)->get()->first();
-    	$page = Page::where('slug', $slugp)->get()->first();
-    	    	
-    	return view('frontend.quiz.cours.showPage' , compact('cour' , 'page' ) ) ;
-    }
-
-    public function showCourQuiz($slug )
-    {        
-    	$cour = Cour::where('slug', $slug)->get()->first();
-    	//$question = Question::where('slug', $slugq)->get()->first();
-        $question = '';
-    	return view('frontend.quiz.cours.showQuiz' , compact('cour' ,  'question') ) ;
-    }
-
-    public function paresXml ($slug)
+    public function showCourPage($slug, $slugp)
     {
-        $QuizService = new QuizService() ;
-        $cours = Cour::where('slug', $slug)->get()->first();
-        $timer = $cours->timer == '1' ? 'true' : 'false' ;
+        $cour = Cour::where('slug', $slug)->get()->first();
+        $page = Page::where('slug', $slugp)->get()->first();
 
-        $output ='<?xml version="1.0" encoding="utf-8" ?>
+        return view('frontend.quiz.cours.showPage', compact('cour', 'page'));
+    }
+
+    public function showCourQuiz($slug)
+    {
+        $cour = Cour::where('slug', $slug)->get()->first();
+        //$question = Question::where('slug', $slugq)->get()->first();
+        $question = '';
+
+        return view('frontend.quiz.cours.showQuiz', compact('cour',  'question'));
+    }
+
+    public function paresXml($slug)
+    {
+        $QuizService = new QuizService();
+        $cours = Cour::where('slug', $slug)->get()->first();
+        $timer = $cours->timer == '1' ? 'true' : 'false';
+
+        $output = '<?xml version="1.0" encoding="utf-8" ?>
                     <data>                           
                       '.$QuizService::XmlEvents().'      
                      <box id="failbg" position="absolute" x="0" y="0" width="100%" height="100%" anim="hide" class="failbg" />
@@ -93,26 +91,23 @@ class CourController extends Controller
                             <!--score screen-->
                             '.$QuizService::XmlScore().'
                         </custom>
-                    </data>' ;
-    
-    return Response::make($output, '200')->header('Content-Type', 'text/xml');
+                    </data>';
 
+        return Response::make($output, '200')->header('Content-Type', 'text/xml');
     }
 
-    function quiz (Request $request)
+    public function quiz(Request $request)
     {
-
-        $id = $request->id ;
-        $passed = $request->passed ;
-        $cour_id =  Question::findOrFail($id)->cour_id;
+        $id = $request->id;
+        $passed = $request->passed;
+        $cour_id = Question::findOrFail($id)->cour_id;
         $cour = Cour::findOrFail($cour_id);
-        
-        $user = Auth::user() ;
 
-        if (Redis::get('quiz'))
-        {                       
-            $quiz = unserialize(Redis::get('quiz')) ;
-            $question = [ 'id'=>$id , 'passed'=>$passed ] ; 
+        $user = Auth::user();
+
+        if (Redis::get('quiz')) {
+            $quiz = unserialize(Redis::get('quiz'));
+            $question = ['id' => $id , 'passed' => $passed];
 
             foreach ($quiz['question'] as $key => $value) {
                 if ($value['id'] == $id) {
@@ -121,24 +116,23 @@ class CourController extends Controller
             }
 
             array_push($quiz['question'], $question);
-            $redis = Redis::set('quiz' , serialize($quiz));
-
-        }else{
-            $quiz=['question'=>[]];
-            $question = ['id'=>$id , 'passed'=>$passed ] ;                        
+            $redis = Redis::set('quiz', serialize($quiz));
+        } else {
+            $quiz = ['question' => []];
+            $question = ['id' => $id , 'passed' => $passed];
             array_push($quiz['question'], $question);
-            $redis =  Redis::set('quiz' , serialize($quiz));
-        }   
+            $redis = Redis::set('quiz', serialize($quiz));
+        }
 
-        if($cour->hasUser($user->id , $cour_id))
-        {
-            DB::table('cour_user')->where('user_id' ,$user->id )
-                                  ->where('cour_id' ,$cour_id )    
-                                  ->update(['result'=> Redis::get('quiz') , 'score'=>$request->score]);
+        if ($cour->hasUser($user->id, $cour_id)) {
+            DB::table('cour_user')->where('user_id', $user->id)
+                                  ->where('cour_id', $cour_id)
+                                  ->update(['result' => Redis::get('quiz'), 'score' => $request->score]);
             //$user->cours()->sync([$cour_id=>['result'=> Redis::get('quiz') , 'score'=>$request->score]]); 
-       }else{
-           $user->cours()->attach([$cour_id=>['result'=> Redis::get('quiz') , 'score'=>$request->score]]);
-       }            
-       return  response()->json(['data' => Redis::get('quiz') , 'unserialize'=>unserialize(Redis::get('quiz'))]) ;
+        } else {
+            $user->cours()->attach([$cour_id => ['result' => Redis::get('quiz'), 'score' => $request->score]]);
+        }
+
+        return  response()->json(['data' => Redis::get('quiz'), 'unserialize' => unserialize(Redis::get('quiz'))]);
     }
 }

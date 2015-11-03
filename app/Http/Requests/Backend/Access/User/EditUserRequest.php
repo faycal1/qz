@@ -1,13 +1,14 @@
-<?php namespace App\Http\Requests\Backend\Access\User;
+<?php
+
+namespace App\Http\Requests\Backend\Access\User;
 
 use App\Http\Requests\Request;
 
 /**
- * Class EditUserRequest
- * @package App\Http\Requests\Backend\Access\User
+ * Class EditUserRequest.
  */
-class EditUserRequest extends Request {
-
+class EditUserRequest extends Request
+{
     /**
      * Determine if the user is authorized to make this request.
      *

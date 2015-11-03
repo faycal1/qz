@@ -24,18 +24,17 @@ class UpdatePageRequest extends Request
     public function rules()
     {
         return [
-            'title'                =>  "required",
-            'body'                 =>  'required',
+            'title' => 'required',
+            'body' => 'required',
             ];
     }
 
     public function messages()
     {
         return [
-            
+
             'title.required' => 'Le titre est obligatoire',
             'body.required' => 'La déscription est obligatoire',
         ];
     }
 }
-

@@ -1,4 +1,6 @@
-<?php namespace App\Http\Controllers\Frontend\Auth;
+<?php
+
+namespace App\Http\Controllers\Frontend\Auth;
 
 use Illuminate\Http\Request;
 use App\Exceptions\GeneralException;
@@ -9,12 +11,10 @@ use App\Http\Requests\Frontend\Access\RegisterRequest;
 use App\Repositories\Frontend\Auth\AuthenticationContract;
 
 /**
- * Class AuthController
- * @package App\Http\Controllers\Frontend\Auth
+ * Class AuthController.
  */
 class AuthController extends Controller
 {
-
     use ThrottlesLogins;
 
     /**
@@ -35,16 +35,19 @@ class AuthController extends Controller
 
     /**
      * @param RegisterRequest $request
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function postRegister(RegisterRequest $request)
     {
         if (config('access.users.confirm_email')) {
             $this->auth->create($request->all());
-            return redirect()->route('home')->withFlashSuccess("Your account was successfully created. We have sent you an e-mail to confirm your account.");
+
+            return redirect()->route('home')->withFlashSuccess('Your account was successfully created. We have sent you an e-mail to confirm your account.');
         } else {
             //Use native auth login because do not need to check status when registering
             auth()->login($this->auth->create($request->all()));
+
             return redirect()->route('frontend.dashboard');
         }
     }
@@ -60,6 +63,7 @@ class AuthController extends Controller
 
     /**
      * @param LoginRequest $request
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function postLogin(LoginRequest $request)
@@ -69,23 +73,26 @@ class AuthController extends Controller
         // the IP address of the client making these requests into this application.
         $throttles = $this->isUsingThrottlesLoginsTrait();
 
-        if ($throttles && $this->hasTooManyLoginAttempts($request))
+        if ($throttles && $this->hasTooManyLoginAttempts($request)) {
             return $this->sendLockoutResponse($request);
+        }
 
         //Don't know why the exception handler is not catching this
         try {
             $this->auth->login($request);
 
-            if ($throttles)
+            if ($throttles) {
                 $this->clearLoginAttempts($request);
+            }
 
             return redirect()->intended('/dashboard');
         } catch (GeneralException $e) {
             // If the login attempt was unsuccessful we will increment the number of attempts
             // to login and redirect the user back to the login form. Of course, when this
             // user surpasses their maximum number of attempts they will get locked out.
-            if ($throttles)
+            if ($throttles) {
                 $this->incrementLoginAttempts($request);
+            }
 
             return redirect()->back()->withInput()->withFlashDanger($e->getMessage());
         }
@@ -94,6 +101,7 @@ class AuthController extends Controller
     /**
      * @param Request $request
      * @param $provider
+     *
      * @return mixed
      */
     public function loginThirdParty(Request $request, $provider)
@@ -107,12 +115,15 @@ class AuthController extends Controller
     public function getLogout()
     {
         $this->auth->logout();
+
         return redirect()->route('home');
     }
 
     /**
      * @param $token
+     *
      * @return mixed
+     *
      * @throws \App\Exceptions\GeneralException
      */
     public function confirmAccount($token)
@@ -120,7 +131,8 @@ class AuthController extends Controller
         //Don't know why the exception handler is not catching this
         try {
             $this->auth->confirmAccount($token);
-            return redirect()->route('frontend.dashboard')->withFlashSuccess("Your account has been successfully confirmed!");
+
+            return redirect()->route('frontend.dashboard')->withFlashSuccess('Your account has been successfully confirmed!');
         } catch (GeneralException $e) {
             return redirect()->back()->withInput()->withFlashDanger($e->getMessage());
         }
@@ -128,6 +140,7 @@ class AuthController extends Controller
 
     /**
      * @param $user_id
+     *
      * @return mixed
      */
     public function resendConfirmationEmail($user_id)
@@ -135,14 +148,15 @@ class AuthController extends Controller
         //Don't know why the exception handler is not catching this
         try {
             $this->auth->resendConfirmationEmail($user_id);
-            return redirect()->route('home')->withFlashSuccess("A new confirmation e-mail has been sent to the address on file.");
+
+            return redirect()->route('home')->withFlashSuccess('A new confirmation e-mail has been sent to the address on file.');
         } catch (GeneralException $e) {
             return redirect()->back()->withInput()->withFlashDanger($e->getMessage());
         }
     }
 
     /**
-     * Helper methods to get laravel's ThrottleLogin class to work with this package
+     * Helper methods to get laravel's ThrottleLogin class to work with this package.
      */
 
     /**
@@ -178,7 +192,8 @@ class AuthController extends Controller
     }
 
     /**
-     * Generates social login links based on what is enabled
+     * Generates social login links based on what is enabled.
+     *
      * @return string
      */
     protected function getSocialLinks()
@@ -186,20 +201,24 @@ class AuthController extends Controller
         $socialite_enable = [];
         $socialite_links = '';
 
-        if (getenv('GITHUB_CLIENT_ID') != '')
+        if (getenv('GITHUB_CLIENT_ID') != '') {
             $socialite_enable[] = link_to_route('auth.provider', trans('labels.login_with', ['social_media' => 'Github']), 'github');
+        }
 
-        if (getenv('FACEBOOK_CLIENT_ID') != '')
+        if (getenv('FACEBOOK_CLIENT_ID') != '') {
             $socialite_enable[] = link_to_route('auth.provider', trans('labels.login_with', ['social_media' => 'Facebook']), 'facebook');
+        }
 
-        if (getenv('TWITTER_CLIENT_ID') != '')
+        if (getenv('TWITTER_CLIENT_ID') != '') {
             $socialite_enable[] = link_to_route('auth.provider', trans('labels.login_with', ['social_media' => 'Twitter']), 'twitter');
+        }
 
-        if (getenv('GOOGLE_CLIENT_ID') != '')
+        if (getenv('GOOGLE_CLIENT_ID') != '') {
             $socialite_enable[] = link_to_route('auth.provider', trans('labels.login_with', ['social_media' => 'Google']), 'google');
+        }
 
-        for ($i = 0; $i < count($socialite_enable); $i++) {
-            $socialite_links .= ($socialite_links != '' ? '&nbsp;|&nbsp;' : '') . $socialite_enable[$i];
+        for ($i = 0; $i < count($socialite_enable); ++$i) {
+            $socialite_links .= ($socialite_links != '' ? '&nbsp;|&nbsp;' : '').$socialite_enable[$i];
         }
 
         return $socialite_links;

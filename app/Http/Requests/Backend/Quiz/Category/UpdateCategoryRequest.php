@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Backend\Quiz\Category;;
+namespace App\Http\Requests\Backend\Quiz\Category;
 
 use App\Http\Requests\Request;
 
@@ -24,8 +24,8 @@ class UpdateCategoryRequest extends Request
     public function rules()
     {
         return [
-            'title'                =>  "required|unique:categories,title,".$this->category->id,
-            'body'                 =>  'required',
+            'title' => 'required|unique:categories,title,'.$this->category->id,
+            'body' => 'required',
             ];
     }
 

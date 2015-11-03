@@ -1,13 +1,14 @@
-<?php namespace App\Http\Requests\Backend\Access\Permission;
+<?php
+
+namespace App\Http\Requests\Backend\Access\Permission;
 
 use App\Http\Requests\Request;
 
 /**
- * Class DeletePermissionRequest
- * @package App\Http\Requests\Backend\Access\Permission
+ * Class DeletePermissionRequest.
  */
-class DeletePermissionRequest extends Request {
-
+class DeletePermissionRequest extends Request
+{
     /**
      * Determine if the user is authorized to make this request.
      *

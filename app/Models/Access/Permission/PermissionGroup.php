@@ -1,15 +1,16 @@
-<?php namespace App\Models\Access\Permission;
+<?php
+
+namespace App\Models\Access\Permission;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Access\Permission\Traits\Attribute\PermissionGroupAttribute;
 use App\Models\Access\Permission\Traits\Relationship\PermissionGroupRelationship;
 
 /**
- * Class PermissionGroup
- * @package App\Models\Access\Permission
+ * Class PermissionGroup.
  */
-class PermissionGroup extends Model {
-
+class PermissionGroup extends Model
+{
     use PermissionGroupRelationship, PermissionGroupAttribute;
 
     /**

@@ -19,9 +19,9 @@ class CreateCourRequest extends Request
     public function rules()
     {
         return [
-            'title'  =>  'required|unique:cours',
-            'body'   =>  'required',
-            'category_id' => 'required'
+            'title' => 'required|unique:cours',
+            'body' => 'required',
+            'category_id' => 'required',
             ];
     }
 
@@ -31,7 +31,7 @@ class CreateCourRequest extends Request
             'title.unique' => 'Ce titre existe deja',
             'title.required' => 'Le titre est obligatoire',
             'body.required' => 'La déscription est obligatoire',
-            'category_id.required' => 'La categorie est obligatoire'
+            'category_id.required' => 'La categorie est obligatoire',
         ];
     }
 }

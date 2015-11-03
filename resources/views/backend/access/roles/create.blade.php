@@ -62,9 +62,10 @@
                                                                     <?php
                                                                         //Get the dependency list for the tooltip
                                                                         $dependency_list = [];
-                                                                        foreach ($permission->dependencies as $dependency)
+                                                                        foreach ($permission->dependencies as $dependency) {
                                                                             array_push($dependency_list, $dependency->permission->display_name);
-                                                                        $dependency_list = implode(", ", $dependency_list);
+                                                                        }
+                                                                        $dependency_list = implode(', ', $dependency_list);
                                                                     ?>
                                                                     <a data-toggle="tooltip" data-html="true" title="<strong>Dependencies:</strong> {!! $dependency_list !!}">{!! $permission->display_name !!} <small><strong>(D)</strong></small></a>
                                                                 @else
@@ -88,9 +89,10 @@
                                                                                     <?php
                                                                                     //Get the dependency list for the tooltip
                                                                                     $dependency_list = [];
-                                                                                    foreach ($permission->dependencies as $dependency)
+                                                                                    foreach ($permission->dependencies as $dependency) {
                                                                                         array_push($dependency_list, $dependency->permission->display_name);
-                                                                                    $dependency_list = implode(", ", $dependency_list);
+                                                                                    }
+                                                                                    $dependency_list = implode(', ', $dependency_list);
                                                                                     ?>
                                                                                     <a data-toggle="tooltip" data-html="true" title="<strong>Dependencies:</strong> {!! $dependency_list !!}">{!! $permission->display_name !!} <small><strong>(D)</strong></small></a>
                                                                                 @else
@@ -125,9 +127,10 @@
                                             <?php
                                             //Get the dependency list for the tooltip
                                             $dependency_list = [];
-                                            foreach ($perm->dependencies as $dependency)
+                                            foreach ($perm->dependencies as $dependency) {
                                                 array_push($dependency_list, $dependency->permission->display_name);
-                                            $dependency_list = implode(", ", $dependency_list);
+                                            }
+                                            $dependency_list = implode(', ', $dependency_list);
                                             ?>
                                             <a style="color:black;text-decoration:none;" data-toggle="tooltip" data-html="true" title="<strong>Dependencies:</strong> {!! $dependency_list !!}">{!! $perm->display_name !!} <small><strong>(D)</strong></small></a>
                                         @else

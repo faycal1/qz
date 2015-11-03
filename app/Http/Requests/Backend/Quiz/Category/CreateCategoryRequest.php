@@ -13,7 +13,7 @@ class CreateCategoryRequest extends Request
      */
     public function authorize()
     {
-       return access()->can('create-category');
+        return access()->can('create-category');
     }
 
     /**
@@ -24,8 +24,8 @@ class CreateCategoryRequest extends Request
     public function rules()
     {
         return [
-            'title'  =>  'required|unique:categories',
-            'body'   =>  'required'
+            'title' => 'required|unique:categories',
+            'body' => 'required',
             ];
     }
 
@@ -34,8 +34,7 @@ class CreateCategoryRequest extends Request
         return [
             'title.unique' => 'Ce titre existe deja',
             'title.required' => 'Le titre est obligatoire',
-            'body.required' => 'La déscription est obligatoire'
+            'body.required' => 'La déscription est obligatoire',
         ];
     }
 }
-

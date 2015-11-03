@@ -1,32 +1,33 @@
-<?php namespace App\Http\Requests\Backend\Access\Permission;
+<?php
+
+namespace App\Http\Requests\Backend\Access\Permission;
 
 use App\Http\Requests\Request;
 
 /**
- * Class CreatePermissionRequest
- * @package App\Http\Requests\Backend\Access\Permission
+ * Class CreatePermissionRequest.
  */
-class CreatePermissionRequest extends Request {
+class CreatePermissionRequest extends Request
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return access()->can('create-permissions');
+    }
 
-	/**
-	 * Determine if the user is authorized to make this request.
-	 *
-	 * @return bool
-	 */
-	public function authorize()
-	{
-		return access()->can('create-permissions');
-	}
-
-	/**
-	 * Get the validation rules that apply to the request.
-	 *
-	 * @return array
-	 */
-	public function rules()
-	{
-		return [
-			//
-		];
-	}
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            //
+        ];
+    }
 }
