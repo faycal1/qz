@@ -63,7 +63,7 @@
                             var quiz;
                             function init(){                                
                                 //create the screen object which loads the xml and creates all screen elements
-                                quiz = new Screen({id:"myQuiz", xmlPath:APP_URL"pxml/{{ $cour->slug }}"});                                
+                                quiz = new Screen({id:"myQuiz", xmlPath:APP_URL+"/pxml/{{ $cour->slug }}"});                                
                                 //choose a target div
                                 var targetDiv = get("container");                                
                                 //load it

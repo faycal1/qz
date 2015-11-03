@@ -27,13 +27,13 @@ class DepartementUserTableSeeder extends Seeder
 
     		User::create([        		
         		'name' => $faker->name,
-                'email' => $faker->email,
-                'password' => bcrypt('1234'),
-                'confirmation_code' => md5(uniqid(mt_rand(), true)),
-                'confirmed' => true,
-                'departement_id' => $faker->randomElement($departement) ,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now()        		
+                            'email' => $faker->email,
+                            'password' => bcrypt('1234'),
+                            'confirmation_code' => md5(uniqid(mt_rand(), true)),
+                            'confirmed' => true,
+                            'departement_id' => $faker->randomElement($departement) ,
+                            'created_at' => Carbon::now(),
+                            'updated_at' => Carbon::now()        		
         		
 	        ]);
     	}

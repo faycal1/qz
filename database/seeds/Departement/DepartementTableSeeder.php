@@ -20,17 +20,17 @@ class DepartementTableSeeder extends Seeder
 			DB::statement('SET FOREIGN_KEY_CHECKS=0;');	
 			DB::table('departements')->truncate();
 
-        $faker = Faker::create();
+                                            $faker = Faker::create();
 
-    	foreach (range(1,5) as $key => $value ) {
+                                        	foreach (range(1,5) as $key => $value ) {
 
-    		Departement::create([        		
-        		'name'=>$faker->lastName        		
-        		
-	        ]);
-    	}
+                                        		Departement::create([        		
+                                            		'name'=>$faker->lastName        		
+                                            		
+                                    	        ]);
+                                        	}
 
-    	if(env('DB_DRIVER')=='mysql')
-				DB::statement('SET FOREIGN_KEY_CHECKS=1;') ;
+                                        	if(env('DB_DRIVER')=='mysql')
+                                    				DB::statement('SET FOREIGN_KEY_CHECKS=1;') ;
     }
 }

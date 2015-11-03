@@ -110,8 +110,7 @@ class CourController extends Controller
         $user = Auth::user() ;
 
         if (Redis::get('quiz'))
-        {
-            
+        {                       
             $quiz = unserialize(Redis::get('quiz')) ;
             $question = [ 'id'=>$id , 'passed'=>$passed ] ; 
 
@@ -139,11 +138,7 @@ class CourController extends Controller
             //$user->cours()->sync([$cour_id=>['result'=> Redis::get('quiz') , 'score'=>$request->score]]); 
        }else{
            $user->cours()->attach([$cour_id=>['result'=> Redis::get('quiz') , 'score'=>$request->score]]);
-       }    
-
-        
-        //$cour->users()->sync([$cour_id=>['result'=> Redis::get('quiz') , 'score'=>$request->score]]);
-         
+       }            
        return  response()->json(['data' => Redis::get('quiz') , 'unserialize'=>unserialize(Redis::get('quiz'))]) ;
     }
 }
