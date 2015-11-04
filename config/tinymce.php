@@ -2,7 +2,7 @@
 
 return [
 
-	'cdn' => env('TINY_MCE_URL') ,//url('vendor/js/tinymce/tinymce.min.js'),
+	'cdn' => env('APP_URL') .':8000/vendor/js/tinymce/tinymce.min.js',
 
 	'params' => [
 		

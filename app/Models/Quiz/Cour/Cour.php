@@ -99,6 +99,4 @@ class Cour extends Model implements SluggableInterface
     {
         return Cour::has('questions')->has('users' , '<' , 1);
     }
-
-
 }

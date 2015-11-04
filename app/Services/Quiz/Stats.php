@@ -60,79 +60,12 @@ class Stats
                 "category"=>$category 
             ],
             'dataset'=>[
-                ['seriesname'=> 'quizsHasUsersByDepartement' , 'data'=>$quizsHasUsersByDepartement],
-                ['seriesname'=> 'quizsByDepartement' , 'data'=>$quizsByDepartement]
+             ['seriesname'=> 'Quiz Par département ' , 'data'=>$quizsByDepartement] ,
+             ['seriesname'=> 'Quiz  Passé par au moin un utilisateur par département ' , 'data'=>$quizsHasUsersByDepartement]
+               
             ]
         ] ;
 
         return $chart ;
-    }
-    /*
-    
-    {
-    "chart": {
-        "caption": "Revenue split by product category",
-        "subCaption": "For current year",
-        "xAxisname": "Quarter",
-        "yAxisName": "Revenues (In USD)",
-        "showSum": "1",
-        "numberPrefix": "$",
-        "theme": "fint"
-    },
-    "categories": [
-        {
-            "category": [
-                {
-                    "label": "Q1"
-                },
-                {
-                    "label": "Q2"
-                },
-                {
-                    "label": "Q3"
-                },
-                {
-                    "label": "Q4"
-                }
-            ]
-        }
-    ],
-    "dataset": [
-        {
-            "seriesname": "Food Products",
-            "data": [
-                {
-                    "value": "11000"
-                },
-                {
-                    "value": "15000"
-                },
-                {
-                    "value": "13500"
-                },
-                {
-                    "value": "15000"
-                }
-            ]
-        },
-        {
-            "seriesname": "Non-Food Products",
-            "data": [
-                {
-                    "value": "11400"
-                },
-                {
-                    "value": "14800"
-                },
-                {
-                    "value": "8300"
-                },
-                {
-                    "value": "11800"
-                }
-            ]
-        }
-    ]
-}
-     */
+    }   
 }
