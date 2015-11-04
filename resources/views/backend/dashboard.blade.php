@@ -28,6 +28,7 @@
 
             
         </div><!-- /.box-body -->
+        <div class="clearfix" ></div>
     </div><!--box box-success-->
 @endsection
 
