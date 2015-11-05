@@ -51,8 +51,26 @@ class Cour extends Model implements SluggableInterface
     }
 
     public function hasUser($user_id, $cour_id)
-    {
-        return DB::table('cour_user')->where('user_id', $user_id)->where('cour_id', $cour_id)->first();
+    {        
+       
+           $questions =0;
+            $score = 0;
+            $result= '';
+            $cour =  Cour::find($cour_id); 
+            $questions = $cour->questions->count();
+
+            if(!is_null($cour ->users->first()))
+            {
+                $first =  $cour ->users->first();
+                        if (!is_null($first))
+                        {
+                                $score =  $first ->pivot->score;
+                                $result=  $first ->pivot->result;
+                         }
+                        
+            }
+            return ['score'=>$score , 'result' => unserialize($result ) , 'questions'=>$questions] ;
+       
     }
 
     public function selectedDepartement(Array $selcted)
@@ -90,13 +108,15 @@ class Cour extends Model implements SluggableInterface
         });
     }
 
-    public static function quizsHasUsers ()
+    public static function quizsHasUsers ( $cour_id , $user_id)
     {
-        return Cour::has('questions')->has('users');
+        return Cour::find($cour_id)->users()->find($user_id); 
     }
 
     public static function quizsHasNotUsers ()
     {
         return Cour::has('questions')->has('users' , '<' , 1);
     }
+
+
 }

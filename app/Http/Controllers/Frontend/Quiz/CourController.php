@@ -15,6 +15,7 @@ use App\Models\Quiz\Question\Question;
 
 class CourController extends Controller
 {
+
     public function index()
     {
         if (!is_null(Cour::first())) {
@@ -22,12 +23,12 @@ class CourController extends Controller
         } else {
             $cour = [];
         }
-
         return view('frontend.quiz.cours.list', compact('cour'));
     }
 
     public function show($slug)
     {
+        
         $cour = Cour::where('slug', $slug)->get()->first();
 
         return view('frontend.quiz.cours.show', compact('cour'));
@@ -43,6 +44,7 @@ class CourController extends Controller
 
     public function showCourQuiz($slug)
     {
+        Redis::flushall();
         $cour = Cour::where('slug', $slug)->get()->first();
         //$question = Question::where('slug', $slugq)->get()->first();
         $question = '';
@@ -105,8 +107,10 @@ class CourController extends Controller
 
         $user = Auth::user();
 
-        if (Redis::get('quiz')) {
-            $quiz = unserialize(Redis::get('quiz'));
+        $redisname = $id.'-'.$cour_id.'-quiz' ;
+
+        if (Redis::get($redisname)) {
+            $quiz = unserialize(Redis::get($redisname));
             $question = ['id' => $id , 'passed' => $passed];
 
             foreach ($quiz['question'] as $key => $value) {
@@ -116,24 +120,27 @@ class CourController extends Controller
             }
 
             array_push($quiz['question'], $question);
-            $redis = Redis::set('quiz', serialize($quiz));
+
+            $redis = Redis::set($redisname, serialize($quiz));
+
         } else {
+
             $quiz = ['question' => []];
             $question = ['id' => $id , 'passed' => $passed];
             array_push($quiz['question'], $question);
-            $redis = Redis::set('quiz', serialize($quiz));
+            $redis = Redis::set($redisname , serialize($quiz));
         }
-
-        if ($cour->hasUser($user->id, $cour_id)) {
+  
+        if (!is_null($cour->quizsHasUsers(  $cour_id ,$user->id))) {
             DB::table('cour_user')->where('user_id', $user->id)
                                   ->where('cour_id', $cour_id)
-                                  ->update(['result' => Redis::get('quiz'), 'score' => $request->score]);
-            //$user->cours()->sync([$cour_id=>['result'=> Redis::get('quiz') , 'score'=>$request->score]]); 
+                                  ->update(['result' => Redis::get($redisname), 'score' => $request->score]);    
+
         } else {
-            $user->cours()->attach([$cour_id => ['result' => Redis::get('quiz'), 'score' => $request->score]]);
+            $user->cours()->attach([$cour_id => ['result' => Redis::get($redisname), 'score' => $request->score]]);
         }
 
-        return  response()->json(['data' => Redis::get('quiz'), 'unserialize' => unserialize(Redis::get('quiz'))]);
+        return  response()->json(['data' => Redis::get($redisname), 'unserialize' => unserialize(Redis::get($redisname))]);
     }
 
     
