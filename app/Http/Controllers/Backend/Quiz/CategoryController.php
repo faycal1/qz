@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend\Quiz;
 
+use Datatables;
 use App\Http\Controllers\Controller;
 use App\Models\Quiz\Category\Category;
 use App\Http\Requests\Backend\Quiz\Category\CreateCategoryRequest;
@@ -127,5 +128,10 @@ class CategoryController extends Controller
         } catch (\Illuminate\Database\QueryException $e) {
             return redirect()->route('admin.quiz.category.deleted')->withFlashDanger('Cette Catégorie contiens des Cours , vous pouvez pas le supprimer !!!');
         }
+    }
+
+    public function anyData()
+    {
+        return Datatables::of(Category::select('*'))->make(true);
     }
 }

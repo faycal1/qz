@@ -15,6 +15,18 @@
 @section('content')
     @include('backend.quiz.includes.partials.header-buttons')
 
+    <table class="table table-bordered" id="users-table">
+        <thead>
+            <tr>
+               <th>Title</th>
+                <th>Description</th>            
+                <th class="visible-lg">Créer</th>
+                <th class="visible-lg">Editer</th>
+                <th>{{ trans('crud.actions') }}</th>
+            </tr>
+        </thead>
+    </table>
+
     <table class="table table-striped table-bordered table-hover">
         <thead>
         <tr>            
@@ -50,3 +62,22 @@
 
     <div class="clearfix"></div>
 @stop
+
+@section('fc')
+   <script type="text/javascript">
+$(function() {
+    $('#users-table').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: '{!! route('datatables.data') !!}',
+        columns: [
+            { data: 'id', name: 'id' },
+            { data: 'title', name: 'title' },
+            { data: 'body', name: 'body' },
+            { data: 'created_at', name: 'created_at' },
+            { data: 'updated_at', name: 'updated_at' }
+        ]
+    });
+});
+</script>
+@endsection

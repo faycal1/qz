@@ -13,7 +13,7 @@ elixir(function(mix) {
         .styles([  // Combine pre-processed CSS files
                 'frontend/main.css',
                 'frontend/style.css',
-                'frontend/quiz/styles.css'
+                'frontend/quiz/styles.css',
             ], 'public/css/frontend.css')
         .scripts([ // Combine front-end scripts
                 'plugins.js',
@@ -34,6 +34,7 @@ elixir(function(mix) {
                 'backend/main.css',
                 'sweetalert.css',
                 'backend/dropzone.css',
+                'backend/jquery.dataTables.min.css',
                 'backend/basic.css',
             ], 'public/css/backend.css')
         .scripts([ // Combine back-end scripts
@@ -42,6 +43,7 @@ elixir(function(mix) {
                 'backend/main.js',
                 'backend/plugin/toastr/toastr.min.js',
                 'backend/plugin/dropzone/dropzone.js',
+                'backend/plugin/datatables/jquery.dataTables.min.js',
                 'fc/fusioncharts.js',
                 'fc/fusioncharts.charts.js',
                 'fc/fusioncharts.powercharts.js',

@@ -122,3 +122,6 @@ $router->group(['middleware' => 'access.routeNeedsPermission:view-frontend'], fu
     Route::post('quiz', 'Frontend\Quiz\CourController@quiz');
 
 });
+
+
+Route::get('datatables', [ 'uses' => 'Backend\Quiz\CategoryController@anyData', 'as'=> 'datatables.data']);

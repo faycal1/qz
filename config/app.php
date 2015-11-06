@@ -149,6 +149,7 @@ return [
 		Cviebrock\EloquentSluggable\SluggableServiceProvider::class,
 		Teepluss\Restable\RestableServiceProvider::class,
 		Ktquez\Tinymce\TinymceServiceProvider::class, 
+		yajra\Datatables\DatatablesServiceProvider::class,
 
 		/*
 		 * Application Service Providers...
@@ -225,7 +226,8 @@ return [
 		'Gravatar'  => 'Creativeorange\Gravatar\Facades\Gravatar',
 		'HTML'		=> 'Illuminate\Html\HtmlFacade',
 		'Socialize' => 'Laravel\Socialite\Facades\Socialite',
-		 'Restable' => 'Teepluss\Restable\Facades\Restable'
+		'Restable' => 'Teepluss\Restable\Facades\Restable',
+		'Datatables' => yajra\Datatables\Datatables::class,
 
 	],
 ];
