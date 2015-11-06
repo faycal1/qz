@@ -56,6 +56,29 @@ class PermissionTableSeeder extends Seeder {
 		/**
 		 * User
 		 */
+		
+		$permission_model = config('access.permission');
+		$viewfrontend = new $permission_model;
+		$viewfrontend->name = 'view-frontend';
+		$viewfrontend->display_name = 'View Frontend';
+		$viewfrontend->system = false;
+		$viewfrontend->group_id = 2;
+		$viewfrontend->sort = 5;
+		$viewfrontend->created_at = Carbon::now();
+		$viewfrontend->updated_at = Carbon::now();
+		$viewfrontend->save();
+
+		$permission_model = config('access.permission');
+		$viewcours = new $permission_model;
+		$viewcours->name = 'view-cours';
+		$viewcours->display_name = 'View Cours';
+		$viewcours->system = false;
+		$viewcours->group_id = 2;
+		$viewcours->sort = 5;
+		$viewcours->created_at = Carbon::now();
+		$viewcours->updated_at = Carbon::now();
+		$viewcours->save();
+
 		$permission_model = config('access.permission');
 		$createUsers = new $permission_model;
 		$createUsers->name = 'create-users';

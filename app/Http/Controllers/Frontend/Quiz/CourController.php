@@ -107,30 +107,17 @@ class CourController extends Controller
 
         $user = Auth::user();
 
-        $redisname = $id.'-'.$cour_id.'-quiz' ;
+        $redisname = $user->id.'-'.$cour_id.'-quiz' ;
 
         if (Redis::get($redisname)) {
             $quiz = unserialize(Redis::get($redisname));
-            $question = [$id => $passed];           
-
-            foreach ($quiz['question'] as $key => $value) {
-                  foreach ($value as $k => $v) { 
-                        if ($k == $id) {
-                            unset($quiz['question'][$key ][$k]);
-                            unset($quiz['question'][$key ]);
-                        }
-                    }
-            }
-
-            array_push($quiz['question'], $question);
-
+            $quiz['question'][$id]= $passed; 
             $redis = Redis::set($redisname, serialize($quiz));
 
         } else {
 
             $quiz = ['question' => []];
-            $question = [$id=> $passed];
-            array_push($quiz['question'], $question);
+            $quiz['question'][$id]=$passed;            
             $redis = Redis::set($redisname , serialize($quiz));
         }
   
@@ -143,7 +130,7 @@ class CourController extends Controller
             $user->cours()->attach([$cour_id => ['result' => Redis::get($redisname), 'score' => $request->score]]);
         }
 
-        return  response()->json(['data' => Redis::get($redisname), 'unserialize' => unserialize(Redis::get($redisname))['question']]);
+        return  response()->json(['data' => Redis::get($redisname), 'unserialize' => unserialize(Redis::get($redisname))]);
     }
 
     

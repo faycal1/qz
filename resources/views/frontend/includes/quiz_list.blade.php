@@ -1,18 +1,24 @@
 <?php $cour_user = $cour->hasUser(\Auth::user()->id, $cour->id) ?>
 @if (isset($cour_user['result'] ['question']) )
-		
-	    	{!! link_to( 'cour/'.$cour->slug.'/quiz/' , 'Jouer Au Quiz ?' , array('style' => 'color:#b52a2f !important; text-decoration: line-through;')) !!} <br>
+			<?php  $color = $cour_user['score'] >='80' ?  'green' : 'red' ?>
+	    	{!! link_to( 'cour/'.$cour->slug.'/quiz/' , 'Jouer Au Quiz ?' , 
+	    	array('style' => "color:$color; text-decoration: line-through;")) !!} 
+
+	    	<br>
 	    	Score <span style="color:#b52a2f; text-style:bold;" > {{ $cour_user['score']}} %</span><br>	    	
-	    	repondu à   <span style="color:#b52a2f; text-style:bold;" > {{ count( $cour_user['result'] ['question'])  }} </span>
+	    	Repondu à   <span style="color:#b52a2f; text-style:bold;" > {{ count( $cour_user['result'] ['question'])  }} </span>
 	    	 Sur <span style="color:#b52a2f; text-style:bold;" > {{ $cour_user['questions']   }} </span><br>    	 
-	    	resultats 
+	    	<hr> 
 	    		    	
-	    	<ul>
-		@foreach ($cour_user['result']['question'] as $key =>$answer)
-			<li>
-		    	     <span style="color:#b52a2f; text-style:bold;" > Question {{  $key }} - {{ $answer =='true' ?  'Juste' : 'Faux' }} </span>
-		    	</li>
+	    	<ul class="list-group" >
+	    	<?php $i=1 ?>
+		    @foreach ($cour_user['result']['question'] as $key =>$answer)
+				<li  class="list-group-item  " >
+			    	<span  class=" label label-{{ $answer =='true' ?  'success' : 'danger' }}" > Question {{  $i }} - {{ $answer =='true' ?  'Juste' : 'Faux' }} </span>
+			    </li>
+			  <?php $i++ ?>
 	    	@endforeach
+
 		</ul>
 @else
 	{!! link_to( 'cour/'.$cour->slug.'/quiz/' , 'Jouer Au Quiz ?' ) !!}
