@@ -71,11 +71,11 @@ $(function() {
         serverSide: true,
         ajax: '{!! route('datatables.data') !!}',
         columns: [
-            { data: 'id', name: 'id' },
+            
             { data: 'title', name: 'title' },
             { data: 'body', name: 'body' },
-            { data: 'created_at', name: 'created_at' },
-            { data: 'updated_at', name: 'updated_at' }
+            { data: 'updated_at', name: 'updated_at' },
+            { data: 'created_at', name: 'created_at' }
         ]
     });
 });

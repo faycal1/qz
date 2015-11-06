@@ -17,6 +17,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        //dd(Category::paginate(15)) ;
         return view('backend.quiz.categories.index')->with('categories', Category::paginate(15));
     }
 
