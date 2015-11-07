@@ -35,6 +35,7 @@ elixir(function(mix) {
                 'sweetalert.css',
                 'backend/dropzone.css',
                 'backend/jquery.dataTables.min.css',
+                'backend/datatables.min.css',
                 'backend/basic.css',
             ], 'public/css/backend.css')
         .scripts([ // Combine back-end scripts

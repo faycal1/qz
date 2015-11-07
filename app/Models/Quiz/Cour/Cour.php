@@ -5,13 +5,13 @@ namespace App\Models\Quiz\Cour;
 use DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Models\Quiz\Cour\Traits\Attribute\CourAttribute;
+
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
 
 class Cour extends Model implements SluggableInterface
 {
-    use CourAttribute;
+    
     use SluggableTrait;
     use SoftDeletes;
 
@@ -73,11 +73,11 @@ class Cour extends Model implements SluggableInterface
        
     }
 
-    public function selectedDepartement(Array $selcted)
+    public function selectedDepartement(Array $selected)
     {
         $DepartementsToDisplay = [];
 
-        foreach ($selcted as $key => $value) {
+        foreach ($selected as $key => $value) {
             array_push($DepartementsToDisplay, $value['id']);
         }
 
@@ -113,10 +113,17 @@ class Cour extends Model implements SluggableInterface
         return Cour::find($cour_id)->users()->find($user_id); 
     }
 
+    public static function quizHasUsers ( )
+    {
+        return Cour::has('users'); 
+    }
+
     public static function quizsHasNotUsers ()
     {
         return Cour::has('questions')->has('users' , '<' , 1);
     }
+
+   
 
 
 }

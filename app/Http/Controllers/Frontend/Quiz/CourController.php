@@ -30,7 +30,6 @@ class CourController extends Controller
     {
         
         $cour = Cour::where('slug', $slug)->get()->first();
-
         return view('frontend.quiz.cours.show', compact('cour'));
     }
 
@@ -44,9 +43,14 @@ class CourController extends Controller
 
     public function showCourQuiz($slug)
     {
-        Redis::flushall();
-        $cour = Cour::where('slug', $slug)->get()->first();
-        //$question = Question::where('slug', $slugq)->get()->first();
+        //Redis::flushall();
+
+       
+        $cour = Cour::where('slug', $slug)->get()->first(); 
+        
+        $user = Auth::user();
+        $redisname = $user->id.'-'.$cour->id .'-quiz' ;
+         Redis::del($redisname);       
         $question = '';
 
         return view('frontend.quiz.cours.showQuiz', compact('cour',  'question'));

@@ -22,7 +22,33 @@
         </div><!-- /.box-header -->
         <div class="box-body">
             
-            <div id="chartContainer" class="col-md-6"> Chargement des données ...</div>
+            <div id="chartContainer" class="col-md-6"> 
+            <table class="table" >
+                <thead>
+                    <tr>
+                        <th >Département</th>
+                        <th >N° Employés</th>
+                        <th >Quiz Passés</th>
+                        <th >Quiz Non Passés</th>
+                        <th >N° Succées </th>
+                        <th >N° Echec</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($departements as $departement)
+                    <tr>
+                        <td>{{ $departement['dep'] }}</td>
+                        <td>{{ $departement['users'] }}</td>
+                        <td>{{ $departement['nbr_passed'] }}</td>
+                        <td>{{ $departement['nbr_non_passed'] }}</td>
+                        <td>{{ $departement['succes'] }}</td>
+                        <td>{{ $departement['failure'] }}</td>
+                    </tr>
+                    @endforeach 
+                </tbody>
+            </table>            
+
+            </div>
             <div id="stackedShartContainer" class="col-md-6">Chargement des données ...</div>
 
 
@@ -36,29 +62,27 @@
 <script type="text/javascript">
   
   FusionCharts.ready(function(){
-      var revenueChart = new FusionCharts({
-        "type": "column2d",
-        "renderAt": "chartContainer",
-        "width": "100%",
-        "height": "500",
+    //   var revenueChart = new FusionCharts({
+    //     "type": "column2d",
+    //     "renderAt": "chartContainer",
+    //     "width": "100%",
+    //     "height": "500",
         
-        "dataSource": "<?php echo url() ?>/admin/jsonChart",
-        "dataFormat": "jsonurl"   
+    //     "dataSource": "<?php echo url() ?>/admin/jsonChart",
+    //     "dataFormat": "jsonurl"   
 
        
-    });
-var quizStackedChart = new FusionCharts({
+    // });
+    //revenueChart.render();
+
+    var quizStackedChart = new FusionCharts({
         "type": "stackedcolumn2d",
         "renderAt": "stackedShartContainer",
         "width": "100%",
         "height": "500",        
         "dataSource": "<?php echo url() ?>/admin/statcked",
-        "dataFormat": "jsonurl"   
-
-       
+        "dataFormat": "jsonurl" 
     });
-
-    revenueChart.render();
     quizStackedChart.render();
 })
 

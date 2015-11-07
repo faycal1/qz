@@ -107,3 +107,38 @@ $(function(){
         });
     });
 });
+
+function deleteCinfirmationButtons()
+{
+  $('[data-method]').append(function(){
+                            return "\n"+
+                            "<form action='"+$(this).attr('href')+"' method='POST' name='delete_item' style='display:none'>\n"+
+                            "   <input type='hidden' name='_method' value='"+$(this).attr('data-method')+"'>\n"+
+                            "   <input type='hidden' name='_token' value='"+$('meta[name="_token"]').attr('content')+"'>\n"+
+                            "</form>\n"
+                        })
+                        .removeAttr('href')
+                        .attr('style','cursor:pointer;')
+                        .attr('onclick','$(this).find("form").submit();');
+
+                    $('form[name=delete_item]').submit(function(e){
+                         e.preventDefault();
+                         var _this = $(this);
+                        swal({
+                          title: "Etes vous sure?",
+                          text: "Touts les elements relatives a cette enregistrement seront supprimés !",
+                          type: "warning",
+                          showCancelButton: true,
+                          confirmButtonColor: "#DD6B55",
+                          confirmButtonText: "Oui!",
+                          cancelButtonText: "Quitter!",
+                          closeOnConfirm: false
+                        },
+                        function(){
+                            _this.unbind('submit').submit();
+                            swal("Deleted!", "...", "success");
+                          
+                        });
+                       // return confirm("Are you sure you want to delete this item?");
+                    });
+}

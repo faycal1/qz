@@ -15,7 +15,9 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('backend.dashboard');
+        $departements = new Stats();
+        $stat = $departements->getTableData();
+        return view('backend.dashboard'  )->with('departements' , $stat );
     }
 
     public function Chart()

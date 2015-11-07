@@ -2,15 +2,25 @@
 
 namespace App\Http\Controllers\Backend\Quiz;
 
+use Datatables;
+use Carbon\Carbon ;
 use App\Models\Quiz\Cour\Cour;
 use App\Http\Controllers\Controller;
 use App\Models\Departement\Departement;
 use App\Models\Quiz\Category\Category as Category;
+use App\Models\Quiz\Cour\Traits\Attribute\CourAttribute;
 use App\Http\Requests\Backend\Quiz\Cour\CreateCourRequest;
 use App\Http\Requests\Backend\Quiz\Cour\UpdateCourRequest;
 
 class CourController extends Controller
 {
+    use CourAttribute;
+
+    function __construct ()
+    {
+        Carbon::setLocale('fr');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -58,9 +68,7 @@ class CourController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Cour $cour)
-    {
-        setlocale(LC_TIME, 'fr');
-
+    {     
         return view('backend.quiz.cours.show', compact('cour'));
     }
 
@@ -140,5 +148,19 @@ class CourController extends Controller
         } catch (\Illuminate\Database\QueryException $e) {
             return redirect()->route('admin.quiz.cour.deleted')->withFlashDanger('Ce Cour contiens des pages , vous pouvez pas le supprimer !!!');
         }
+    }
+
+     public function courData()
+    {
+
+        $datatables = Cour::select('*') ;
+        return Datatables::of($datatables)
+            ->addColumn('action', function ($cour) {
+                return $this->getActionButtonsAttribute($cour->id);
+            })
+            ->editColumn('body', '{{ str_limit(strip_tags($body) , 50 )}}')
+            ->editColumn('created_at', '{{ $created_at->diffForHumans() }}')
+            ->editColumn('updated_at', '{{ $updated_at->diffForHumans()}}')
+            ->make(true);
     }
 }

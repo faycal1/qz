@@ -48,7 +48,7 @@ $router->group(['middleware' => 'access.routeNeedsPermission:view-backend'], fun
       Route::patch('admin/quiz/category/{category}/update', ['middleware' => 'access.routeNeedsPermission:update-category', 'uses' => 'Backend\Quiz\CategoryController@update',   'as' => 'admin.quiz.category.update']);
       Route::delete('admin/quiz/category/{category}/destroy', ['middleware' => 'access.routeNeedsPermission:destroy-category', 'uses' => 'Backend\Quiz\CategoryController@destroy',   'as' => 'admin.quiz.category.destroy']);
       Route::get('admin/quiz/category/deleted', ['middleware' => 'access.routeNeedsPermission:view-deleted-category', 'uses' => 'Backend\Quiz\CategoryController@deleted',   'as' => 'admin.quiz.category.deleted']);
-
+      Route::post('datatables/category', [ 'uses' => 'Backend\Quiz\CategoryController@categoryData', 'as'=> 'datatables.category']);
       Route::resource('admin/quiz/category',      'Backend\Quiz\CategoryController', ['only' => ['index', 'show']]);
 
       Route::patch('admin/quiz/cour/{cour}/restore', ['middleware' => 'access.routeNeedsPermission:restore-cour', 'uses' => 'Backend\Quiz\CourController@restore',   'as' => 'admin.quiz.cour.restore']);
@@ -59,6 +59,7 @@ $router->group(['middleware' => 'access.routeNeedsPermission:view-backend'], fun
       Route::patch('admin/quiz/cour/{cour}/update', ['middleware' => 'access.routeNeedsPermission:update-cour', 'uses' => 'Backend\Quiz\CourController@update',   'as' => 'admin.quiz.cour.update']);
       Route::delete('admin/quiz/cour/{cour}/destroy', ['middleware' => 'access.routeNeedsPermission:destroy-cour', 'uses' => 'Backend\Quiz\CourController@destroy',   'as' => 'admin.quiz.cour.destroy']);
       Route::get('admin/quiz/cour/deleted', ['middleware' => 'access.routeNeedsPermission:view-deleted-cour', 'uses' => 'Backend\Quiz\CourController@deleted',   'as' => 'admin.quiz.cour.deleted']);
+      Route::post('datatables/cour', [ 'uses' => 'Backend\Quiz\CourController@courData', 'as'=> 'datatables.cour']);
 
       Route::resource('admin/quiz/cour', 'Backend\Quiz\CourController', ['only' => ['index', 'show']]);
 
@@ -124,4 +125,3 @@ $router->group(['middleware' => 'access.routeNeedsPermission:view-frontend'], fu
 });
 
 
-Route::get('datatables', [ 'uses' => 'Backend\Quiz\CategoryController@anyData', 'as'=> 'datatables.data']);

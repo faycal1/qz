@@ -48,10 +48,10 @@ class Stats
 
         $chart = [
             "chart"=> [
-                "caption"=> "Revenue split by product category",
-                "subCaption"=> "For current year",
-                "xAxisname"=> "Quarter",
-                "yAxisName"=> "Revenues (In USD)",
+                "caption"=> "Taux de Quiz Fait et Pas fait par départmenet",
+                "subCaption"=> "---",
+                "xAxisname"=> "Departement",
+                "yAxisName"=> "Nombre de Quiz",
                 "showSum"=> "1",
                 "numberPrefix"=> "",
                 "theme"=> "fint"
@@ -68,4 +68,61 @@ class Stats
 
         return $chart ;
     }   
+
+    function getTableData()
+    {
+        $result = [];
+        $departements = Departement::all();
+
+        foreach ($departements as $value) {
+
+            array_push($result, [ 
+
+                    'dep'=>$value->name ,
+                    'users'=>$value->users->count() ,
+                    'nbr_passed'=>$value->cours()->has('questions')->has('users')->count(),
+                    'nbr_non_passed'=>$value->cours()->has('questions')->has('users' , '<' , 1)->count() ,
+
+                    'succes'=>$this->getScoreByDepartementByCourList($value->cours()->lists('cour_id')->all())['passed'] ,
+                    'failure'=>$this->getScoreByDepartementByCourList($value->cours()->lists('cour_id')->all())['notPassed']  
+                    ]
+                );
+        }
+
+        return $result;
+    }
+
+
+    public function getCourScoreByDepartement($cour_id)
+    {
+        $passed =[] ;
+        $notPassed =[] ;
+        foreach (Cour::find($cour_id)->users as $score )
+        {
+            //dd($score->pivot->score) ;
+                if($score->pivot->score >= '80')
+                {
+                    array_push($passed, $score->pivot->score) ;
+                }else{
+                    array_push($notPassed, $score->pivot->score) ;
+                }
+            
+            
+        }  
+
+        return ['passed'=>count($passed) , 'notPassed'=>count($notPassed)] ;
+    }
+
+    public function getScoreByDepartementByCourList(Array $list)
+    {
+        $passed =[] ;
+        $notPassed =[] ;
+        foreach ($list as $value) {
+            
+            array_push($passed, $this->getCourScoreByDepartement($value)['passed']);
+            array_push($notPassed, $this->getCourScoreByDepartement($value)['notPassed']);
+        }
+
+        return ['passed'=>array_sum($passed) , 'notPassed'=>array_sum($notPassed)] ;
+    }
 }

@@ -13,42 +13,52 @@
 @endsection
 
 @section('content')
-    @include('backend.quiz.includes.partials.header-buttons')
-
-    <table class="table table-striped table-bordered table-hover">
+     @include('backend.quiz.includes.partials.header-buttons')
+     <hr style="border: 1px solid #3C8DBC" >
+     <table class="table table-bordered" id="cours-table">
         <thead>
-        <tr>            
-            <th>Title</th>
-            <th>Description</th>
-            <th>Categorie</th>            
-            <th class="visible-lg">Créer</th>
-            <th class="visible-lg">Editer</th>
-            <th>{{ trans('crud.actions') }}</th>
-        </tr>
+            <tr>
+               <th>Title</th>
+                <th>Description</th>            
+                <th class="visible-lg">Créer</th>
+                <th class="visible-lg">Editer</th>
+                <th>{{ trans('crud.actions') }}</th>
+            </tr>
         </thead>
-        <tbody>
-
-        @foreach ($cours as $cour)
-                <tr>
-                    <td><a href="{{route('admin.quiz.cour.show' , $cour->id)}}">{!! $cour->title !!}</a></td>
-                    <td>{!! str_limit($cour->body , 30) !!}</td>
-                    <td>{!! $cour->category->title  !!}</td>
-                    <td>{!! $cour->created_at->diffForHumans() !!}</td>
-                    <td>{!! $cour->updated_at->diffForHumans() !!}</td>
-                    <td>{!! $cour->action_buttons !!}</td>
-                </tr>
-        @endforeach
-            
-        </tbody>
-    </table>
-
-    <div class="pull-left">
-        
-    </div>
-
-    <div class="pull-right">
-        {!! $cours->render() !!}
-    </div>
+    </table>   
 
     <div class="clearfix"></div>
 @stop
+
+@section('fc')
+<script type="text/javascript">
+        $(function() {
+            $('#cours-table').DataTable({
+                processing: true,
+                bServerSide: true,
+                sAjaxSource: '{!! route('datatables.cour') !!}',
+                aoColumns: [
+                    
+                    { data: 'title', name: 'title' },
+                    { data: 'body', name: 'body' },
+                    { data: 'updated_at', name: 'updated_at' },
+                    { data: 'created_at', name: 'created_at' },
+                    { data: 'action', name: 'action' }
+                ],
+                'fnServerData': function(sSource, aoData, fnCallback) {                     
+                    $.ajax
+                        ({
+                            'dataType': 'json',
+                            'type': 'POST',
+                            'url': sSource,
+                            'data': aoData,
+                            'success': fnCallback
+                        });
+                },
+                "fnDrawCallback": function(oSettings) {
+                    deleteCinfirmationButtons();
+                }
+            });
+        });
+    </script>
+@endsection

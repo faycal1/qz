@@ -3,22 +3,31 @@
 namespace App\Http\Controllers\Backend\Quiz;
 
 use Datatables;
+use Carbon\Carbon ;
 use App\Http\Controllers\Controller;
 use App\Models\Quiz\Category\Category;
+use App\Models\Quiz\Category\Traits\Attribute\CategoryAttribute;
 use App\Http\Requests\Backend\Quiz\Category\CreateCategoryRequest;
 use App\Http\Requests\Backend\Quiz\Category\UpdateCategoryRequest;
 
 class CategoryController extends Controller
 {
+    use CategoryAttribute;
+
+      function __construct ()
+    {
+        Carbon::setLocale('fr');
+    }
+
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //dd(Category::paginate(15)) ;
-        return view('backend.quiz.categories.index')->with('categories', Category::paginate(15));
+    {        
+        return view('backend.quiz.categories.index');
     }
 
     /**
@@ -131,8 +140,16 @@ class CategoryController extends Controller
         }
     }
 
-    public function anyData()
+    public function categoryData()
     {
-        return Datatables::of(Category::select('*'))->make(true);
+        $datatables = Category::select('*') ;
+        return Datatables::of($datatables)
+            ->addColumn('action', function ($categorie) {
+                return $this->getActionButtonsAttribute($categorie->id);
+            })
+            ->editColumn('body', '{{ str_limit(strip_tags($body) , 50 )}}')
+            ->editColumn('created_at', '{{ $created_at->diffForHumans() }}')
+            ->editColumn('updated_at', '{{ $updated_at->diffForHumans()}}')
+            ->make(true);
     }
 }
