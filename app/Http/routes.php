@@ -36,21 +36,13 @@ $router->group(['namespace' => 'Backend'], function () use ($router) {
 
 });
 
-        //Route::get('jsonChart' , 'Backend\DashboardController@Chart') ;
+       
 
 
 $router->group(['middleware' => 'access.routeNeedsPermission:view-backend'], function ($router) {
-      Route::patch('admin/quiz/category/{category}/restore', ['middleware' => 'access.routeNeedsPermission:restore-category', 'uses' => 'Backend\Quiz\CategoryController@restore',   'as' => 'admin.quiz.category.restore']);
-      Route::delete('admin/quiz/category/{category}/forcedelete', ['middleware' => 'access.routeNeedsPermission:force-delete-category', 'uses' => 'Backend\Quiz\CategoryController@forcedelete',   'as' => 'admin.quiz.category.forcedelete']);
-      Route::get('admin/quiz/category/create', ['middleware' => 'access.routeNeedsPermission:create-category', 'uses' => 'Backend\Quiz\CategoryController@create', 'as' => 'admin.quiz.category.create']);
-      Route::post('admin/quiz/category/store', ['middleware' => 'access.routeNeedsPermission:create-category', 'uses' => 'Backend\Quiz\CategoryController@store',  'as' => 'admin.quiz.category.store']);
-      Route::get('admin/quiz/category/{category}/edit', ['middleware' => 'access.routeNeedsPermission:edit-category', 'uses' => 'Backend\Quiz\CategoryController@edit',   'as' => 'admin.quiz.category.edit']);
-      Route::patch('admin/quiz/category/{category}/update', ['middleware' => 'access.routeNeedsPermission:update-category', 'uses' => 'Backend\Quiz\CategoryController@update',   'as' => 'admin.quiz.category.update']);
-      Route::delete('admin/quiz/category/{category}/destroy', ['middleware' => 'access.routeNeedsPermission:destroy-category', 'uses' => 'Backend\Quiz\CategoryController@destroy',   'as' => 'admin.quiz.category.destroy']);
-      Route::get('admin/quiz/category/deleted', ['middleware' => 'access.routeNeedsPermission:view-deleted-category', 'uses' => 'Backend\Quiz\CategoryController@deleted',   'as' => 'admin.quiz.category.deleted']);
-      Route::get('datatables/category', [ 'uses' => 'Backend\Quiz\CategoryController@categoryData', 'as'=> 'datatables.category']);
 
-      Route::resource('admin/quiz/category',      'Backend\Quiz\CategoryController', ['only' => ['index', 'show']]);
+      require __DIR__.'/Routes/Backend/Quiz/Category.php';
+
 
       Route::patch('admin/quiz/cour/{cour}/restore', ['middleware' => 'access.routeNeedsPermission:restore-cour', 'uses' => 'Backend\Quiz\CourController@restore',   'as' => 'admin.quiz.cour.restore']);
       Route::delete('admin/quiz/cour/{cour}/forcedelete', ['middleware' => 'access.routeNeedsPermission:force-delete-cour', 'uses' => 'Backend\Quiz\CourController@forcedelete',   'as' => 'admin.quiz.cour.forcedelete']);

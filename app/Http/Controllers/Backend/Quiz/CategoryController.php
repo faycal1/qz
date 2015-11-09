@@ -6,7 +6,6 @@ use Datatables;
 use Carbon\Carbon ;
 use App\Http\Controllers\Controller;
 use App\Models\Quiz\Category\Category;
-
 use App\Http\Requests\Backend\Quiz\Category\CreateCategoryRequest;
 use App\Http\Requests\Backend\Quiz\Category\UpdateCategoryRequest;
 
