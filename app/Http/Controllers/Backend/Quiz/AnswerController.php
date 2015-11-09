@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Backend\Quiz;
 
+use Datatables;
+use Carbon\Carbon ;
+
 use App\Models\Quiz\Question\Question;
 use App\Http\Controllers\Controller;
 use App\Models\Quiz\Answer\Answer;
@@ -10,6 +13,11 @@ use App\Http\Requests\Backend\Quiz\Answer\UpdateAnswerRequest;
 
 class AnswerController extends Controller
 {
+
+       function __construct ()
+    {
+        Carbon::setLocale('fr');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -130,5 +138,18 @@ class AnswerController extends Controller
         } catch (\Illuminate\Database\QueryException $e) {
             return redirect()->route('admin.quiz.answer.deleted')->withFlashDanger('vous pouvez supprimer cette reponse !!!');
         }
+    }
+
+    public function answerData()
+    {
+        $datatables = Answer::select('*') ->with('question');
+        return Datatables::of($datatables)
+            ->addColumn('action', function ($answer) {
+                return $answer->action_buttons;
+            })
+            ->editColumn('body', '{{ str_limit(strip_tags($body) , 50 )}}')
+            ->editColumn('created_at', '{{ $created_at->diffForHumans() }}')
+            ->editColumn('updated_at', '{{ $updated_at->diffForHumans()}}')
+            ->make(true);
     }
 }

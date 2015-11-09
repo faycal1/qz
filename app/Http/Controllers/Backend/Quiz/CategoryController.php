@@ -6,13 +6,13 @@ use Datatables;
 use Carbon\Carbon ;
 use App\Http\Controllers\Controller;
 use App\Models\Quiz\Category\Category;
-use App\Models\Quiz\Category\Traits\Attribute\CategoryAttribute;
+
 use App\Http\Requests\Backend\Quiz\Category\CreateCategoryRequest;
 use App\Http\Requests\Backend\Quiz\Category\UpdateCategoryRequest;
 
 class CategoryController extends Controller
 {
-    use CategoryAttribute;
+   
 
       function __construct ()
     {
@@ -145,7 +145,7 @@ class CategoryController extends Controller
         $datatables = Category::select('*') ;
         return Datatables::of($datatables)
             ->addColumn('action', function ($categorie) {
-                return $this->getActionButtonsAttribute($categorie->id);
+                return $categorie->action_buttons;
             })
             ->editColumn('body', '{{ str_limit(strip_tags($body) , 50 )}}')
             ->editColumn('created_at', '{{ $created_at->diffForHumans() }}')

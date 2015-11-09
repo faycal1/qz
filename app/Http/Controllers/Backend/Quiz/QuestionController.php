@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Backend\Quiz;
 
+use Datatables ;
+use Carbon\Carbon ;
 use App\Models\Quiz\Cour\Cour;
 use App\Http\Controllers\Controller;
 use App\Models\Quiz\Question\Question;
@@ -10,6 +12,10 @@ use App\Http\Requests\Backend\Quiz\Question\UpdateQuestionRequest;
 
 class QuestionController extends Controller
 {
+     function __construct ()
+    {
+        Carbon::setLocale('fr');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +23,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        return view('backend.quiz.questions.index')->with('questions', Question::paginate(15));
+        return view('backend.quiz.questions.index');
     }
 
     /**
@@ -131,5 +137,18 @@ class QuestionController extends Controller
         } catch (\Illuminate\Database\QueryException $e) {
             return redirect()->route('admin.quiz.question.deleted')->withFlashDanger(' vous pouvez pas le supprimer cette question !!!');
         }
+    }
+
+    public function questionData()
+    {
+        $datatables = Question::select('*')->with('cour') ;
+        return Datatables::of($datatables)
+            ->addColumn('action', function ($question) {
+                return $question->action_buttons;
+            })
+            ->editColumn('body', '{{ str_limit(strip_tags($body) , 50 )}}')
+            ->editColumn('created_at', '{{ $created_at->diffForHumans() }}')
+            ->editColumn('updated_at', '{{ $updated_at->diffForHumans()}}')
+            ->make(true);
     }
 }

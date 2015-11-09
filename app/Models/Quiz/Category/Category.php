@@ -4,13 +4,13 @@ namespace App\Models\Quiz\Category;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-//use App\Models\Quiz\Category\Traits\Attribute\CategoryAttribute;
+use App\Models\Quiz\Category\Traits\Attribute\CategoryAttribute;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
 
 class Category extends Model implements SluggableInterface
 {
-    //use CategoryAttribute;
+    use CategoryAttribute;
     use SluggableTrait;
     use SoftDeletes;
 

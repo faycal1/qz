@@ -2,22 +2,20 @@
 
 namespace App\Models\Quiz\Cour;
 
-use DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+use App\Models\Quiz\Cour\Traits\Attribute\CourAttribute;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
 
 class Cour extends Model implements SluggableInterface
-{
-    
+{    
+    use CourAttribute ;
     use SluggableTrait;
     use SoftDeletes;
 
     protected $guarded = ['id'];
     protected $fillable = ['title' , 'body' ,'category_id' , 'timer'];
-
     protected $dates = ['deleted_at'];
 
     protected $sluggable = [
@@ -51,8 +49,7 @@ class Cour extends Model implements SluggableInterface
     }
 
     public function hasUser($user_id, $cour_id)
-    {        
-       
+    {               
            $questions =0;
             $score = 0;
             $result= '';
@@ -69,8 +66,7 @@ class Cour extends Model implements SluggableInterface
                          }
                         
             }
-            return ['score'=>$score , 'result' => unserialize($result ) , 'questions'=>$questions] ;
-       
+            return ['score'=>$score , 'result' => unserialize($result ) , 'questions'=>$questions] ;       
     }
 
     public function selectedDepartement(Array $selected)
@@ -122,8 +118,5 @@ class Cour extends Model implements SluggableInterface
     {
         return Cour::has('questions')->has('users' , '<' , 1);
     }
-
-   
-
-
+    
 }

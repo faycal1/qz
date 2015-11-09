@@ -8,14 +8,11 @@ use App\Models\Quiz\Cour\Cour;
 use App\Http\Controllers\Controller;
 use App\Models\Departement\Departement;
 use App\Models\Quiz\Category\Category as Category;
-use App\Models\Quiz\Cour\Traits\Attribute\CourAttribute;
 use App\Http\Requests\Backend\Quiz\Cour\CreateCourRequest;
 use App\Http\Requests\Backend\Quiz\Cour\UpdateCourRequest;
 
 class CourController extends Controller
 {
-    use CourAttribute;
-
     function __construct ()
     {
         Carbon::setLocale('fr');
@@ -152,11 +149,10 @@ class CourController extends Controller
 
      public function courData()
     {
-
         $datatables = Cour::select('*') ;
         return Datatables::of($datatables)
             ->addColumn('action', function ($cour) {
-                return $this->getActionButtonsAttribute($cour->id);
+                return $cour->action_buttons;
             })
             ->editColumn('body', '{{ str_limit(strip_tags($body) , 50 )}}')
             ->editColumn('created_at', '{{ $created_at->diffForHumans() }}')

@@ -35,8 +35,8 @@
         $(function() {
             $('#cours-table').DataTable({
                 processing: true,
-                bServerSide: true,
-                sAjaxSource: '{!! route('datatables.cour') !!}',
+                serverside: true,
+                ajax: '{!! route('datatables.cour') !!}',
                 aoColumns: [
                     
                     { data: 'title', name: 'title' },
@@ -45,16 +45,16 @@
                     { data: 'created_at', name: 'created_at' },
                     { data: 'action', name: 'action' }
                 ],
-                'fnServerData': function(sSource, aoData, fnCallback) {                     
-                    $.ajax
-                        ({
-                            'dataType': 'json',
-                            'type': 'POST',
-                            'url': sSource,
-                            'data': aoData,
-                            'success': fnCallback
-                        });
-                },
+                // 'fnServerData': function(sSource, aoData, fnCallback) {                     
+                //     $.ajax
+                //         ({
+                //             'dataType': 'json',
+                //             'type': 'POST',
+                //             'url': sSource,
+                //             'data': aoData,
+                //             'success': fnCallback
+                //         });
+                // },
                 "fnDrawCallback": function(oSettings) {
                     deleteCinfirmationButtons();
                 }

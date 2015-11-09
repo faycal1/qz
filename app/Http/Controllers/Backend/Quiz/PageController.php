@@ -2,14 +2,22 @@
 
 namespace App\Http\Controllers\Backend\Quiz;
 
+use Datatables ;
+use Carbon\Carbon ;
 use App\Models\Quiz\Page\Page;
 use App\Models\Quiz\Cour\Cour;
 use App\Http\Controllers\Controller;
+use App\Models\Quiz\Page\Traits\Attribute\PageAttribute;
 use App\Http\Requests\Backend\Quiz\Page\CreatePageRequest;
 use App\Http\Requests\Backend\Quiz\Page\UpdatePageRequest;
 
 class PageController extends Controller
 {
+    use PageAttribute ;
+    function __construct ()
+    {
+        Carbon::setLocale('fr');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -129,5 +137,19 @@ class PageController extends Controller
         } catch (\Illuminate\Database\QueryException $e) {
             return redirect()->route('admin.quiz.page.deleted')->withFlashDanger(' vous pouvez pas le supprimer Cette page !!!');
         }
+    }
+
+    public function pageData()
+    {
+        $datatables = Page::select('*')->with('cour') ;
+        return Datatables::of($datatables)
+            ->addColumn('action', function ($page)   {
+                return $page->action_buttons;
+            })
+            ->editColumn('body', '{{ str_limit(strip_tags($body) , 50 )}}')
+            ->editColumn('cour_id', '{{  $cour->title }}')
+            ->editColumn('created_at', '{{ $created_at->diffForHumans() }}')
+            ->editColumn('updated_at', '{{ $updated_at->diffForHumans()}}')
+            ->make(true);
     }
 }
