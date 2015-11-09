@@ -33,7 +33,7 @@
         @foreach ($questions as $question)
                 <tr>
                     <td><a href="{{route('admin.quiz.question.show' , $question->id)}}">{!! $question->title !!}</a></td>
-                    <td>{!! str_limit($question->body , 30) !!}</td>
+                    <td>{!! str_limit(strip_tags($question->body) , 50 ) !!}</td>
                     <td>{!! $question->cour->title  !!}</td>
                     <td>{!! $question->type  !!}</td>
                     <td>{!! $question->score  !!}</td>

@@ -31,7 +31,7 @@
         @foreach ($pages as $page)
                 <tr>
                     <td><a href="{{route('admin.quiz.page.show' , $page->id)}}">{!! $page->title !!}</a></td>
-                    <td>{!! str_limit($page->body , 30) !!}</td>
+                    <td>{!! str_limit(strip_tags($page->body) , 50 ) !!}</td>
                     <td>{!! $page->cour->title  !!}</td>
                     <td>{!! $page->created_at->diffForHumans() !!}</td>
                     <td>{!! $page->updated_at->diffForHumans() !!}</td>
