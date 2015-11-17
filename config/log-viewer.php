@@ -4,7 +4,7 @@ return [
     /* ------------------------------------------------------------------------------------------------
      |  Locale
      | ------------------------------------------------------------------------------------------------
-     | Available: 'auto', 'ar', 'de', 'en', 'fr', 'it', 'nl'
+     | Available: 'auto', 'ar', 'de', 'en', 'fr', 'nl'
      */
     'locale'         => 'auto',
 
@@ -22,9 +22,8 @@ return [
         'enabled'    => true,
 
         'attributes' => [
-            'prefix'     => 'log-viewer',
-
-            'middleware' => null,
+            'prefix'     => 'admin/log-viewer',
+            'middleware' => 'access.routeNeedsPermission:view-backend',
         ],
     ],
 

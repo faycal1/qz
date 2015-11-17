@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Backend\Access\User;
 
+use Datatables;
+use Carbon\Carbon ;
 use App\Http\Controllers\Controller;
 use App\Models\Departement\Departement;
 use App\Repositories\Backend\User\UserContract;
@@ -25,6 +27,7 @@ use App\Http\Requests\Backend\Access\User\ResendConfirmationEmailRequest;
  */
 class UserController extends Controller
 {
+  
     /**
      * @var UserContract
      */
@@ -47,6 +50,7 @@ class UserController extends Controller
      */
     public function __construct(UserContract $users, RoleRepositoryContract $roles, PermissionRepositoryContract $permissions)
     {
+        Carbon::setLocale('fr');
         $this->users = $users;
         $this->roles = $roles;
         $this->permissions = $permissions;
@@ -64,8 +68,7 @@ class UserController extends Controller
         // }
 
         // exit();
-        return view('backend.access.index')
-            ->withUsers($this->users->getUsersPaginated(config('access.users.default_per_page'), 1));
+        return view('backend.access.index');
     }
 
     /**
@@ -251,5 +254,36 @@ class UserController extends Controller
         $auth->resendConfirmationEmail($user_id);
 
         return redirect()->back()->withFlashSuccess(trans('alerts.users.confirmation_email'));
+    }
+
+     public function userData()
+    {
+        $datatables = \App\Models\Access\User\User::select('*') ;
+
+        return Datatables::of($datatables)
+            ->addColumn('action', function ($users) {
+                return $users->action_buttons;
+            })           
+            ->addColumn('role',function($users){
+
+                  $roles ="" ;
+                         if ($users->roles()->count() > 0){
+                                 foreach ($users->roles as $role)
+                                 {
+                                      $roles .=$role->name .' ' ;
+                                  }
+                        }
+                        else
+                            'Pas de Role' ;
+                        
+                return $roles;
+            })
+            ->addColumn('quiz',function($users){
+                return $users->cours->count();
+            })
+            ->addColumn('departement', function($users){     
+                return $users->departement['name'] ;
+            })
+            ->make(true);
     }
 }

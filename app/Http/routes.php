@@ -41,6 +41,7 @@ $router->group(['namespace' => 'Backend'], function () use ($router) {
 
 $router->group(['middleware' => 'access.routeNeedsPermission:view-backend'], function ($router) {
 
+      Route::get('datatables/users', [ 'uses' => 'Backend\Access\User\UserController@userData', 'as'=> 'datatables.users']);
       require __DIR__.'/Routes/Backend/Quiz/Category.php';
 
 
