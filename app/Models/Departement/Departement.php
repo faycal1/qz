@@ -26,4 +26,17 @@ class Departement extends Model
     {
         return $this->belongsToMany('App\Models\Quiz\Cour\Cour');
     }
+
+    // public function usersThrow()
+    // {
+    //     return $this->hasManyThrough('App\Models\Access\User\User', 'App\Models\Quiz\Cour\Cour');
+    // }
+
+    public static function  departementThatHasCours($departement_id)
+    {
+        return  Departement::find($departement_id);
+    }
+
+
+
 }

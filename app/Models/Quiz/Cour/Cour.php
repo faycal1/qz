@@ -50,20 +50,23 @@ class Cour extends Model implements SluggableInterface
 
     public function hasUser($user_id, $cour_id)
     {               
-           $questions =0;
+            $questions =0;
             $score = 0;
             $result= '';
-            $cour =  Cour::find($cour_id); 
+            $cour = Cour::find($cour_id) ;
             $questions = $cour->questions->count();
-
-            if(!is_null($cour ->users->first()))
-            {
-                $first =  $cour ->users->first();
-                        if (!is_null($first))
-                        {
-                                $score =  $first ->pivot->score;
-                                $result=  $first ->pivot->result;
-                         }
+            $user =  Cour::find($cour_id)->whereHas('users' , function ($query) use ($user_id) 
+                { return $query->where('id' , $user_id) ;
+            })->get()->all(); 
+            
+            if(!empty($user))
+            {                
+                $first =  $cour->users->first();
+                if (!is_null($first))
+                {
+                        $score =  $first ->pivot->score;
+                        $result=  $first ->pivot->result;
+                 }
                         
             }
             return ['score'=>$score , 'result' => unserialize($result ) , 'questions'=>$questions] ;       
@@ -90,15 +93,16 @@ class Cour extends Model implements SluggableInterface
 
     public static function quizsHasUsersByDepartement ($departement_id)
     {
-        return Cour::has('questions')->has('users')->whereHas('departements' , function($query) use ($departement_id)
+        return Cour::has('users')->whereHas('users' , function($query) use ($departement_id)
         { 
-             $query->where('id', $departement_id);                                                                              
+             $query->where('departement_id', $departement_id);                                                                              
         });
     }
+   
 
     public static function quizsHasNotUsersByDepartement ($departement_id)
     {
-        return Cour::has('questions')->has('users' , '<', 1)->whereHas('departements' , function($query) use ($departement_id)
+        return Cour::has('users' , '<', 1)->whereHas('departements' , function($query) use ($departement_id)
         { 
              $query->where('id', $departement_id);                                                                              
         });

@@ -23,7 +23,7 @@ class DepartementUserTableSeeder extends Seeder
         $faker = Faker::create();
         $departement = Db::table('departements')->lists('id') ;
 
-    	foreach (range(1,300) as $key => $value ) {
+    	foreach (range(1,10) as $key => $value ) {
 
     		User::create([        		
         		'name' => $faker->name,

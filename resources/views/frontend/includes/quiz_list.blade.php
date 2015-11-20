@@ -1,7 +1,13 @@
 <?php $cour_user = $cour->hasUser(\Auth::user()->id, $cour->id) ?>
-@if (isset($cour_user['result'] ['question']) )
+
+<?php // var_dump(\Auth::user()->id  , $cour->id , $cour_user ) ?>
+
+@if (isset($cour_user['result']['question']) )
+
 			<?php  $color = $cour_user['score'] >='80' ?  'green' : 'red' ?>
+
 	    	{!! link_to( 'cour/'.$cour->slug.'/quiz/' , 'Jouer Au Quiz ?' , 
+
 	    	array('style' => "color:$color; text-decoration: line-through;")) !!} 
 
 	    	<br>

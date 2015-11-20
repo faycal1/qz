@@ -1,20 +1,14 @@
 <?php
 
-
 namespace App\Services\Quiz;
 
-use App\Models\Departement\Departement;
+use DB;
 use App\Models\Quiz\Cour\Cour;
+use App\Models\Departement\Departement;
 
-/**
- * 		
- */
+
 class Stats
-{
-    public function __construct()
-    {
-        # code...
-    }
+{    
 
     public function getDepartementActivityQuiz()
     {
@@ -40,6 +34,7 @@ class Stats
         $quizsHasUsersByDepartement = [];
         $quizsByDepartement = [];
         $departements = Departement::all();
+
         foreach ($departements as $value) {
             array_push($category, ["label"=>$value->name]);
             array_push($quizsHasUsersByDepartement, ["value"=>Cour::quizsHasUsersByDepartement($value->id)->count()]);
@@ -76,12 +71,19 @@ class Stats
 
         foreach ($departements as $value) {
 
+            $departement_id = $value->id ;
+
             array_push($result, [ 
 
                     'dep'=>$value->name ,
                     'users'=>$value->users->count() ,
-                    'nbr_passed'=>$value->cours()->has('questions')->has('users')->count(),
-                    'nbr_non_passed'=>$value->cours()->has('questions')->has('users' , '<' , 1)->count() ,
+                    
+                    'nbr_passed'=>$value::departementThatHasCours($departement_id)->cours()->whereHas('users' , function($query) use ($departement_id) {
+                        return $query->where('departement_id' , $departement_id) ;
+                    })->lists('id') ,
+                    
+                    
+                    'nbr_non_passed'=>$value->cours()->has('users' , '<' , 1)->count() ,
 
                     'succes'=>$this->getScoreByDepartementByCourList($value->cours()->lists('cour_id')->all())['passed'] ,
                     'failure'=>$this->getScoreByDepartementByCourList($value->cours()->lists('cour_id')->all())['notPassed']  
@@ -89,8 +91,11 @@ class Stats
                 );
         }
 
+
+
         return $result;
     }
+
 
 
     public function getCourScoreByDepartement($cour_id)
@@ -98,15 +103,13 @@ class Stats
         $passed =[] ;
         $notPassed =[] ;
         foreach (Cour::find($cour_id)->users as $score )
-        {
-            //dd($score->pivot->score) ;
+        {            
                 if($score->pivot->score >= '80')
                 {
                     array_push($passed, $score->pivot->score) ;
                 }else{
                     array_push($notPassed, $score->pivot->score) ;
                 }
-            
             
         }  
 
