@@ -34,8 +34,9 @@ elixir(function(mix) {
                 'backend/main.css',
                 'sweetalert.css',
                 'backend/dropzone.css',
-                'backend/jquery.dataTables.min.css',
+                'backend/jquery.dataTables.min.css',                
                 'backend/datatables.min.css',
+                'backend/select2/select2.min.css',
                 'backend/basic.css',
             ], 'public/css/backend.css')
         .scripts([ // Combine back-end scripts
@@ -45,6 +46,7 @@ elixir(function(mix) {
                 'backend/plugin/toastr/toastr.min.js',
                 'backend/plugin/dropzone/dropzone.js',
                 'backend/plugin/datatables/jquery.dataTables.min.js',
+                'backend/plugin/select2/select2.full.min.js',
                 'fc/fusioncharts.js',
                 'fc/fusioncharts.charts.js',
                 'fc/fusioncharts.powercharts.js',

@@ -13,12 +13,12 @@ return [
     |
     */
 
-    'here' => 'Here',
-    'all_rights_reserved' => 'All rights reserved.',
-    'boilerplate_link' => 'Laravel Boilerplate',
+    'here' => 'Ici',
+    'all_rights_reserved' => 'Tous droits résérvé.',
+    'boilerplate_link' => 'Application Quiz',
     'backend' => [
-        'WELCOME' => 'WELCOME',
-        'dashboard_title' => 'Administrative Dashboard',
+        'WELCOME' => 'Bienvenu',
+        'dashboard_title' => 'Tableau de bord administrative',
     ],
     'based_on' => [
         'permission' => 'Permission Based - ',

@@ -54,6 +54,7 @@ $router->group(['middleware' => 'access.routeNeedsPermission:view-backend'], fun
       Route::delete('admin/quiz/cour/{cour}/destroy', ['middleware' => 'access.routeNeedsPermission:destroy-cour', 'uses' => 'Backend\Quiz\CourController@destroy',   'as' => 'admin.quiz.cour.destroy']);
       Route::get('admin/quiz/cour/deleted', ['middleware' => 'access.routeNeedsPermission:view-deleted-cour', 'uses' => 'Backend\Quiz\CourController@deleted',   'as' => 'admin.quiz.cour.deleted']);
       Route::get('datatables/cour', [ 'uses' => 'Backend\Quiz\CourController@courData', 'as'=> 'datatables.cour']);
+      Route::get('cour/list' , [ 'uses' => 'Backend\Quiz\CourController@getCourHasQuestions' , 'as'=> 'cour.list']) ;
       Route::resource('admin/quiz/cour', 'Backend\Quiz\CourController', ['only' => ['index', 'show']]);
 
       Route::patch('admin/quiz/page/{page}/restore', ['middleware' => 'access.routeNeedsPermission:restore-page', 'uses' => 'Backend\Quiz\PageController@restore',   'as' => 'admin.quiz.page.restore']);
@@ -75,7 +76,7 @@ $router->group(['middleware' => 'access.routeNeedsPermission:view-backend'], fun
       Route::patch('admin/quiz/question/{question}/update', ['middleware' => 'access.routeNeedsPermission:update-question', 'uses' => 'Backend\Quiz\QuestionController@update',   'as' => 'admin.quiz.question.update']);
       Route::delete('admin/quiz/question/{question}/destroy', ['middleware' => 'access.routeNeedsPermission:destroy-question', 'uses' => 'Backend\Quiz\QuestionController@destroy',   'as' => 'admin.quiz.question.destroy']);
       Route::get('admin/quiz/question/deleted', ['middleware' => 'access.routeNeedsPermission:view-deleted-question', 'uses' => 'Backend\Quiz\QuestionController@deleted',   'as' => 'admin.quiz.question.deleted']);
-       Route::get('datatables/question', [ 'uses' => 'Backend\Quiz\QuestionController@questionData', 'as'=> 'datatables.question']);
+      Route::get('datatables/question', [ 'uses' => 'Backend\Quiz\QuestionController@questionData', 'as'=> 'datatables.question']);
       Route::resource('admin/quiz/question', 'Backend\Quiz\QuestionController', ['only' => ['index', 'show']]);
 
       Route::patch('admin/quiz/answer/{answer}/restore', ['middleware' => 'access.routeNeedsPermission:restore-answer', 'uses' => 'Backend\Quiz\AnswerController@restore',   'as' => 'admin.quiz.answer.restore']);

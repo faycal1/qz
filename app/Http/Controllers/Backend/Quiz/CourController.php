@@ -159,4 +159,16 @@ class CourController extends Controller
             ->editColumn('updated_at', '{{ $updated_at->diffForHumans()}}')
             ->make(true);
     }
+
+    public function getCourHasQuestions()
+    {
+        $cours =  Cour::has('questions')->get();
+
+        foreach ($cours as $key => $value) {
+            $list[$key]['id'] = $value->id;
+            $list[$key]['text'] = $value->title; 
+        }
+
+        return "{ \"results\": " . json_encode($list) . "}"; 
+    }
 }

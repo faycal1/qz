@@ -15,14 +15,14 @@
 @section('content')
     <div class="box box-success">
         <div class="box-header with-border">
-          <h3 class="box-title">{{ trans('strings.backend.WELCOME') }} {!! auth()->user()->name !!}!</h3>
+          <h3 class="box-title">{{ trans('strings.backend.WELCOME') }} {!! auth()->user()->name !!}</h3>
           <div class="box-tools pull-right">
               <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
           </div>
         </div><!-- /.box-header -->
         <div class="box-body">
             
-            <div id="chartContainer" class="col-md-6"> 
+            <div class="col-md-6"> 
             <table class="table" >
                 <thead>
                     <tr>
@@ -56,6 +56,48 @@
         </div><!-- /.box-body -->
         <div class="clearfix" ></div>
     </div><!--box box-success-->
+
+    <div class="box box-success">
+        <div class="box-header with-border">
+          
+          <div class="box-tools pull-right">
+                 <select id="select_departement" name="select_departement"  >
+                 </select> 
+                 
+              <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+          </div>
+        </div><!-- /.box-header -->
+        <div class="box-body">            
+            <div  class="col-md-6"> 
+            <table class="table" >
+                <thead>
+                    <tr>
+                        <th >Département</th>
+                        <th >N° Employés</th>
+                        <th >Quiz Passés</th>
+                        <th >Quiz Non Passés</th>
+                        <th >N° Succées </th>
+                        <th >N° Echec</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($departements as $departement)
+                    <tr>
+                        <td>{{ $departement['dep'] }}</td>
+                        <td>{{ $departement['users'] }}</td>
+                        <td>{{ $departement['nbr_passed'] }}</td>
+                        <td>{{ $departement['nbr_non_passed'] }}</td>
+                        <td>{{ $departement['succes'] }}</td>
+                        <td>{{ $departement['failure'] }}</td>
+                    </tr>
+                    @endforeach 
+                </tbody>
+            </table>            
+
+            </div>
+        </div><!-- /.box-body -->
+            <div class="clearfix" ></div>
+        </div><!--box box-success-->
 @endsection
 
 @section('fc')
@@ -84,6 +126,40 @@
         "dataFormat": "jsonurl" 
     });
     quizStackedChart.render();
+
+    jQuery(document).ready(function($)
+    {
+        $eventSelect = jQuery('#select_departement').select2({
+            width:'400',
+            placeholder:'Quiz',
+                ajax:{
+                    url: "<?php echo url() ?>/cour/list",
+                    dataType: 'json',
+                    quietMillis: 100,
+                    data: function (term, page) {
+                        return {
+                            term: term,    //search term
+                            page_limit: 10 // page size
+                        };
+                    },
+                    results: function (data, page) {
+                        return { results: data.results };
+                    }
+                },
+                initSelection: function(element, callback){
+                    return $.getJSON("<?php echo url() ?>/cour/list" , null, function(data){
+                            return callback(data);
+                    });
+                }          
+        }); 
+
+        $eventSelect.on("change", function (e) {
+            console.log($(this).val()) ;
+           $.get('/path/to/file', function(data) {
+                /*optional stuff to do after success */
+            });
+        });       
+    });    
 })
 
 </script>

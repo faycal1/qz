@@ -284,6 +284,9 @@ class UserController extends Controller
             ->addColumn('departement', function($users){     
                 return $users->departement['name'] ;
             })
+            ->editColumn('confirmed',  function ($users){
+                return $users->confirmed == 1 ? 'Confirmé' : 'Non confirmé' ;
+            })
             ->make(true);
     }
 }
