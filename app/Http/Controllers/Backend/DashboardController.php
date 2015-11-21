@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Services\Quiz\Stats;
+use App\Models\Departement\Departement;
 
 /**
  * Class DashboardController.
@@ -48,6 +49,36 @@ class DashboardController extends Controller
 
     public function MultiColumnBarByCours($cour)
     {
-        return array($cour->title);
+        $id = $cour->id;
+        
+        $departements = Departement::whereHas('cours', function ($query) use ($id) 
+        {
+            return  $query->where('id' , $id) ;
+        });
+
+        $stat = new Stats();
+
+        $stats = [];
+        foreach ($departements->get() as $departement) {
+
+            $departement_id =$departement->id ;
+            $s_f = $stat->getScoreByDepartementByCourList([$id] , $departement_id) ;
+
+            $passed = $departement->cours;
+
+            $stats[$departement->id] = [ 
+                        'name'=>$departement->name  ,
+                        'users'=> $departement->users->count(),
+                        'passed'=> $passed->count(),
+                        'succe'=> $s_f['passed'],
+                        'failure'  => $s_f['notPassed'],
+                        ] ;
+        }
+
+       
+
+        return view ('backend.statByCour' )->with('stats' , $stats) ;
+         
+        //return $users;
     }
 }

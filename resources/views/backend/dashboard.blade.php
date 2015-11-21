@@ -26,26 +26,26 @@
             <table class="table" >
                 <thead>
                     <tr>
-                        <th >Département</th>
-                        <th >N° Employés</th>
+                        <th>Département </th>
+                        <th>N° Employés </th>
                         <th>N° Quiz</th>
-                        <th >Quiz Passés</th>
-                        <th >Quiz Non Passés</th>
-                        <th >N° Succées </th>
-                        <th >N° Echec</th>
+                        <th>Quiz Passés </th>
+                        <th>Quiz Non Passés </th>
+                        <th>N° Succées </th>
+                        <th>N° Echec </th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($departements as $departement)
-                    <tr>
-                        <td>{{ $departement['dep'] }}</td>
-                        <td>{{ $departement['users'] }}</td>
-                        <td>{{ $departement['quiz'] }}</td>
-                        <td>{{ $departement['nbr_passed'] }}</td>
-                        <td>{{ $departement['nbr_non_passed'] }}</td>
-                        <td>{{ $departement['succes'] }}</td>
-                        <td>{{ $departement['failure'] }}</td>
-                    </tr>
+                        <tr>
+                            <td>{{ $departement['dep'] }}</td>
+                            <td>{{ $departement['users'] }}</td>
+                            <td>{{ $departement['quiz'] }}</td>
+                            <td>{{ $departement['nbr_passed'] }}</td>
+                            <td>{{ $departement['nbr_non_passed'] }}</td>
+                            <td>{{ $departement['succes'] }}</td>
+                            <td>{{ $departement['failure'] }}</td>
+                        </tr>
                     @endforeach 
                 </tbody>
             </table>            
@@ -69,12 +69,9 @@
               <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
           </div>
         </div><!-- /.box-header -->
-        <div class="box-body">            
-            <div  class="col-md-6"> 
-            
-                //
 
-            </div>
+        <div class="box-body" id="ContainerByCour">            
+            
         </div><!-- /.box-body -->
             <div class="clearfix" ></div>
         </div><!--box box-success-->
@@ -133,10 +130,9 @@
                 }          
         }); 
 
-        $eventSelect.on("change", function (e) {
-            console.log($(this).val()) ;
-           $.get('<?php echo url() ?>/admin/stats/cour/'+$(this).val(), function(data) {
-                /*optional stuff to do after success */
+        $eventSelect.on("change", function (e) {            
+           $.get('<?php echo url() ?>/admin/stats/cour/'+$(this).val() , function(data) {
+                $('#ContainerByCour').html(data)
             });
         });       
     });    

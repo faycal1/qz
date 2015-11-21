@@ -126,10 +126,10 @@ class Stats
         $notPassed =[] ;
         foreach ($list as $value) {
 
-            $cours = $this->getCourScoreByDepartement($value , $departement_id) ;
-            
+            $cours = $this->getCourScoreByDepartement($value , $departement_id) ;            
             array_push($passed, $cours['passed']);
             array_push($notPassed, $cours['notPassed']);
+            
         } 
         return ['passed'=>array_sum($passed) , 'notPassed'=>array_sum($notPassed)] ;
     }
