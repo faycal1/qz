@@ -28,6 +28,7 @@
                     <tr>
                         <th >Département</th>
                         <th >N° Employés</th>
+                        <th>N° Quiz</th>
                         <th >Quiz Passés</th>
                         <th >Quiz Non Passés</th>
                         <th >N° Succées </th>
@@ -39,6 +40,7 @@
                     <tr>
                         <td>{{ $departement['dep'] }}</td>
                         <td>{{ $departement['users'] }}</td>
+                        <td>{{ $departement['quiz'] }}</td>
                         <td>{{ $departement['nbr_passed'] }}</td>
                         <td>{{ $departement['nbr_non_passed'] }}</td>
                         <td>{{ $departement['succes'] }}</td>
@@ -133,7 +135,7 @@
 
         $eventSelect.on("change", function (e) {
             console.log($(this).val()) ;
-           $.get('/path/to/file', function(data) {
+           $.get('<?php echo url() ?>/admin/stats/cour/'+$(this).val(), function(data) {
                 /*optional stuff to do after success */
             });
         });       

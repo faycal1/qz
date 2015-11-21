@@ -73,59 +73,64 @@ class Stats
 
             $departement_id = $value->id ;
 
-            array_push($result, [ 
-
-                    'dep'=>$value->name ,
-                    'users'=>$value->users->count() ,
-                    
-                    'nbr_passed'=>$value::departementThatHasCours($departement_id)->cours()->whereHas('users' , function($query) use ($departement_id) {
+            $nbr_passed = $value::departementThatHasCours($departement_id)->cours()->whereHas('users' , function($query) use ($departement_id) {
                         return $query->where('departement_id' , $departement_id) ;
-                    })->lists('id') ,
-                    
-                    
-                    'nbr_non_passed'=>$value->cours()->has('users' , '<' , 1)->count() ,
+                    }) ;
 
-                    'succes'=>$this->getScoreByDepartementByCourList($value->cours()->lists('cour_id')->all())['passed'] ,
-                    'failure'=>$this->getScoreByDepartementByCourList($value->cours()->lists('cour_id')->all())['notPassed']  
+            $success_failure = $this->getScoreByDepartementByCourList($nbr_passed->lists('cour_id')->all() ,  $departement_id ) ;
+
+           
+            array_push($result, [ 
+                        'id'=>$value->id ,
+                        'dep'=>$value->name ,
+                        'users'=>$value->users->count() , 
+                        'quiz'=>$value->cours()->has('questions')->count() ,                   
+                        'nbr_passed'=> $nbr_passed->count() ,   
+                        'nbr_non_passed'=> $value->cours()->count() - $nbr_passed->count()  ,
+                        'succes'=>$success_failure['passed'] ,
+                        'failure'=>$success_failure['notPassed']  
                     ]
                 );
-        }
-
-
-
+        }        
         return $result;
     }
 
-
-
-    public function getCourScoreByDepartement($cour_id)
+    public function getCourScoreByDepartement($cour_id , $departement_id)
     {
         $passed =[] ;
         $notPassed =[] ;
-        foreach (Cour::find($cour_id)->users as $score )
-        {            
-                if($score->pivot->score >= '80')
-                {
-                    array_push($passed, $score->pivot->score) ;
-                }else{
-                    array_push($notPassed, $score->pivot->score) ;
-                }
-            
-        }  
 
+        $cours =  Cour::where( 'id' , $cour_id)->with(['users' =>function ($query) use($departement_id) {
+                        return $query->where('departement_id' , $departement_id) ;
+                    } ])->get() ;
+
+        foreach ($cours->all() as $cour) {  
+
+            $users = $cour->users;           
+
+            foreach ($users as $user) {                
+                if($user->pivot->score >= '80')
+                {
+                    array_push($passed, $user->pivot->score) ;
+                }else{
+                    array_push($notPassed, $user->pivot->score) ;
+                }
+            } 
+        }                 
         return ['passed'=>count($passed) , 'notPassed'=>count($notPassed)] ;
     }
 
-    public function getScoreByDepartementByCourList(Array $list)
+    public function getScoreByDepartementByCourList(Array $list , $departement_id)
     {
         $passed =[] ;
         $notPassed =[] ;
         foreach ($list as $value) {
-            
-            array_push($passed, $this->getCourScoreByDepartement($value)['passed']);
-            array_push($notPassed, $this->getCourScoreByDepartement($value)['notPassed']);
-        }
 
+            $cours = $this->getCourScoreByDepartement($value , $departement_id) ;
+            
+            array_push($passed, $cours['passed']);
+            array_push($notPassed, $cours['notPassed']);
+        } 
         return ['passed'=>array_sum($passed) , 'notPassed'=>array_sum($notPassed)] ;
     }
 }

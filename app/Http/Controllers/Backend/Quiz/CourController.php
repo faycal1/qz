@@ -171,4 +171,7 @@ class CourController extends Controller
 
         return "{ \"results\": " . json_encode($list) . "}"; 
     }
+
+
+    
 }

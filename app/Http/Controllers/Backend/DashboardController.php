@@ -40,9 +40,14 @@ class DashboardController extends Controller
         return response()->json($json);
     }
 
-    function StackedChartCoursUsersByDepartement ()
+    public function StackedChartCoursUsersByDepartement ()
     {
         $StackedChartCoursUsersByDepartement = new Stats();
         return  response()->json($StackedChartCoursUsersByDepartement->StackedChartCoursUsersByDepartement());
+    }
+
+    public function MultiColumnBarByCours($cour)
+    {
+        return array($cour->title);
     }
 }

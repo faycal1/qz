@@ -32,6 +32,7 @@ $router->group(['namespace' => 'Backend'], function () use ($router) {
 
         get('jsonChart', 'DashboardController@Chart');
         get('statcked' , 'DashboardController@StackedChartCoursUsersByDepartement');
+        get('stats/cour/{cour}' ,'DashboardController@MultiColumnBarByCours');
     });
 
 });
