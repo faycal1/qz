@@ -4,9 +4,9 @@
                     <tr>
                         <th>Département</th>
                         <th>Employés</th>
-                        <th>Nbr Quiz</th>                        
-                        <th>Nbr Succées </th>
-                        <th>Nbr Echec</th>
+                        <th>Passé</th>                        
+                        <th>Succées </th>
+                        <th>Echecs</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -24,11 +24,16 @@
 </div>
 <div id="columnCourContainer" class="col-md-6"></div>
 
-
 <?php
     $names = [] ;
+    $passed = [] ;
+    $succe = [] ;
+    $failure = [] ;
     foreach ($stats as $stat) {
-        array_push($names, ['label'=>$stat['name']]);
+        array_push($names, ['label'=>$stat['name'] ]);
+        array_push($passed, ['value'=>$stat['passed'] , 'color'=>"#008ee4"]);
+        array_push($succe, ['value'=>$stat['succe'] , 'color'=>"#9b59b6" ]);
+        array_push($failure, ['value'=>$stat['failure'] , 'color'=>"#6baa01"]);
     }
  ?>
 
@@ -85,39 +90,17 @@
                                 }
                             ],
                             "dataset": [
-                                {
-                                    "seriesname": "Previous Year",
-                                    "data": [
-                                        {
-                                            "value": "10000"
-                                        },
-                                        {
-                                            "value": "11500"
-                                        },
-                                        {
-                                            "value": "12500"
-                                        },
-                                        {
-                                            "value": "15000"
-                                        }
-                                    ]
+                                {         
+                                    "seriesname": "Passé",
+                                    "data":<?php echo json_encode($passed); ?>
                                 },
                                 {
-                                    "seriesname": "Current Year",
-                                    "data": [
-                                        {
-                                            "value": "25400"
-                                        },
-                                        {
-                                            "value": "29800"
-                                        },
-                                        {
-                                            "value": "21800"
-                                        },
-                                        {
-                                            "value": "26800"
-                                        }
-                                    ]
+                                    "seriesname": "Réussi",
+                                    "data":<?php echo json_encode($succe); ?>
+                                },
+                                {
+                                    "seriesname": "Echek",
+                                    "data":<?php echo json_encode($failure); ?>
                                 }
                             ]
                         },
