@@ -15,7 +15,7 @@
 @section('content')
     <div class="box box-success">
         <div class="box-header with-border">
-          <h3 class="box-title">{{ trans('strings.backend.WELCOME') }} {!! auth()->user()->name !!}!</h3>
+          <h3 class="box-title">Uploader des Images</h3>
           <div class="box-tools pull-right">
               <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
           </div>
@@ -26,9 +26,7 @@
 
                 {!! Form::open(['url' => route('admin.media.upload'), 'class' => 'dropzone', 'files'=>true, 'id'=>'real-dropzone']) !!}
 
-                <div class="dz-message">
-
-                </div>
+                <div class="dz-message"></div>
 
                 <div class="fallback">
                     <input name="file" type="file" multiple />
@@ -36,7 +34,32 @@
 
                 <div class="dropzone-previews" id="dropzonePreview"></div>
 
-                <h4 style="text-align: center;color:#428bca;">Drop images in this area  <span class="glyphicon glyphicon-hand-down"></span></h4>
+                <h4 style="text-align: center;color:#428bca;">Glisser des images ici  <span class="glyphicon glyphicon-hand-down"></span></h4>
+
+                {!! Form::close() !!}
+        </div><!-- /.box-body -->
+    </div><!--box box-success-->
+
+
+    <div class="box box-success">
+        <div class="box-header with-border">
+          <h3 class="box-title">Uploader des Videos</h3>
+          <div class="box-tools pull-right">
+              <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+          </div>
+        </div><!-- /.box-header -->
+        <div class="box-body"> 
+                {!! Form::open(['url' => route('admin.media.upload.video'), 'class' => 'dropzone', 'files'=>true, 'id'=>'real-dropzone-video']) !!}
+
+                <div class="dz-message"></div>
+
+                <div class="fallback">
+                    <input name="file" type="file" multiple />
+                </div>
+
+                <div class="dropzone-previews" id="dropzonePreview"></div>
+
+                <h4 style="text-align: center;color:#428bca;">Glisser des Videos ici<span class="glyphicon glyphicon-hand-down"></span></h4>
 
                 {!! Form::close() !!}
         </div><!-- /.box-body -->
@@ -105,12 +128,9 @@ Dropzone.options.realDropzone = {
     addRemoveLinks: true,
     dictRemoveFile: 'Remove',
     dictFileTooBig: 'Image is bigger than 8MB',
-
     // The setting up of the dropzone
     init:function() {
-
         this.on("removedfile", function(file) {
-
             $.ajax({
                 type: 'POST',
                 url: 'media/delete',

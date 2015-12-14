@@ -106,6 +106,12 @@ $router->group(['middleware' => 'access.routeNeedsPermission:view-backend'], fun
       Route::post('admin/media/upload', ['as' => 'admin.media.upload', 'uses' => 'Backend\Media\MediaController@postUpload']);
       Route::post('admin/media/delete', ['as' => 'admin.media.remove', 'uses' => 'Backend\Media\MediaController@deleteUpload']);
 
+      //video
+      Route::get('admin/media/list/video', ['as' => 'admin.media.list.video', 'uses' => 'Backend\Media\MediaController@getListVideo']);
+      Route::get('admin/media/video', ['as' => 'admin.media.video', 'uses' => 'Backend\Media\MediaController@getUploadVideo']);
+      Route::post('admin/media/upload/video', ['as' => 'admin.media.upload.video', 'uses' => 'Backend\Media\MediaController@postUploadVideo']);
+      Route::post('admin/media/delete/video', ['as' => 'admin.media.remove.video', 'uses' => 'Backend\Media\MediaController@deleteUploadVideo']);
+
 });
 
 $router->group(['middleware' => 'access.routeNeedsPermission:view-frontend'], function ($router) {

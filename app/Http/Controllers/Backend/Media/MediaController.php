@@ -54,4 +54,44 @@ class MediaController extends Controller
 
         return Response::json($image_array);
     }
+
+    // video
+    // 
+     public function getUploadVideo()
+    {
+        //return view('backend.media.index');
+    }
+
+    public function postUploadVideo()
+    {
+        $video = Input::all();
+       $response = $this->image->upload($photo);
+
+        // return $response;
+    }
+
+    public function deleteUploadVideo()
+    {
+        // $filename = Input::get('id');
+
+        // if (!$filename) {
+        //     return 0;
+        // }
+
+        // $response = $this->image->delete($filename);
+
+        // return $response;
+    }
+
+    public function getListVideo()
+    {
+        // $image_array = array();
+        // $images = Image::all();
+
+        // foreach ($images as $key => $value) {
+        //     array_push($image_array, array('title' => $value->filename, 'value' => $value->filename.'.jpg'));
+        // }
+
+        // return Response::json($image_array);
+    }
 }
