@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend\Media;
 
 use Response;
 use App\Models\Image;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Services\Image\ImageRepository;
 use Illuminate\Support\Facades\Input;
@@ -62,12 +63,19 @@ class MediaController extends Controller
         //return view('backend.media.index');
     }
 
-    public function postUploadVideo()
+    public function postUploadVideo(Request $request)
     {
-        $video = Input::all();
-       $response = $this->image->upload($photo);
+       // $video = Input::all();
+        $video = $request->file('video');
+       //$response = $this->image->upload($photo);
+        if ($request->hasFile('video')) {
+            return 'true' ;
 
-        // return $response;
+        }else
+        {
+            return 'false' ;
+        }
+       // dd(  $video );
     }
 
     public function deleteUploadVideo()

@@ -54,7 +54,7 @@
                 <div class="dz-message"></div>
 
                 <div class="fallback">
-                    <input name="file" type="file" multiple />
+                    <input name="video" type="file" multiple />
                 </div>
 
                 <div class="dropzone-previews" id="dropzonePreview"></div>
