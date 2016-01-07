@@ -14,5 +14,5 @@ php:
   # aliased to a recent hhvm version
   - hhvm
 
-before_script:
+before_install:
   - composer install
